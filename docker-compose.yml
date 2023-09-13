@@ -1,0 +1,55 @@
+version: '3.7'
+services:
+  car-workshop-nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./:/var/www/html
+    depends_on:
+      - php
+    networks:
+      - car-workshop-network
+
+  php:
+    build:
+      dockerfile: Dockerfile.php
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "9000:9000"
+    environment:
+      - PHP_IDE_CONFIG=serverName=localhost
+      - XDEBUG_CONFIG=remote_host=172.17.0.1 xdebug.mode = debug xdebug.start_with_request = yes xdebug.client_port = 9000"
+
+ 
+
+
+    working_dir: /var/www/html
+    networks:
+      - car-workshop-network
+
+  car-workshop-db:
+    image: mysql
+    volumes:
+      - ./db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: car-workshop
+      MYSQL_USER: user
+      MYSQL_PASSWORD: "password"
+    ports:
+      - "3306:3306" # Прокинуть порт MySQL из контейнера на хост машины
+    networks:
+      - car-workshop-network
+
+  car-workshop-adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - car-workshop-network
+
+networks:
+  car-workshop-network:
