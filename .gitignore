@@ -1,2 +1,5 @@
 vendor
 composer.lock
+bootstrap-examples
+car-workshop-db-volume
+db-data
