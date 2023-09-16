@@ -4,3 +4,4 @@ car-workshop-db-volume
 db-data
 dist
 vendor
+.vscode
