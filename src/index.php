@@ -3,6 +3,10 @@ require '../vendor/autoload.php'; // Подключаем библиотеку
 
 use Firebase\JWT\JWT;
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+
 // Создание access токена
 function generateAccessToken($user_id) {
     $token_data = [
