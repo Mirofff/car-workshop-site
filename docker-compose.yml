@@ -1,0 +1,13 @@
+services:
+    car-workshop-mysqldb:
+        image: 'mysql'
+        ports:
+            - '3306:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: 'mysql-root-password'
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: 'car-workshop'
+            MYSQL_USER: 'car-workshop-user'
+            MYSQL_PASSWORD: 'mysql-user-password'
+        volumes:
+            - './mysqldb:/var/lib/mysql'
