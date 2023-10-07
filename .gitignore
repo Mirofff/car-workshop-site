@@ -20,3 +20,10 @@ yarn-error.log
 /mysqldb
 artisan
 composer.lock
+composer.lock
+bootstrap-examples
+car-workshop-db-volume
+db-data
+dist
+vendor
+.vscode
