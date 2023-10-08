@@ -26,6 +26,6 @@ Route::get('/register', RegistrationController::class);
 Route::post('/register-action', [RegistrationController::class, 'register']);
 
 Route::get('/login', LoginController::class);
-Route::post('/login-action', [LoginController::class, 'login']);
+Route::post('/login-action', [LoginController::class, 'login()']);
 
 Route::get('/tables', TablesController::class)->middleware('auth');
