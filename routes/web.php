@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\TablesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +17,15 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get("/", function () {
+    $users = DB::table('users')->get();
+    return view('home', ['user' => $users->first(), 'title' => 'Home']);
 });
 
-Route::get("/hello", function () {
-    $users = DB::table('users')->get();
-    return view('hello', ['user' => $users->first()]);
-});
+Route::get('/register', RegistrationController::class);
+Route::post('/register-action', [RegistrationController::class, 'register']);
+
+Route::get('/login', LoginController::class);
+Route::post('/login-action', [LoginController::class, 'login']);
+
+Route::get('/tables', TablesController::class)->middleware('auth');
