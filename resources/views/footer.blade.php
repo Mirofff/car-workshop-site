@@ -25,14 +25,9 @@
         bottom: 0;
     }
 </style>
-<html>
 
-<body>
-    <footer class="footer mt-auto py-3 bg-body-tertiary">
-        <div class="container">
-            <span class="text-body-secondary">Powered by Zhebra</span>
-        </div>
-    </footer>
-</body>
-
-</html>
+<footer class="footer bg-body-tertiary w-100">
+    <div class="container">
+        <span class="text-body-secondary">Powered by Zhebra</span>
+    </div>
+</footer>

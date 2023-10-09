@@ -29,3 +29,7 @@ Route::get('/login', LoginController::class);
 Route::post('/login-action', [LoginController::class, 'login()']);
 
 Route::get('/tables', TablesController::class)->middleware('auth');
+
+Route::get('/cars', function () {
+    return view('tables.cars');
+});

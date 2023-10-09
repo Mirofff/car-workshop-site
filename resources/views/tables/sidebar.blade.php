@@ -1,6 +1,30 @@
-<html>
-
 <style>
+    /* Стиль для прилипающего подвала */
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    main {
+        flex-grow: 1;
+    }
+
+    footer {
+        background-color: #f8f9fa;
+        /* Цвет подвала */
+        padding: 20px;
+        /* Отступы для подвала */
+        text-align: center;
+        /* Выравнивание текста в подвале */
+        position: sticky;
+        bottom: 0;
+    }
+
     <style>.bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -116,7 +140,7 @@
     }
 </style>
 
-<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
+<div class="d-flex flex-column flex-shrink-0 text-bg-dark" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         <svg class="bi pe-none me-2" width="40" height="32">
             <use xlink:href="#bootstrap"></use>
@@ -125,9 +149,14 @@
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-            <li><a href="/tables?table=users" class="nav-link text-white">Users</a>
-            </li>
+        <li>
+            <a href="/tables?table=users" class="nav-link text-white">Users</a>
+        </li>
     </ul>
+
+    <footer class="bg-body-tertiary mt-auto w-100">
+        <span class="text-body-secondary">Powered by Zhebra</span>
+    </footer>
 </div>
 
 <script>
