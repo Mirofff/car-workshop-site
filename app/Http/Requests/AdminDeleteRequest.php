@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class AdminDeleteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,12 +22,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-                'email' => 'required|email:rfc,dns|unique:users,email',
-                'name' => 'required|unique:users,name',
-                'first_name' => 'required|unique:users,first_name',
-                'second_name' => 'required|unique:users,second_name',
-                'last_name' => 'required|unique:users,last_name',
-                'password' => 'required|min:8',
+            'id' => 'required|uuid',
         ];
     }
 }
