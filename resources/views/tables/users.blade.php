@@ -49,11 +49,10 @@
                                         <input type="hidden" name="second_name" value="{{ $user->second_name }}" />
                                         <input type="hidden" name="last_name" value="{{ $user->last_name }}" />
                                         <input type="hidden" name="email" value="{{ $user->email }}" />
-                                        <input type="hidden" name="password" value="{{ $user->password }}" />
                                         <input type="hidden" name="active" value="{{ $user->active }}" />
                                         <input type="hidden" name="is_admin" value="{{ $user->is_admin }}" />
 
-                                        <button class="fs-4" name="edit" type="submit">
+                                        <button class="btn btn-secondary fs-4" name="edit" type="submit">
                                             🖊
                                         </button>
                                     </form>
@@ -62,7 +61,7 @@
                                     <form action="/delete-user" method="POST">
                                         @csrf
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                        <button class="fs-4" name="id" type="submit"
+                                        <button class="btn btn-secondary fs-4" name="id" type="submit"
                                             onsubmit="return confirm('Are you sure?')"
                                             value="{{ $user->id }}">✞</button>
                                     </form>
@@ -71,11 +70,11 @@
                         @endforeach
                     </tbody>
                 </table>
-                <form method="post" action="">
+                <form method="post" action="" class="col-12 d-flex justify-content-center">
                     @csrf
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                    <button type="submit" name="add" class="button fs-2">+</button>
+                    <button type="submit" name="add" class="btn btn-primary fs-2">+</button>
                 </form>
             </div>
 
@@ -120,27 +119,16 @@
                             <input type="email" name="email" class="form-control" placeholder="User Email"
                                 value="{{ $_POST['email'] ?? '' }}" required="">
                         </div>
-
-                        <div class="list-group-item list-group-item-action w-100 d-flex">
-                            <label class="form-label">User Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="User Email"
-                                value="{{ $_POST['password'] ?? '' }}" required="">
-                        </div>
-
                         <div class="list-group-item list-group-item-action w-100 d-flex">
                             <label class="form-label">Is Admin</label>
-                            <input type="hidden" name = "is_admin" value="0">
-                            <input type="checkbox" name="is_admin" class="form-check-input"
-                                style="margin-left: 20px" placeholder="Last Name"
-                                @if ($_POST['active'] == 1) checked @endif value="1">
+                            <input class="form-check-input" style="margin-left: 20px" type="checkbox" name="is_admin" value="1" @checked(old('is_admin', $_POST['is_admin'])) />
                         </div>
 
                         <div class="list-group-item list-group-item-action w-100 d-flex">
                             <label class="form-label">Active</label>
-                            <input type="hidden" name = "active" value="0">
                             <input type="checkbox" name="active" class="form-check-input" style="margin-left: 20px"
-                                placeholder="Last Name" @if ($_POST['active'] == 1) checked @endif
-                                value="1">
+                                placeholder="Last Name" value="1"
+                                {{ $_POST['active'] === '1' ? 'checked' : '' }}>
                         </div>
                         <button type="submit"
                             @isset($_POST['id'])
@@ -156,3 +144,4 @@
 </body>
 
 </html>
+Undefined variable $is_admin

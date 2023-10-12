@@ -12,16 +12,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(Uuid::uuid4());
+        Schema::create('emploees', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('email')->unique();
             $table->string('first_name');
             $table->string('second_name');
             $table->string('last_name');
             $table->string('avatar')->nullable();
-            $table->boolean('active')->default(true);
+            $table->boolean('is_active')->default(true);
             $table->string('password');
             $table->rememberToken();
         });
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('emploees');
     }
 };
