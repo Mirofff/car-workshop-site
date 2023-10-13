@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\TablesController;
+// use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,7 @@ use App\Http\Controllers\TablesController;
 |
 */
 
-Route::get("/", function () {
-    $users = DB::table('users')->get();
-    return view('home', ['user' => $users->first(), 'title' => 'Home']);
-});
+// Route::get("/", HomeController::class);
 
 Route::get('/register', RegistrationController::class);
 Route::post('/register-action', [RegistrationController::class, 'register']);
