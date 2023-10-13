@@ -21,45 +21,45 @@
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                                <input type="text" name='name' id="form3Example1c"
+                                                <input type="text" name='first_name' id="form3Example1c"
                                                     class="form-control" />
-                                                <label class="form-label" for="form3Example1c">Your nickname</label>
+                                                <label class="form-label" for="form3Example1c">First Name</label>
                                             </div>
                                         </div>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                                <input type="email" name='email' id="form3Example3c"
+                                                <input type="text" name='second_name' id="form3Example3c"
                                                     class="form-control" />
-                                                <label class="form-label" for="form3Example3c">Your Email</label>
+                                                <label class="form-label" for="form3Example3c">Second Name</label>
                                             </div>
                                         </div>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                                <input type="text" name="first_name" id="form3Example1c"
+                                                <input type="text" name="last_name" id="form3Example1c"
                                                     class="form-control" />
-                                                <label class="form-label" for="form3Example1c">Your First Name</label>
+                                                <label class="form-label" for="form3Example1c">Last Name</label>
                                             </div>
                                         </div>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                                <input type="text" name="second_name" id="form3Example1c"
+                                                <input type="email" name="email" id="form3Example1c"
                                                     class="form-control" />
-                                                <label class="form-label" for="form3Example1c">Your Second Name</label>
+                                                <label class="form-label" for="form3Example1c">Your Email</label>
                                             </div>
                                         </div>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
-                                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                                <input type="type" name="last_name" id="form3Example3c"
+                                                <input type="phone" name="phone" id="form3Example1c"
                                                     class="form-control" />
-                                                <label class="form-label" for="form3Example3c">Your Last Name</label>
+                                                <label class="form-label" for="form3Example1c">Your Phone</label>
                                             </div>
                                         </div>
 
@@ -93,7 +93,6 @@
                                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                             <button type="submit" class="btn btn-primary btn-lg">Register</button>
                                         </div>
-
                                     </form>
 
                                 </div>

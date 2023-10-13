@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Client extends Authenticatable
+class User extends Authenticatable
 {
     use HasFactory;
-
 
     /**
      * The attributes that are mass assignable.
@@ -16,13 +15,14 @@ class Client extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'last_name',
         'first_name',
-        'middle_name',
+        'second_name',
+        'last_name',
         'phone',
         'email',
-        'address',
         'password',
+        'is_admin',
+        'is_active',
     ];
 
     /**
@@ -41,10 +41,10 @@ class Client extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
         'active' => 'bool',
         'is_admin' => 'bool',
+        'is_active' => 'bool',
     ];
 
     public function setPasswordAttribute($value)

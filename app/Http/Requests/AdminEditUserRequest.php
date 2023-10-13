@@ -22,14 +22,13 @@ class AdminEditUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
             'first_name' => 'required',
             'second_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
             'id' => 'required',
-            'is_admin' => 'nullable|sometimes',
-            'active' => 'nullable|sometimes',
+            'is_admin' => 'required',
+            'is_active' => 'required',
         ];
     }
 
@@ -38,8 +37,7 @@ class AdminEditUserRequest extends FormRequest
         $data = $this->all();
 
         $data['is_admin'] = $data['is_admin'] ?? '0';
-        $data['active'] = $data['active'] ?? '0';
-        $data['password'] = bcrypt($data['password']);
+        $data['is_active'] = $data['is_active'] ?? '0';
 
         return $data;
     }

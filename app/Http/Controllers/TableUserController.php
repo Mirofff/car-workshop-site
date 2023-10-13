@@ -5,27 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdminAddUser;
 use App\Http\Requests\AdminDeleteRequest;
 use App\Http\Requests\AdminEditUserRequest;
-use App\Http\Requests\AdminRegisterRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use App\Http\Requests\RegisterRequest;
-use App\Models\User;
-use Error;
 
-class TablesController extends Controller
+class TableUserController extends Controller
 {
     public function __invoke()
     {
-        if (!isset($_GET['table'])) {
-            $rows = DB::table('users')->get();
-            return view('tables.users', array_merge(['rows' => $rows, 'title' => 'users']));
-        } elseif (in_array($_GET['table'], DB::connection()->getDoctrineSchemaManager()->listTableNames())) {
-            $rows = DB::table($_GET['table'])->get();
-            return view("tables." . $_GET['table'], array_merge(['rows' => $rows, 'title' => $_GET['table']]));
-        } else {
-            return view('error')->with('error', new Error());
-        }
+        $rows = DB::table('users')->get();
+        return view('tables.users', array_merge(['rows' => $rows, 'title' => 'users']));
     }
 
     public function table(Request $request)

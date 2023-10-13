@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function __invoke()
     {
-        view('home', Auth::user());
+        $user = Auth::user();
+        return view('home', ['user' => $user, 'title' => 'Home']);
     }
 }

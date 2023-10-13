@@ -23,13 +23,11 @@ class AdminRegisterRequest extends FormRequest
     {
         return [
                 'email' => 'required|email:rfc,dns|unique:users,email',
-                'name' => 'required|unique:users,name',
+                'phone' => 'required',
                 'first_name' => 'required|unique:users,first_name',
                 'second_name' => 'required|unique:users,second_name',
                 'last_name' => 'required|unique:users,last_name',
                 'password' => 'required|min:8',
-                'is_admin' => 'required|nullable',
-                'active' => 'required|nullable',
         ];
     }
 }

@@ -5,12 +5,6 @@
 @include('head')
 <html>
 
-{{-- <style>
-    tbody > tr {
-        height: 25px;
-    }
-</style> --}}
-
 <body>
     <main class="d-flex flex-nowrap">
         @include('tables.sidebar')
@@ -21,36 +15,45 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
+                            <th>Created At</th>
                             <th>First Name</th>
                             <th>Second Name</th>
                             <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Is active</th>
+                            <th>Is admin</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($rows as $row)
                             <tr>
-                                <td>{{ $user->id }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->first_name }}</td>
-                                <td>{{ $user->second_name }}</td>
-                                <td>{{ $user->last_name }}</td>
+                                <td>{{ $row->id }}</td>
+                                <td>{{ $row->first_name }}</td>
+                                <td>{{ $row->first_name }}</td>
+                                <td>{{ $row->second_name }}</td>
+                                <td>{{ $row->last_name }}</td>
+                                <td>{{ $row->email }}</td>
+                                <td>{{ $row->phone }}</td>
+                                <td>{{ $row->is_active }}</td>
+                                <td>{{ $row->is_admin }}</td>
                                 <td>
                                     <form method="post">
                                         @csrf
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                                        <input type="hidden" name="id" value="{{ $user->id }}" />
-                                        <input type="hidden" name="name" value="{{ $user->name }}" />
-                                        <input type="hidden" name="name" value="{{ $user->name }}" />
-                                        <input type="hidden" name="first_name" value="{{ $user->first_name }}" />
-                                        <input type="hidden" name="second_name" value="{{ $user->second_name }}" />
-                                        <input type="hidden" name="last_name" value="{{ $user->last_name }}" />
-                                        <input type="hidden" name="email" value="{{ $user->email }}" />
-                                        <input type="hidden" name="active" value="{{ $user->active }}" />
-                                        <input type="hidden" name="is_admin" value="{{ $user->is_admin }}" />
+                                        <input type="hidden" name="id" value="{{ $row->id }}" />
+                                        <input type="hidden" name="name" value="{{ $row->first_name }}" />
+                                        <input type="hidden" name="name" value="{{ $row->first_name }}" />
+                                        <input type="hidden" name="first_name" value="{{ $row->first_name }}" />
+                                        <input type="hidden" name="second_name" value="{{ $row->second_name }}" />
+                                        <input type="hidden" name="last_name" value="{{ $row->last_name }}" />
+                                        <input type="hidden" name="email" value="{{ $row->email }}" />
+                                        <input type="hidden" name="phone" value="{{ $row->phone }}" />
+                                        <input type="hidden" name="is_active" value="{{ $row->is_active }}" />
+                                        <input type="hidden" name="is_admin" value="{{ $row->is_admin }}" />
 
                                         <button class="btn btn-secondary fs-4" name="edit" type="submit">
                                             🖊
@@ -61,9 +64,10 @@
                                     <form action="/delete-user" method="POST">
                                         @csrf
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
                                         <button class="btn btn-secondary fs-4" name="id" type="submit"
-                                            onsubmit="return confirm('Are you sure?')"
-                                            value="{{ $user->id }}">✞</button>
+                                            onSubmit="return confirm('Are you sure?')"
+                                            value="{{ $row->id }}">✞</button>
                                     </form>
                                 </td>
                             </tr>
@@ -78,70 +82,16 @@
                 </form>
             </div>
 
-            @if (isset($_POST['add']) || isset($_POST['edit']))
-                <form class="d-flex flex-column mx-auto mb-5 mt-auto" method="post"
-                    @isset($_POST['add'])
-                    action="/add-user"
-                @endisset
-                    @isset($_POST['edit'])
-                    action="/edit-user"
-                @endisset>
-                    @csrf
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            @isset($_POST['add'])
+                @include('tables.forms.user.add')
+            @endisset
 
-                    <div class="list-group">
-                        <div class="list-group-item list-group-item-action w-100 d-flex">
-                            <label class="form-label">User Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="Name"
-                                value="{{ $_POST['name'] ?? '' }}" required="">
-                        </div>
+            @isset($_POST['edit'])
+                @include('tables.forms.user.edit')
+            @endisset
 
-                        <div class="list-group-item list-group-item-action w-100 d-flex">
-                            <label class="form-label">First Name</label>
-                            <input type="text" name="first_name" class="form-control" placeholder="Frist Name"
-                                value="{{ $_POST['first_name'] ?? '' }}" required="">
-                        </div>
-
-                        <div class="list-group-item list-group-item-action w-100 d-flex">
-                            <label class="form-label">Second Name</label>
-                            <input type="text" name="second_name" class="form-control" placeholder="Second Name"
-                                value="{{ $_POST['second_name'] ?? '' }}" required="">
-                        </div>
-
-                        <div class="list-group-item list-group-item-action w-100 d-flex">
-                            <label class="form-label">Last Name</label>
-                            <input type="text" name="last_name" class="form-control" placeholder="Last Name"
-                                value="{{ $_POST['last_name'] ?? '' }}" required="">
-                        </div>
-
-                        <div class="list-group-item list-group-item-action w-100 d-flex">
-                            <label class="form-label">User Email</label>
-                            <input type="email" name="email" class="form-control" placeholder="User Email"
-                                value="{{ $_POST['email'] ?? '' }}" required="">
-                        </div>
-                        <div class="list-group-item list-group-item-action w-100 d-flex">
-                            <label class="form-label">Is Admin</label>
-                            <input class="form-check-input" style="margin-left: 20px" type="checkbox" name="is_admin" value="1" @checked(old('is_admin', $_POST['is_admin'])) />
-                        </div>
-
-                        <div class="list-group-item list-group-item-action w-100 d-flex">
-                            <label class="form-label">Active</label>
-                            <input type="checkbox" name="active" class="form-check-input" style="margin-left: 20px"
-                                placeholder="Last Name" value="1"
-                                {{ $_POST['active'] === '1' ? 'checked' : '' }}>
-                        </div>
-                        <button type="submit"
-                            @isset($_POST['id'])
-                            value="{{ $_POST['id'] ?? '' }}"
-                            name="id"
-                        @endisset
-                            class="button">Save</button>
-                    </div>
-                </form>
-            @endif
         </div>
     </main>
 </body>
 
 </html>
-Undefined variable $is_admin

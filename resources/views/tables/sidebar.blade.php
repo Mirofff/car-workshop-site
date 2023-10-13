@@ -152,6 +152,24 @@
         <li>
             <a href="/tables?table=users" class="nav-link text-white">Users</a>
         </li>
+        <li>
+            <a href="/tables?table=cars" class="nav-link text-white">Cars</a>
+        </li>
+        <li>
+            <a href="/tables?table=engines" class="nav-link text-white">Engines</a>
+        </li>
+        <li>
+            <a href="/tables?table=orders" class="nav-link text-white">Orders</a>
+        </li>
+        <li>
+            <a href="/tables?table=parts" class="nav-link text-white">Parts</a>
+        </li>
+        <li>
+            <a href="/tables?table=used_pars" class="nav-link text-white">Used parts</a>
+        </li>
+        <li>
+            <a href="/tables?table=services" class="nav-link text-white">Services</a>
+        </li>
     </ul>
 
     <footer class="bg-body-tertiary mt-auto w-100">
