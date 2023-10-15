@@ -10,43 +10,43 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('used_parts', function (Blueprint $table) {
+        Schema::create('used_services', function (Blueprint $table) {
             $table->id();
             $table->timestamp('created_at');
             $table->integer('quantity');
             $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('part_id');
+            $table->unsignedBigInteger('service_id');
 
             $table
                 ->foreign('order_id')
                 ->references('id')
                 ->on('orders');
             $table
-                ->foreign('part_id')
+                ->foreign('service_id')
                 ->references('id')
-                ->on('parts');
+                ->on('services');
         });
-        // Insert default used parts data
-        DB::table('used_parts')->insert([
-            [
-                'created_at' => now(),
-                'quantity' => 5,
-                'order_id' => 1,
-                'part_id' => 1,
-            ],
+
+        // Insert default used services data
+        DB::table('used_services')->insert([
             [
                 'created_at' => now(),
                 'quantity' => 3,
-                'order_id' => 2,
-                'part_id' => 2,
+                'order_id' => 1,
+                'service_id' => 1,
             ],
             [
                 'created_at' => now(),
                 'quantity' => 2,
-                'order_id' => 3,
-                'part_id' => 3,
+                'order_id' => 2,
+                'service_id' => 2,
             ],
-            // Add more default used parts data as needed
+            [
+                'created_at' => now(),
+                'quantity' => 4,
+                'order_id' => 3,
+                'service_id' => 3,
+            ],
         ]);
     }
 
@@ -55,6 +55,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('used_parts');
+        Schema::dropIfExists('used_services');
     }
 };

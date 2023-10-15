@@ -28,7 +28,7 @@ class AdminEditUserRequest extends FormRequest
             'email' => 'required',
             'id' => 'required',
             'is_admin' => 'required',
-            'is_active' => 'required',
+            'is_operator' => 'sometimes',
         ];
     }
 
@@ -37,7 +37,7 @@ class AdminEditUserRequest extends FormRequest
         $data = $this->all();
 
         $data['is_admin'] = $data['is_admin'] ?? '0';
-        $data['is_active'] = $data['is_active'] ?? '0';
+        $data['is_operator'] = $data['is_operator'] ?? '0';
 
         return $data;
     }

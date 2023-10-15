@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'address' => fake()->address(),
             'password' => Hash::make(Str::random(8)),
             'is_admin' => false,
-            'is_active' => true,
+            'is_operator' => false,
         ];
     }
 

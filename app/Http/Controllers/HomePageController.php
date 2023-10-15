@@ -17,4 +17,8 @@ class HomePageController extends Controller
         $user = Auth::logout();
         return view('home', ['user' => $user, 'title' => 'Home']);
     }
+
+    public function export() {
+        
+    }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminAddUser extends FormRequest
+class ExportOrderDocx extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +22,7 @@ class AdminAddUser extends FormRequest
     public function rules(): array
     {
         return [
-                'first_name' => 'required',
-                'second_name' => 'required',
-                'last_name' => 'required',
-                'email' => 'required',
-                'phone' => 'required',
-                'password' => 'required',
-                'is_admin' => 'sometimes',
-                'is_operator' => 'sometimes',
+            "id" => "required",
         ];
     }
 }

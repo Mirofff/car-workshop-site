@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
-        'is_active',
+        
     ];
 
     /**
@@ -44,7 +44,6 @@ class User extends Authenticatable
         'password' => 'hashed',
         'active' => 'bool',
         'is_admin' => 'bool',
-        'is_active' => 'bool',
     ];
 
     public function setPasswordAttribute($value)

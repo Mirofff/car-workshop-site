@@ -44,9 +44,9 @@
         </div>
 
         <div class="list-group-item list-group-item-action w-100 d-flex">
-            <label class="form-label">Is Active</label>
-            <input type="checkbox" name="is_active" class="form-check-input" style="margin-left: 20px"
-                placeholder="Is Active" value="1" />
+            <label class="form-label">Operator</label>
+            <input type="checkbox" name="is_operator" class="form-check-input" style="margin-left: 20px"
+                placeholder="Operator" value="1" />
         </div>
         <button type="submit" class="button">Save</button>
     </div>
