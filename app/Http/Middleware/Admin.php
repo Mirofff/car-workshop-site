@@ -15,8 +15,9 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->is_admin) {
+        if (isset($request->user()->is_admin) && $request->user()->is_admin) {
             return $next($request);
         }
+        // $next(new Request(config('constants.HOME_PAGE_URL'), 'GET'));
     }
 }

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('second_name');
             $table->string('last_name');
             $table->string('phone');
-            $table->boolean('is_admin')->default(true);
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_active')->default(false);
             $table->string('password');
             $table->rememberToken();
         });

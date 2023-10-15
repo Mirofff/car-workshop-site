@@ -6,18 +6,19 @@ use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class LoginPageController extends Controller
 {
     public function __invoke()
     {
         return view('auth.login', ['title' => 'Login']);
     }
+
     public function login(LoginRequest $request)
     {
         $credentials = $request->getCredentials();
 
         if (!Auth::validate($credentials)):
-            return redirect('/login')
+            return redirect(config('constants.HOME_PAGE_URL'))
                 ->withErrors("Wrong password!!!!!");
         endif;
 
@@ -25,7 +26,7 @@ class LoginController extends Controller
 
         Auth::login($user);
 
-        return $this->authenticated($request, $user);
+        return redirect(config('constants.HOME_PAGE_URL'));
     }
 
     protected function authenticated(Request $request, $user)

@@ -14,7 +14,7 @@
                 <li><a href="#" class="nav-link px-2 text-white">About</a></li>
                 @auth
                 @if ($user->is_admin)
-                    <li><a href="/tables" class="nav-link px-2 text-primary">Tables</a></li>
+                    <li><a href="{{config('constants.USERS_TABLE_URL')}}" class="nav-link px-2 text-primary">Tables</a></li>
                 @endif
                 @endauth
             </ul>
@@ -27,6 +27,15 @@
             @auth
                 <a href="#" class="justify-content-end px-2 text-white">{{ $user->first_name }}
                     {{ $user->last_name }}</a>
+
+                <div class="dropdown-center">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false"></button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    </ul>
+                </div>
             @endauth
             @guest
                 <div class="text-end">

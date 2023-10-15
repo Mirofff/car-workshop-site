@@ -22,14 +22,14 @@ class AdminAddUser extends FormRequest
     public function rules(): array
     {
         return [
-                'email' => 'required|email:rfc,dns|unique:users,email',
+                'first_name' => 'required',
+                'second_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required',
                 'phone' => 'required',
-                'first_name' => 'required|unique:users,first_name',
-                'second_name' => 'required|unique:users,second_name',
-                'last_name' => 'required|unique:users,last_name',
-                'password' => 'required|min:8',
-                'is_active' => 'required',
-                'is_admin' => 'required',
+                'password' => 'required',
+                'is_admin' => 'sometimes',
+                'is_active' => 'sometimes',
         ];
     }
 }

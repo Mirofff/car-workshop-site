@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\RegisterRequest;
 
-class RegistrationController extends Controller
+class RegistrationPageController extends Controller
 {
     public function __invoke()
     {

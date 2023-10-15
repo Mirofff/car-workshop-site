@@ -30,12 +30,12 @@
 
 <body class="py-4 bg-body-tertiary">
     <main class="form-signin d-flex justify-content-center align-items-center m-auto">
-        <form class="w-330" method="post" action="/login-action">
+        <form class="w-330" method="post" action="{{ config('constants.HOME_PAGE_URL_LOGIN_ACTION') }}">
+            @csrf
+
             <img class="mb-4" src="img/logo.svg" width="100%" alt="" width="72" height="57">
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-            @csrf
-            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             <div class="form-floating">
                 <input type="email" name="email" class="form-control" id="floatingInput"
                     placeholder="name@example.com">

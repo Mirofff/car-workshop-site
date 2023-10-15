@@ -47,17 +47,17 @@
                                         <input type="hidden" name="is_active" value="{{ $row->is_active }}" />
                                         <input type="hidden" name="is_admin" value="{{ $row->is_admin }}" />
 
-                                        <button class="btn btn-secondary fs-4" name="edit" type="submit">
+                                        <button class="btn btn-secondary" name="edit" type="submit">
                                             🖊
                                         </button>
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="/delete-user" method="POST">
+                                    <form action="{{ config('constants.USERS_TABLE_URL_DELETE') }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                                        <button class="btn btn-secondary fs-4" name="id" type="submit"
+                                        <button class="btn btn-secondary" name="id" type="submit"
                                             onSubmit="return confirm('Are you sure?')"
                                             value="{{ $row->id }}">✞</button>
                                     </form>
@@ -70,7 +70,7 @@
                     @csrf
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                    <button type="submit" name="add" class="btn btn-primary fs-2">+</button>
+                    <button type="submit" name="add" class="btn btn-primary">+</button>
                 </form>
             </div>
 

@@ -21,8 +21,8 @@
                             <th>Last Name</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th>Is active</th>
-                            <th>Is admin</th>
+                            <th>Active</th>
+                            <th>Admin</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -30,44 +30,41 @@
                     <tbody>
                         @foreach ($rows as $row)
                             <tr>
-                                <td>{{ $row->id }}</td>
-                                <td>{{ $row->first_name }}</td>
-                                <td>{{ $row->first_name }}</td>
-                                <td>{{ $row->second_name }}</td>
-                                <td>{{ $row->last_name }}</td>
-                                <td>{{ $row->email }}</td>
-                                <td>{{ $row->phone }}</td>
-                                <td>{{ $row->is_active }}</td>
-                                <td>{{ $row->is_admin }}</td>
-                                <td>
-                                    <form method="post">
+                                <form method="post">
+                                    <td><input type="hidden" name="id"
+                                            value="{{ $row->id }}" />{{ $row->id }}
+                                    </td>
+                                    <td><input type="hidden" name="created_at"
+                                            value="{{ $row->created_at }}" />{{ $row->created_at }}</td>
+                                    <td><input type="hidden" name="first_name"
+                                            value="{{ $row->first_name }}" />{{ $row->first_name }}</td>
+                                    <td><input type="hidden" name="second_name"
+                                            value="{{ $row->second_name }}" />{{ $row->second_name }}</td>
+                                    <td><input type="hidden" name="last_name"
+                                            value="{{ $row->last_name }}" />{{ $row->last_name }}</td>
+                                    <td><input type="hidden" name="email"
+                                            value="{{ $row->email }}" />{{ $row->email }}</td>
+                                    <td><input type="hidden" name="phone"
+                                            value="{{ $row->phone }}" />{{ $row->phone }}</td>
+                                    <td><input type="hidden" name="is_active"
+                                            value="{{ $row->is_active }}" />{{ $row->is_active }}</td>
+                                    <td> <input type="hidden" name="is_admin"
+                                            value="{{ $row->is_admin }}" />{{ $row->is_admin }}</td>
+                                    <td>
                                         @csrf
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-
-                                        <input type="hidden" name="id" value="{{ $row->id }}" />
-                                        <input type="hidden" name="name" value="{{ $row->first_name }}" />
-                                        <input type="hidden" name="name" value="{{ $row->first_name }}" />
-                                        <input type="hidden" name="first_name" value="{{ $row->first_name }}" />
-                                        <input type="hidden" name="second_name" value="{{ $row->second_name }}" />
-                                        <input type="hidden" name="last_name" value="{{ $row->last_name }}" />
-                                        <input type="hidden" name="email" value="{{ $row->email }}" />
-                                        <input type="hidden" name="phone" value="{{ $row->phone }}" />
-                                        <input type="hidden" name="is_active" value="{{ $row->is_active }}" />
-                                        <input type="hidden" name="is_admin" value="{{ $row->is_admin }}" />
-
-                                        <button class="btn btn-secondary fs-4" name="edit" type="submit">
-                                            🖊
+                                        <button class="btn btn-secondary" name="edit" type="submit">
+                                            edit
                                         </button>
-                                    </form>
-                                </td>
+                                    </td>
+                                </form>
                                 <td>
-                                    <form action="/delete-user" method="POST">
+                                    <form action="{{ config('constants.USERS_TABLE_URL_DELETE') }}"
+                                        onsubmit="return confirm('Are you sure?')" method="POST">
                                         @csrf
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-
-                                        <button class="btn btn-secondary fs-4" name="id" type="submit"
-                                            onSubmit="return confirm('Are you sure?')"
-                                            value="{{ $row->id }}">✞</button>
+                                        <button class="btn btn-secondary" name="id" type="submit"
+                                            value="{{ $row->id }}">
+                                            delete
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -78,7 +75,7 @@
                     @csrf
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                    <button type="submit" name="add" class="btn btn-primary fs-2">+</button>
+                    <button type="submit" name="add" class="btn btn-primary">+</button>
                 </form>
             </div>
 

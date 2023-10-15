@@ -145,30 +145,30 @@
         <svg class="bi pe-none me-2" width="40" height="32">
             <use xlink:href="#bootstrap"></use>
         </svg>
-        <span class="fs-4">Sidebar</span>
+        <a class="fs-4" href="{{ config('constants.HOME_PAGE_URL') }}">Car workshop</a>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li>
-            <a href="/tables?table=users" class="nav-link text-white">Users</a>
+            <a href="{{ config('constants.USERS_TABLE_URL') }}" class="nav-link text-white">Users</a>
         </li>
         <li>
-            <a href="/tables?table=cars" class="nav-link text-white">Cars</a>
+            <a href="{{ config('constants.CARS_TABLE_URL') }}" class="nav-link text-white">Cars</a>
         </li>
         <li>
-            <a href="/tables?table=engines" class="nav-link text-white">Engines</a>
+            <a href="{{ config('constants.ENGINES_TABLE_URL') }}" class="nav-link text-white">Engines</a>
         </li>
         <li>
-            <a href="/tables?table=orders" class="nav-link text-white">Orders</a>
+            <a href="{{ config('constants.ORDERS_TABLE_URL') }}" class="nav-link text-white">Orders</a>
         </li>
         <li>
-            <a href="/tables?table=parts" class="nav-link text-white">Parts</a>
+            <a href="{{ config('constants.PARTS_TABLE_URL') }}" class="nav-link text-white">Parts</a>
         </li>
         <li>
-            <a href="/tables?table=used_pars" class="nav-link text-white">Used parts</a>
+            <a href="{{ config('constants.USED_PARTS_TABLE_URL') }}" class="nav-link text-white">Used parts</a>
         </li>
         <li>
-            <a href="/tables?table=services" class="nav-link text-white">Services</a>
+            <a href="{{ config('constants.SERVICES_TABLE_URL') }}" class="nav-link text-white">Services</a>
         </li>
     </ul>
 
