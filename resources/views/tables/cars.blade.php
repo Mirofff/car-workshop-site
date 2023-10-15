@@ -44,7 +44,7 @@
                                         <input type="hidden" name="last_name" value="{{ $row->last_name }}" />
                                         <input type="hidden" name="email" value="{{ $row->email }}" />
                                         <input type="hidden" name="phone" value="{{ $row->phone }}" />
-                                        <input type="hidden" name="is_active" value="{{ $row->is_active }}" />
+                                        <input type="hidden" name="is_operator" value="{{ $row->is_operator }}" />
                                         <input type="hidden" name="is_admin" value="{{ $row->is_admin }}" />
 
                                         <button class="btn btn-secondary" name="edit" type="submit">

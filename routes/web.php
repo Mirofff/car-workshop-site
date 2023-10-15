@@ -10,6 +10,7 @@ use App\Http\Controllers\MarksTableController;
 use App\Http\Controllers\PartsTableController;
 use App\Http\Controllers\OrdersTableController;
 use App\Http\Controllers\UsedPartsTableController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Middleware\Admin;
 
 /*
@@ -74,3 +75,6 @@ Route::post(config('constants.ORDERS_TABLE_URL'), OrdersTableController::class)-
 Route::post(config('constants.ORDERS_TABLE_URL_ADD'), [OrdersTableController::class, 'add_order'])->middleware(Admin::class);
 Route::post(config('constants.ORDERS_TABLE_URL_DELETE'), [OrdersTableController::class, 'delete_order'])->middleware(Admin::class);
 Route::post(config('constants.ORDERS_TABLE_URL_EDIT'), [OrdersTableController::class, 'edit_order'])->middleware(Admin::class);
+
+Route::get(config('constants.ORDERS_TABLES_URL'), OrdersController::class);
+Route::post(config('constants.EXPORT_ORDER_DOCX'), [OrdersController::class, 'OrderDocx']);

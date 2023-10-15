@@ -46,8 +46,8 @@
                                             value="{{ $row->email }}" />{{ $row->email }}</td>
                                     <td><input type="hidden" name="phone"
                                             value="{{ $row->phone }}" />{{ $row->phone }}</td>
-                                    <td><input type="hidden" name="is_active"
-                                            value="{{ $row->is_active }}" />{{ $row->is_active }}</td>
+                                    <td><input type="hidden" name="is_operator"
+                                            value="{{ $row->is_operator }}" />{{ $row->is_operator }}</td>
                                     <td> <input type="hidden" name="is_admin"
                                             value="{{ $row->is_admin }}" />{{ $row->is_admin }}</td>
                                     <td>

@@ -35,8 +35,8 @@
 
         <div class="list-group-item list-group-item-action w-100 d-flex">
             <label class="form-label">Active</label>
-            <input type="checkbox" name="is_active" class="form-check-input" style="margin-left: 20px"
-                placeholder="Last Name" value="1" @checked(old('true', $_POST['is_active'])) />
+            <input type="checkbox" name="is_operator" class="form-check-input" style="margin-left: 20px"
+                placeholder="Last Name" value="1" @checked(old('true', $_POST['is_operator'])) />
         </div>
         <div class="row">
             <div class="col-md-6">

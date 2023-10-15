@@ -8,6 +8,9 @@ return [
     'HOME_PAGE_URL_REGISTER_ACTION' => '/register-action',
     'HOME_PAGE_URL_LOGOUT_URL' => '/logout',
 
+    'ORDERS_TABLES_URL' => '/orders',
+    'EXPORT_ORDER_DOCX' => '/order-docx',
+
     'USERS_TABLE_URL' => '/tables/users',
     'USERS_TABLE_URL_DELETE' => '/tables/users/delete',
     'USERS_TABLE_URL_EDIT' => '/tables/users/edit',
