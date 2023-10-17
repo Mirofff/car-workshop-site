@@ -11,6 +11,6 @@ class UsedPartsTableController extends Controller
     {
         $table = "used_parts";
         $rows = DB::table($table)->get();
-        return view('tables' . $table, array_merge(['rows' => $rows, 'title' => $table]));
+        return view('tables.' . $table, array_merge(['rows' => $rows, 'title' => $table]));
     }
 }

@@ -1,14 +1,16 @@
 <?php
 
 return [
-    'HOME_PAGE_URL' => '/',
+    'HOME_PAGE_URL' => '/home',
     'HOME_PAGE_URL_LOGIN' => '/login',
     'HOME_PAGE_URL_LOGIN_ACTION' => '/login-action',
     'HOME_PAGE_URL_REGISTER' => '/register',
     'HOME_PAGE_URL_REGISTER_ACTION' => '/register-action',
     'HOME_PAGE_URL_LOGOUT_URL' => '/logout',
 
-    'ORDERS_TABLES_URL' => '/orders',
+    'ORDERS_TABLE_URL' => '/orders',
+    'ORDERS_TABLE_URL_DELETE' => '/orders/delete',
+    'ORDERS_TABLE_URL_ADD' => '/orders/add',
     'EXPORT_ORDER_DOCX' => '/order-docx',
 
     'USERS_TABLE_URL' => '/tables/users',
@@ -21,10 +23,6 @@ return [
     'CARS_TABLE_URL_EDIT' => '/tables/cars/edit',
     'CARS_TABLE_URL_ADD' => '/tables/cars/add',
 
-    'ORDERS_TABLE_URL' => '/tables/orders',
-    'ORDERS_TABLE_URL_DELETE' => '/tables/orders/delete',
-    'ORDERS_TABLE_URL_EDIT' => '/tables/orders/edit',
-    'ORDERS_TABLE_URL_ADD' => '/tables/orders/add',
 
     'PARTS_TABLE_URL' => '/tables/parts',
     'PARTS_TABLE_URL_DELETE' => '/tables/parts/delete',

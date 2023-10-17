@@ -12,6 +12,7 @@ use App\Http\Controllers\OrdersTableController;
 use App\Http\Controllers\UsedPartsTableController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\Operator;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,12 +70,8 @@ Route::post(config('constants.USED_PARTS_TABLE_URL_ADD'), [UsedPartsTableControl
 Route::post(config('constants.USED_PARTS_TABLE_URL_DELETE'), [UsedPartsTableController::class, 'delete_used_part'])->middleware(Admin::class);
 Route::post(config('constants.USED_PARTS_TABLE_URL_EDIT'), [UsedPartsTableController::class, 'edit_used_part'])->middleware(Admin::class);
 
-// Orders tables page
-Route::get(config('constants.ORDERS_TABLE_URL'), OrdersTableController::class)->middleware(Admin::class);
-Route::post(config('constants.ORDERS_TABLE_URL'), OrdersTableController::class)->middleware(Admin::class);
-Route::post(config('constants.ORDERS_TABLE_URL_ADD'), [OrdersTableController::class, 'add_order'])->middleware(Admin::class);
-Route::post(config('constants.ORDERS_TABLE_URL_DELETE'), [OrdersTableController::class, 'delete_order'])->middleware(Admin::class);
-Route::post(config('constants.ORDERS_TABLE_URL_EDIT'), [OrdersTableController::class, 'edit_order'])->middleware(Admin::class);
-
-Route::get(config('constants.ORDERS_TABLES_URL'), OrdersController::class);
-Route::post(config('constants.EXPORT_ORDER_DOCX'), [OrdersController::class, 'OrderDocx']);
+Route::get(config('constants.ORDERS_TABLE_URL'), OrdersController::class)->middleware(Operator::class);
+Route::post(config('constants.ORDERS_TABLE_URL'), OrdersController::class)->middleware(Operator::class);
+Route::post(config('constants.ORDERS_TABLE_URL_ADD'), [OrdersController::class, 'add_order'])->middleware(Operator::class);
+Route::post(config('constants.ORDERS_TABLE_URL_DELETE'), [OrdersController::class, 'delete_order'])->middleware(Operator::class);
+Route::post(config('constants.EXPORT_ORDER_DOCX'), [OrdersController::class, 'OrderDocx'])->middleware(Operator::class);

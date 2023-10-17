@@ -34,7 +34,7 @@ return new class extends Migration {
                 'phone' => '123-456-7890',
                 'is_admin' => true,
                 'is_operator' => false,
-                'password' => 'Pa$$w0rd',
+                'password' => bcrypt('Pa$$w0rd'),
             ],
             [
                 'email' => 'operator@example.com',
@@ -45,6 +45,7 @@ return new class extends Migration {
                 'is_admin' => false,
                 'is_operator' => true,
                 'password' => 'Pa$$w0rd',
+                'password' => bcrypt('Pa$$w0rd'),
             ],
             [
                 'email' => 'user@example.com',
@@ -54,7 +55,7 @@ return new class extends Migration {
                 'phone' => '123-456-7890',
                 'is_admin' => false,
                 'is_operator' => false,
-                'password' => 'Pa$$w0rd',
+                'password' => bcrypt('Pa$$w0rd'),
             ],
         ]);
     }

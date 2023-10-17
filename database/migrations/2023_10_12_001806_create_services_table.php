@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->decimal('price', 10, 2);
-            $table->text('complaints');
+            $table->text('name');
             $table->enum('status', ['new', 'in progress', 'done'])->default('new');
 
             $table
@@ -27,19 +27,19 @@ return new class extends Migration {
             [
                 'order_id' => 1,
                 'price' => 100.0,
-                'complaints' => 'Complaint 1',
+                'name' => 'Complaint 1',
                 'status' => 'new',
             ],
             [
                 'order_id' => 2,
                 'price' => 75.5,
-                'complaints' => 'Complaint 2',
+                'name' => 'Complaint 2',
                 'status' => 'in progress',
             ],
             [
                 'order_id' => 3,
                 'price' => 150.25,
-                'complaints' => 'Complaint 3',
+                'name' => 'Complaint 3',
                 'status' => 'done',
             ],
         ]);

@@ -16,6 +16,9 @@
                 @if ($user->is_admin)
                     <li><a href="{{config('constants.USERS_TABLE_URL')}}" class="nav-link px-2 text-primary">Tables</a></li>
                 @endif
+                @if ($user->is_operator)
+                    <li><a href="{{config('constants.ORDERS_TABLE_URL')}}" class="nav-link px-2 text-primary">Orders</a></li>
+                @endif
                 @endauth
             </ul>
 
