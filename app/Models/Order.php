@@ -18,6 +18,7 @@ class Order extends Model
         'date',
         'reason',
         'user_id',
+        'is_saved',
         'car_id',
         'recommendations',
         

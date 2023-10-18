@@ -1,5 +1,5 @@
 <form class="d-flex flex-column mx-auto mb-5 mt-auto" method="post"
-    action="{{ config('constants.ORDERS_TABLE_URL_ADD') }}">
+    action="{{ config('constants.ORDERS_TABLE_URL_EXTEND_PARTS') }}">
     @csrf
 
     <div class="list-group">
@@ -38,6 +38,6 @@
             <label class="form-label">Recommendations</label>
             <input type="text" name="recommendations" class="form-control" placeholder="Recommendations" required>
         </div>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="button">Save</button>
     </div>
 </form>

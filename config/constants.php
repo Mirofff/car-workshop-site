@@ -11,6 +11,10 @@ return [
     'ORDERS_TABLE_URL' => '/orders',
     'ORDERS_TABLE_URL_DELETE' => '/orders/delete',
     'ORDERS_TABLE_URL_ADD' => '/orders/add',
+    'ORDERS_TABLE_URL_DETAILS' => '/orders/details',
+    'ORDERS_TABLE_URL_SAVE_DETAILS' => '/orders/save-details',
+    'ORDERS_TABLE_URL_EXTEND_PARTS' => '/orders/extend-parts',
+    'ORDERS_TABLE_URL_EXTEND_SERVICES' => '/orders/extend-services',
     'EXPORT_ORDER_DOCX' => '/order-docx',
 
     'USERS_TABLE_URL' => '/tables/users',

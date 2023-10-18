@@ -4,7 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ExportOrderDocx;
 use App\Http\Requests\OperatorAddOrder;
+use App\Http\Requests\OperatorDeleteOrder;
+use App\Http\Requests\OperatorDetailsOrder;
+use App\Http\Requests\OperatorExtendOrderUsedParts;
+use App\Http\Requests\OperatorExtendOrderUsedServices;
+use App\Http\Requests\OperatorSaveDetails;
 use App\Models\Order;
+use App\Models\UsedPart;
+use App\Models\UsedService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpWord\IOFactory;
@@ -21,25 +28,73 @@ class OrdersController extends Controller
             ->join('users', 'orders.user_id', '=', 'users.id')
             ->join('models', 'cars.model_id', '=', 'models.id')
             ->join('marks', 'models.mark_id', '=', 'marks.id')
+            ->select('*', 'orders.id as id')
+            ->get();
+        $cars = DB::table('cars')
+            ->join('models', 'cars.id', '=', 'models.id')
+            ->join('marks', 'models.mark_id', '=', 'marks.id')
             ->select('*')
             ->get();
-        $cars = DB::table('cars')->join('models', 'cars.id', '=', 'models.id')->join('marks', 'models.mark_id', '=', 'marks.id')->select('*')->get();
         $users = DB::table('users')->get();
         return view($table, array_merge(['rows' => $rows, 'cars' => $cars, 'users' => $users, 'title' => $table]));
+    }
+
+    public function extend_services(OperatorExtendOrderUsedServices $request)
+    {
+        $order_id = (integer)$request->validated()['order_id'];
+        if (!Order::find($order_id)['is_saved']) {
+            $service = UsedService::create($request->validated());
+
+            return redirect(config('constants.ORDERS_TABLE_URL_DETAILS') . '?order_id=' . $request->validated()['order_id']);
+        }
+    }
+
+    public function extend_parts(OperatorExtendOrderUsedParts $request)
+    {
+        $part = UsedPart::create($request->validated());
+
+        return redirect(config('constants.ORDERS_TABLE_URL_DETAILS') . '?order_id=' . $request->validated()['order_id']);
+    }
+
+    public function save_details(OperatorSaveDetails $request)
+    {
+        Order::find($request->validated()['order_id'])->update(['is_saved' => 1]);
+
+        return redirect(config('constants.ORDERS_TABLE_URL'));
     }
 
     public function add_order(OperatorAddOrder $request)
     {
         $user = Order::create($request->validated());
 
-        return redirect(config('constants.ORDERS_TABLE_URL'))->with('success', 'Account successfully registered!');
+        return redirect(config('constants.ORDERS_TABLE_URL'));
     }
 
     public function delete_order(OperatorDeleteOrder $request)
     {
-        $user = Order::create($request->validated());
+        Order::create($request->validated());
 
         return redirect(config('constants.ORDERS_TABLE_URL'))->with('success', 'Account successfully registered!');
+    }
+
+    public function index_details(OperatorDetailsOrder $request)
+    {
+        $order_id = (int) $request->validated()['order_id'];
+        $order = Order::find($order_id);
+        $parts = DB::table('parts')->get();
+        $services = DB::table('services')->get();
+        $order_services = DB::table('orders')
+            ->join('used_services', 'orders.id', '=', 'used_services.order_id')
+            ->join('services', 'used_services.service_id', '=', 'services.id')
+            ->where('order_id', $order_id)
+            ->get();
+        $order_parts = DB::table('orders')
+            ->join('used_parts', 'orders.id', '=', 'used_parts.order_id')
+            ->join('parts', 'used_parts.part_id', '=', 'parts.id')
+            ->where('order_id', $order_id)
+            ->get();
+
+        return view('tables.order-details', ['order_id' => $order_id, 'title' => 'Order Details', 'services' => $services, 'parts' => $parts, 'order' => $order, 'order_details' => $order_services, 'order_parts' => $order_parts]);
     }
 
     public function OrderDocx(ExportOrderDocx $request)

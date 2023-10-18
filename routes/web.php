@@ -25,6 +25,7 @@ use App\Http\Middleware\Operator;
 |
 */
 
+Route::get('/', fn () =>  redirect('/home'));
 Route::get(config('constants.HOME_PAGE_URL'), HomePageController::class);
 
 Route::get(config('constants.HOME_PAGE_URL_LOGOUT_URL'), [HomePageController::class, 'logout']);
@@ -71,7 +72,11 @@ Route::post(config('constants.USED_PARTS_TABLE_URL_DELETE'), [UsedPartsTableCont
 Route::post(config('constants.USED_PARTS_TABLE_URL_EDIT'), [UsedPartsTableController::class, 'edit_used_part'])->middleware(Admin::class);
 
 Route::get(config('constants.ORDERS_TABLE_URL'), OrdersController::class)->middleware(Operator::class);
+Route::get(config('constants.ORDERS_TABLE_URL_DETAILS'), [OrdersController::class, 'index_details'])->middleware(Operator::class);
+Route::post(config('constants.ORDERS_TABLE_URL_SAVE_DETAILS'), [OrdersController::class, 'save_details'])->middleware(Operator::class);
 Route::post(config('constants.ORDERS_TABLE_URL'), OrdersController::class)->middleware(Operator::class);
 Route::post(config('constants.ORDERS_TABLE_URL_ADD'), [OrdersController::class, 'add_order'])->middleware(Operator::class);
 Route::post(config('constants.ORDERS_TABLE_URL_DELETE'), [OrdersController::class, 'delete_order'])->middleware(Operator::class);
+Route::post(config('constants.ORDERS_TABLE_URL_EXTEND_SERVICES'), [OrdersController::class, 'extend_services'])->middleware(Operator::class);
+Route::post(config('constants.ORDERS_TABLE_URL_EXTEND_PARTS'), [OrdersController::class, 'extend_parts'])->middleware(Operator::class);
 Route::post(config('constants.EXPORT_ORDER_DOCX'), [OrdersController::class, 'OrderDocx'])->middleware(Operator::class);
