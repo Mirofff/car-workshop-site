@@ -11,8 +11,11 @@ use App\Http\Controllers\PartsTableController;
 use App\Http\Controllers\OrdersTableController;
 use App\Http\Controllers\UsedPartsTableController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Operator;
+use App\Http\Middleware\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +28,7 @@ use App\Http\Middleware\Operator;
 |
 */
 
-Route::get('/', fn () =>  redirect('/home'));
+Route::get('/', fn() => redirect('/home'));
 Route::get(config('constants.HOME_PAGE_URL'), HomePageController::class);
 
 Route::get(config('constants.HOME_PAGE_URL_LOGOUT_URL'), [HomePageController::class, 'logout']);
@@ -48,7 +51,8 @@ Route::get(config('constants.CARS_TABLE_URL'), CarsTableController::class)->midd
 Route::post(config('constants.CARS_TABLE_URL'), CarsTableController::class)->middleware(Admin::class);
 Route::post(config('constants.CARS_TABLE_URL_ADD'), [CarsTableController::class, 'add_user'])->middleware(Admin::class);
 Route::post(config('constants.CARS_TABLE_URL_DELETE'), [CarsTableController::class, 'delete_user'])->middleware(Admin::class);
-Route::post(config('constants.CARS_TABLE_URL_EDIT'), [CarsTableController::class, 'edit_user'])->middleware(Admin::class);
+Route::post('/cars/edit-car', [CarController::class, 'edit_car_index'])->name('edit-car')->middleware(Admin::class);
+Route::post('/cars/edit-car/action', [CarController::class, 'edit_car_action'])->name('edit-car-action')->middleware(Admin::class);
 
 // Marks tables page
 Route::get(config('constants.MARKS_TABLE_URL'), MarksTableController::class)->middleware(Admin::class);
@@ -80,3 +84,8 @@ Route::post(config('constants.ORDERS_TABLE_URL_DELETE'), [OrdersController::clas
 Route::post(config('constants.ORDERS_TABLE_URL_EXTEND_SERVICES'), [OrdersController::class, 'extend_services'])->middleware(Operator::class);
 Route::post(config('constants.ORDERS_TABLE_URL_EXTEND_PARTS'), [OrdersController::class, 'extend_parts'])->middleware(Operator::class);
 Route::post(config('constants.EXPORT_ORDER_DOCX'), [OrdersController::class, 'OrderDocx'])->middleware(Operator::class);
+
+Route::get('/dashboard', UserController::class)->middleware(User::class)->name('dashboard');
+// Route::get('/appointment', ['as' => 'appointment', 'uses' => [UserController::class, 'index_appointment']])->middleware(User::class);
+Route::get('/booking', [UserController::class, 'index_booking'])->middleware(User::class)->name('booking');
+Route::post('/booking', [UserController::class, 'booking_action'])->middleware(User::class)->name('booking-action');

@@ -13,11 +13,14 @@
                 <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">About</a></li>
                 @auth
-                @if ($user->is_admin)
+                @if (isset($user->is_admin) and ($user->is_admin))
                     <li><a href="{{config('constants.USERS_TABLE_URL')}}" class="nav-link px-2 text-primary">Tables</a></li>
-                @endif
-                @if ($user->is_operator)
+                @elseif (isset($user->is_operator) and ($user->is_operator))
                     <li><a href="{{config('constants.ORDERS_TABLE_URL')}}" class="nav-link px-2 text-primary">Orders</a></li>
+                @else
+                    {{-- <li><a href="{{route('dashboard')}}" class="nav-link px-2 text-primary">Dashboard</a></li> --}}
+                    <li><a href="/dashboard" class="nav-link px-2 text-primary">Dashboard</a></li>
+                    <li><a href="{{route('booking')}}" class="nav-link px-2 text-primary">Booking</a></li>
                 @endif
                 @endauth
             </ul>

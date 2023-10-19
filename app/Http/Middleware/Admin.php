@@ -18,6 +18,6 @@ class Admin
         if (isset($request->user()->is_admin) && $request->user()->is_admin) {
             return $next($request);
         }
-        // $next(new Request(config('constants.HOME_PAGE_URL'), 'GET'));
+        return response()->view('errors.403', ['title' => 'Forbidden']);
     }
 }

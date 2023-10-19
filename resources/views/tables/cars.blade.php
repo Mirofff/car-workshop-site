@@ -26,28 +26,18 @@
                         @foreach ($rows as $row)
                             <tr>
                                 <td>{{ $row->id }}</td>
-                                <td>{{ $row->model}}</td>
-                                <td>{{ $row->license_plate}}</td>
-                                <td>{{ $row->vin}}</td>
-                                <td>{{ $row->year}}</td>
-                                <td>{{ $row->engine}}</td>
+                                <td>{{ $row->model }}</td>
+                                <td>{{ $row->license_plate }}</td>
+                                <td>{{ $row->vin }}</td>
+                                <td>{{ $row->year }}</td>
+                                <td>{{ $row->engine }}</td>
                                 <td>
-                                    <form method="post">
+                                    <form method="post" action="{{route('edit-car')}}">
                                         @csrf
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                                        <input type="hidden" name="id" value="{{ $row->id }}" />
-                                        <input type="hidden" name="name" value="{{ $row->first_name }}" />
-                                        <input type="hidden" name="name" value="{{ $row->first_name }}" />
-                                        <input type="hidden" name="first_name" value="{{ $row->first_name }}" />
-                                        <input type="hidden" name="second_name" value="{{ $row->second_name }}" />
-                                        <input type="hidden" name="last_name" value="{{ $row->last_name }}" />
-                                        <input type="hidden" name="email" value="{{ $row->email }}" />
-                                        <input type="hidden" name="phone" value="{{ $row->phone }}" />
-                                        <input type="hidden" name="is_operator" value="{{ $row->is_operator }}" />
-                                        <input type="hidden" name="is_admin" value="{{ $row->is_admin }}" />
+                                        <input type="hidden" name="id" value="{{ $row->id }}">
 
-                                        <button class="btn btn-secondary" name="edit" type="submit">
+                                        <button class="btn btn-secondary" type="submit">
                                             🖊
                                         </button>
                                     </form>
@@ -73,14 +63,6 @@
                     <button type="submit" name="add" class="btn btn-primary">+</button>
                 </form>
             </div>
-
-            @isset($_POST['add'])
-                @include('tables.forms.user.add')
-            @endisset
-
-            @isset($_POST['edit'])
-                @include('tables.forms.user.edit')
-            @endisset
 
         </div>
     </main>
