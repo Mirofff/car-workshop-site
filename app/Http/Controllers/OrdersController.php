@@ -13,6 +13,7 @@ use App\Models\Order;
 use App\Models\UsedPart;
 use App\Models\UsedService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
@@ -31,17 +32,17 @@ class OrdersController extends Controller
             ->select('*', 'orders.id as id')
             ->get();
         $cars = DB::table('cars')
-            ->join('models', 'cars.id', '=', 'models.id')
+            ->join('models', 'cars.model_id', '=', 'models.id')
             ->join('marks', 'models.mark_id', '=', 'marks.id')
-            ->select('*')
+            ->select('*', 'cars.id as id')
             ->get();
         $users = DB::table('users')->get();
-        return view($table, array_merge(['rows' => $rows, 'cars' => $cars, 'users' => $users, 'title' => $table]));
+        return view($table, array_merge(['rows' => $rows, 'cars' => $cars, 'users' => $users, 'title' => $table, 'user' => Auth::user()]));
     }
 
     public function extend_services(OperatorExtendOrderUsedServices $request)
     {
-        $order_id = (integer)$request->validated()['order_id'];
+        $order_id = (int) $request->validated()['order_id'];
         if (!Order::find($order_id)['is_saved']) {
             $service = UsedService::create($request->validated());
 
@@ -72,9 +73,11 @@ class OrdersController extends Controller
 
     public function delete_order(OperatorDeleteOrder $request)
     {
-        Order::create($request->validated());
+        DB::table('used_parts')->where('order_id', $request->validated()['id'])->delete();
+        DB::table('used_services')->where('order_id', $request->validated()['id'])->delete();
+        Order::where('id', $request->validated()['id'])->delete();
 
-        return redirect(config('constants.ORDERS_TABLE_URL'))->with('success', 'Account successfully registered!');
+        return redirect()->route('orders');
     }
 
     public function index_details(OperatorDetailsOrder $request)

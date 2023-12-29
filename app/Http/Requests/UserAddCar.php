@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class OperatorDeleteOrder extends FormRequest
+class UserAddCar extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,14 @@ class OperatorDeleteOrder extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => "required",
+            'license_plate' => 'required',
+            'vin' => 'required',
+            'year' => 'required',
+            'mileage' => 'required',
+            'register_sign' => 'required',
+            'model_id' => 'required',
+            'user_id' => 'required',
+            'engine_id' => 'required',
         ];
     }
 }

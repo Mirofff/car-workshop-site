@@ -12,10 +12,13 @@ use App\Http\Controllers\OrdersTableController;
 use App\Http\Controllers\UsedPartsTableController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\OperatorController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Operator;
 use App\Http\Middleware\User;
+use Faker\Guesser\Name;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,8 +54,12 @@ Route::get(config('constants.CARS_TABLE_URL'), CarsTableController::class)->midd
 Route::post(config('constants.CARS_TABLE_URL'), CarsTableController::class)->middleware(Admin::class);
 Route::post(config('constants.CARS_TABLE_URL_ADD'), [CarsTableController::class, 'add_user'])->middleware(Admin::class);
 Route::post(config('constants.CARS_TABLE_URL_DELETE'), [CarsTableController::class, 'delete_user'])->middleware(Admin::class);
-Route::post('/cars/edit-car', [CarController::class, 'edit_car_index'])->name('edit-car')->middleware(Admin::class);
-Route::post('/cars/edit-car/action', [CarController::class, 'edit_car_action'])->name('edit-car-action')->middleware(Admin::class);
+Route::post('/cars/edit-car', [CarController::class, 'edit_car_index'])
+    ->name('edit-car')
+    ->middleware(Admin::class);
+Route::post('/cars/edit-car/action', [CarController::class, 'edit_car_action'])
+    ->name('edit-car-action')
+    ->middleware(Admin::class);
 
 // Marks tables page
 Route::get(config('constants.MARKS_TABLE_URL'), MarksTableController::class)->middleware(Admin::class);
@@ -75,17 +82,41 @@ Route::post(config('constants.USED_PARTS_TABLE_URL_ADD'), [UsedPartsTableControl
 Route::post(config('constants.USED_PARTS_TABLE_URL_DELETE'), [UsedPartsTableController::class, 'delete_used_part'])->middleware(Admin::class);
 Route::post(config('constants.USED_PARTS_TABLE_URL_EDIT'), [UsedPartsTableController::class, 'edit_used_part'])->middleware(Admin::class);
 
-Route::get(config('constants.ORDERS_TABLE_URL'), OrdersController::class)->middleware(Operator::class);
+Route::get('/orders', OrdersController::class)->middleware(Operator::class)->name('orders');
 Route::get(config('constants.ORDERS_TABLE_URL_DETAILS'), [OrdersController::class, 'index_details'])->middleware(Operator::class);
 Route::post(config('constants.ORDERS_TABLE_URL_SAVE_DETAILS'), [OrdersController::class, 'save_details'])->middleware(Operator::class);
 Route::post(config('constants.ORDERS_TABLE_URL'), OrdersController::class)->middleware(Operator::class);
 Route::post(config('constants.ORDERS_TABLE_URL_ADD'), [OrdersController::class, 'add_order'])->middleware(Operator::class);
-Route::post(config('constants.ORDERS_TABLE_URL_DELETE'), [OrdersController::class, 'delete_order'])->middleware(Operator::class);
+Route::post('/orders/delete', [OrdersController::class, 'delete_order'])->middleware(Operator::class)->name('orders.delete');
 Route::post(config('constants.ORDERS_TABLE_URL_EXTEND_SERVICES'), [OrdersController::class, 'extend_services'])->middleware(Operator::class);
 Route::post(config('constants.ORDERS_TABLE_URL_EXTEND_PARTS'), [OrdersController::class, 'extend_parts'])->middleware(Operator::class);
 Route::post(config('constants.EXPORT_ORDER_DOCX'), [OrdersController::class, 'OrderDocx'])->middleware(Operator::class);
 
-Route::get('/dashboard', UserController::class)->middleware(User::class)->name('dashboard');
+Route::get('/dashboard', UserController::class)
+    ->middleware(User::class)
+    ->name('dashboard');
 // Route::get('/appointment', ['as' => 'appointment', 'uses' => [UserController::class, 'index_appointment']])->middleware(User::class);
-Route::get('/booking', [UserController::class, 'index_booking'])->middleware(User::class)->name('booking');
-Route::post('/booking', [UserController::class, 'booking_action'])->middleware(User::class)->name('booking-action');
+Route::get('/booking', [UserController::class, 'index_booking'])
+    ->middleware(User::class)
+    ->name('booking');
+Route::post('/booking', [UserController::class, 'booking_action'])
+    ->middleware(User::class)
+    ->name('booking-action');
+Route::get('/cars', [UserController::class, 'index_cars'])
+    ->middleware(User::class)
+    ->name('cars');
+Route::post('/cars', [UserController::class, 'cars_actions'])
+    ->middleware(User::class)
+    ->name('cars-action');
+
+
+Route::post(config('/user/add-car'), [UserController::class, 'add_car'])->middleware(User::class)->name('user.add-car');
+Route::get('/reports', ReportsController::class)
+    ->middleware(Operator::class)
+    ->name('reports');
+Route::get('/reports/repairs', [ReportsController::class, 'repairs_index'])
+    ->middleware(Operator::class)
+    ->name('reports.repairs');
+Route::get('/reports/revanue', [ReportsController::class, 'revanue_index'])
+    ->middleware(Operator::class)
+    ->name('reports.revanue');

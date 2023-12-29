@@ -6,6 +6,7 @@
 <html>
 
 <body>
+    @include('header')
     <main class="d-flex flex-nowrap">
 
         <div class="d-flex flex-wrap flex-grow-1" style="height: auto;">
@@ -56,7 +57,7 @@
                                         <input type="hidden" name="model" />
                                         <input type="hidden" name="year" />
                                     </form> --}}
-                                    <form action="{{ config('constants.ORDERS_TABLE_URL_DELETE') }}" method="POST"
+                                    <form action="{{ route('orders.delete') }}" method="POST"
                                         onsubmit="return confirm('Are you sure?')">
                                         @csrf
 
@@ -87,6 +88,7 @@
 
         </div>
     </main>
+    @include('footer')
 </body>
 
 </div>

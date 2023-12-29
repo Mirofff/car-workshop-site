@@ -1,6 +1,6 @@
 <header class="p-3 text-bg-dark">
     <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start" style="min-width: 1200px">
             <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                 <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
                     <use xlink:href="#bootstrap"></use>
@@ -17,10 +17,12 @@
                     <li><a href="{{config('constants.USERS_TABLE_URL')}}" class="nav-link px-2 text-primary">Tables</a></li>
                 @elseif (isset($user->is_operator) and ($user->is_operator))
                     <li><a href="{{config('constants.ORDERS_TABLE_URL')}}" class="nav-link px-2 text-primary">Orders</a></li>
+                    <li><a href="{{route('reports')}}" class="nav-link px-2 text-primary">Report</a></li>
                 @else
                     {{-- <li><a href="{{route('dashboard')}}" class="nav-link px-2 text-primary">Dashboard</a></li> --}}
                     <li><a href="/dashboard" class="nav-link px-2 text-primary">Dashboard</a></li>
                     <li><a href="{{route('booking')}}" class="nav-link px-2 text-primary">Booking</a></li>
+                    <li><a href="{{route('cars')}}" class="nav-link px-2 text-primary">Cars</a></li>
                 @endif
                 @endauth
             </ul>
