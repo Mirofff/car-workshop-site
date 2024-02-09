@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\PutUserStuff;
 use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\UpdateRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,16 +14,16 @@ class UserController extends Controller
 {
     public function __invoke()
     {
-        return view('panel.entities.users', ['items' => User::all()]);
+        return view('components.table', ['items' => User::all(), 'get_route' => 'user.get', 'id_column' => 'uuid']);
     }
 
-    public function registration(RegisterRequest $request): RedirectResponse
+    public function signup(RegisterRequest $request): RedirectResponse
     {
         Auth::login(User::create($request->validated())->make());
         return redirect('login');
     }
 
-    public function authentication(LoginRequest $request): RedirectResponse
+    public function signin(LoginRequest $request): RedirectResponse
     {
         if (Auth::attempt($request->validated(), true)) {
             $request->session()->regenerate();
@@ -36,7 +35,7 @@ class UserController extends Controller
         ])->onlyInput('email');
     }
 
-    public function get(Request $request, string $uuid)
+    public function get(string $uuid)
     {
         return view('panel.page.user', ['item' => User::find($uuid)]);
     }
@@ -57,11 +56,4 @@ class UserController extends Controller
         User::find($uuid)->update($request->validated());
         return back();
     }
-
-    public function update(UpdateRequest $request)
-    {
-        Auth::user()->update($request->validated());
-        return back();
-    }
-
 }

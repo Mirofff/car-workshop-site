@@ -8,6 +8,6 @@ class ConsumablesController extends Controller
 {
     public function __invoke()
     {
-        return view('panel.entities.consumables', ['items' => Consumable::all()]);
+        return view('components.table', ['items' => Consumable::all(), 'get_route' => 'consumable.get', 'id_column' => 'id']);
     }
 }

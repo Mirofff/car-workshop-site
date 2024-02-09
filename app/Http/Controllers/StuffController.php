@@ -8,6 +8,6 @@ class StuffController extends Controller
 {
     public function __invoke()
     {
-        return view('panel.entities.stuff', ['items' => Stuff::all()]);
+        return view('components.table', ['items' => Stuff::all(), 'get_route' => 'stuff.get', 'id_column' => 'uuid']);
     }
 }

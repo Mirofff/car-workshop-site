@@ -14,34 +14,25 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\WorkshopsController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 // ---=== Pages ===---
-Route::redirect('/', '/about');
 Route::view('/about', 'about')->name('about');
 
 
 Route::middleware('guest')->group(function () {
+    Route::redirect('/', '/about');
+
     Route::view('/login', 'login')->name('login');
-    Route::view('/register', 'register')->name('register');
-    Route::post('/registration', [UserController::class, 'registration'])->name('registration');
-    Route::post('/authenticate', [UserController::class, 'authentication'])->name('authenticate');
+    Route::post('/login', [UserController::class, 'signin'])->name('login');
+
+    Route::view('/signup', 'register')->name('signup');
+    Route::post('/signup', [UserController::class, 'signup'])->name('signup');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('role:client')->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
-    Route::view('/profile', 'profile')->name('profile');
-    Route::post('/update-profile', [UserController::class, 'update'])->name('update-profile');
+    Route::get('/profile', [UserController::class, 'get'])->name('profile');
+    Route::put('/profile', [UserController::class, 'put'])->name('profile.put');
 
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 });
@@ -50,25 +41,21 @@ Route::middleware('auth')->group(function () {
 Route::prefix('panel')->middleware('role:admin,operator')->group(function () {
     Route::get('/', RequestController::class)->name('panel.panel');
 
-    Route::view('/statements', "panel.entities.statements")->name('panel.statements');
-    Route::get('/statements', [StatementController::class])->name('panel.models');
-    Route::get('/statements/{id}', [StatementController::class, 'get'])->name('model.get');
-    Route::put('/statements/{uuid}', [StatementController::class, 'put'])->name('model.put');
+    Route::get('/statements', StatementController::class)->name('panel.statements');
+    Route::get('/statements/{id}', [StatementController::class, 'get'])->name('statement.get');
+    Route::put('/statements/{uuid}', [StatementController::class, 'put'])->name('statement.put');
 
-    Route::view('/vehicles', "panel.entities.vehicles")->name('panel.vehicles');
-    Route::get('/vehicles', [VehicleController::class])->name('panel.models');
-    Route::get('/vehicles/{id}', [VehicleController::class, 'get'])->name('model.get');
-    Route::put('/vehicles/{uuid}', [VehicleController::class, 'put'])->name('model.put');
+    Route::get('/vehicles', VehicleController::class)->name('panel.vehicles');
+    Route::get('/vehicles/{id}', [VehicleController::class, 'get'])->name('vehicle.get');
+    Route::put('/vehicles/{uuid}', [VehicleController::class, 'put'])->name('vehicle.put');
 
-    Route::view('/used_consumables', "panel.entities.used_consumables")->name('panel.used_consumables');
-    Route::get('/used_consumables', [UConsumableController::class])->name('panel.models');
-    Route::get('/used_consumables/{id}', [UConsumableController::class, 'get'])->name('model.get');
-    Route::put('/used_consumables/{uuid}', [UConsumableController::class, 'put'])->name('model.put');
+    Route::get('/used_consumables', UConsumableController::class)->name('panel.uconsumables');
+    Route::get('/used_consumables/{id}', [UConsumableController::class, 'get'])->name('uconsumable.get');
+    Route::put('/used_consumables/{uuid}', [UConsumableController::class, 'put'])->name('uconsumable.put');
 
-    Route::view('/used_services', "panel.entities.used_services")->name('panel.used_services');
-    Route::get('/used_services', [UServiceController::class])->name('panel.models');
-    Route::get('/used_services/{id}', [UServiceController::class, 'get'])->name('model.get');
-    Route::put('/used_services/{uuid}', [UServiceController::class, 'put'])->name('model.put');
+    Route::get('/used_services', UServiceController::class)->name('panel.uservices');
+    Route::get('/used_services/{id}', [UServiceController::class, 'get'])->name('uservice.get');
+    Route::put('/used_services/{uuid}', [UServiceController::class, 'put'])->name('uservice.put');
 });
 
 Route::prefix('panel')->middleware('role:admin')->group(function () {

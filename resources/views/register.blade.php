@@ -1,4 +1,4 @@
-<form action="{{route('registration')}}" method="post">
+<form action="{{route('signup')}}" method="post">
     @csrf
     <input name="last_name" id="last_name" type="text">
     <label for="last_name">{{__('Last Name')}}</label>

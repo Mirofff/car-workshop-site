@@ -1,21 +1,27 @@
-<table class="table table-bordered">
+@include('components.head')
+<table class="table table-striped">
+    <thead>
     <tr>
+        <th>#</th>
         @isset($get_route)
-            <td>{{__('Update')}}</td>
+            <th scope="col">{{__('Update')}}</th>
         @endisset
         @foreach ($items[0]->toArray() as $column => $value)
-            <td>{{ $column }}</td>
+            <th scope="col">{{ $column }}</th>
         @endforeach
     </tr>
+    </thead>
+    <tbody>
     @foreach ($items as $item)
         <tr>
+            <th scope="row">{{$loop->iteration}}</th>
             @foreach ($item->toArray() as $column => $value)
                 @isset($get_route)
-                    @if($column == 'uuid' or $column == 'id')
-                        <td><a href="{{route($get_route, ['uuid' => $value])}}">{{__('Update')}}</a></td>
+                    @if($column == $id_column)
+                        <td><a href="{{route($get_route, [$id_column => $value])}}">{{__('Update')}}</a></td>
                     @endif
                 @endisset
-                @if(is_bool($value))
+                @if($value == 1 or $value == 0)
                     <td>{{ $value ? __('Yes') : __('No')}}</td>
                 @else
                     <td>{{ $value }}</td>
@@ -23,4 +29,5 @@
             @endforeach
         </tr>
     @endforeach
+    </tbody>
 </table>

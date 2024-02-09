@@ -8,6 +8,6 @@ class WorkshopsController extends Controller
 {
     public function __invoke()
     {
-        return view('panel.entities.workshops', ['items' => Workshop::all()]);
+        return view('components.table', ['items' => Workshop::all(), 'get_route' => 'workshop.get', 'id_column' => 'uuid']);
     }
 }

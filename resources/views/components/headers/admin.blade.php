@@ -2,8 +2,8 @@
 @include('components.header', ['links' => [
     __('Statements') => route('panel.statements'),
     __('Vehicles') => route('panel.vehicles'),
-    __('Used Consumables') => route('panel.used_consumables'),
-    __('Used Services') => route('panel.used_services'),
+    __('Used Consumables') => route('panel.uconsumables'),
+    __('Used Services') => route('panel.uservices'),
     __('Users') => route('panel.users'),
     __('Models') => route('panel.models'),
     __('Marks') => route('panel.marks'),
