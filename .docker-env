@@ -1,0 +1,2 @@
+MYSQL_DATABASE=car-workshop
+MYSQL_ROOT_PASSWORD=password
