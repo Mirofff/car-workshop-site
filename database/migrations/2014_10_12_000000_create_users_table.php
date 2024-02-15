@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('users',
             function (Blueprint $table) {
-                $table->uuid()->default('uuid()')->primary();
+                $table->uuid()->primary();
                 $table->string('first_name', 45);
                 $table->string('second_name', 45)->nullable();
                 $table->string('last_name', 45);

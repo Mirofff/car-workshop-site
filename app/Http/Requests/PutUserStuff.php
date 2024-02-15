@@ -16,8 +16,8 @@ class PutUserStuff extends FormRequest
     {
         return [
             "email" => "email",
-            "last_name" => "string",
-            "first_name" => "string",
+            "last_name" => "email",
+            "first_name" => "email",
             "second_name" => "string",
             "is_active" => "in:on,off",
             "role" => "in:admin,operator,client",

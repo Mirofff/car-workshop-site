@@ -6,8 +6,8 @@
         @isset($get_route)
             <th scope="col">{{__('Update')}}</th>
         @endisset
-        @foreach ($items[0]->toArray() as $column => $value)
-            <th scope="col">{{ $column }}</th>
+        @foreach ($columns as $value)
+            <th scope="col">{{__($value)}}</th>
         @endforeach
     </tr>
     </thead>

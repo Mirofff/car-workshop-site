@@ -1,6 +1,6 @@
 @include('components.head')
 <main class="row h-100 justify-content-center align-items-center">
-    <form class="w-25" action="{{route('panel.models.put', ['uuid' => $item->uuid])}}"
+    <form class="w-25" action="{{route('admin.models.put', ['uuid' => $item->uuid])}}"
           method="post">
         @method('PUT')
         @csrf
@@ -31,7 +31,7 @@
         </div>
 
         <div class="form-group">
-            <label for="role">{{__('Role')}}</label>
+            <label for="role">{{__('Client')}}</label>
             <select class="form-select" name="role" id="role">
                 @foreach(\App\Enums\UserRole::cases() as $role)
                     <option value="{{$role}}" @selected(old('role') == $role)>{{$role}}</option>

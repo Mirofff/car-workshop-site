@@ -1,3 +1,4 @@
+{{--TODO: change forms to blade components--}}
 @include('components.head')
 <main class="row h-100 justify-content-center align-items-center">
     <form class="w-25" action="{{route('user.put', ['uuid' => $item->uuid])}}"
@@ -31,7 +32,7 @@
         </div>
 
         <div class="form-group">
-            <label for="role">{{__('Role')}}</label>
+            <label for="role">{{__('Client')}}</label>
             <select class="form-select" name="role" id="role">
                 @foreach(\App\Enums\UserRole::cases() as $role)
                     <option value="{{$role}}" @selected(old('role') == $role)>{{$role}}</option>
@@ -44,10 +45,6 @@
         </div>
 
 
-        @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                <div class="alert alert-danger" role="alert">{{ $error }}</div>
-            @endforeach
-        @endif
+        <x-error alert-type="danger" :errors="$errors"/>
     </form>
 </main>

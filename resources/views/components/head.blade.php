@@ -15,12 +15,5 @@
     <script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 
     <title>{{ Route::currentRouteName() }}</title>
-
-    <style>
-        .carousel { height: calc(100vh - 56px);}
-        .carousel-inner,.carousel-item { height: 100%;}
-        .carousel-item { background-color: #000;}
-        .carousel-item img { height: 100%; object-fit: cover; object-position: center;}
-    </style>
 </head>
 

@@ -8,20 +8,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class Role
+class Stuff
 {
     /**
      * Handle an incoming request.
      *
-     * @param Closure(Request): (Response) $next
+     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        $roles = array_map(fn (string $role) => UserRole::from($role), $roles);
-        // TODO: wtf - need to rewrite
-        if (Auth::user() and in_array(Auth::user()->getRole(), $roles)) {
+        $user = Auth::user();
+        $roles = array_map(fn ($role) => UserRole::from($role), $roles);
+        if ($user !== null and in_array($user->getRole(), $roles)) {
             return $next($request);
+        } else {
+            return to_route('403');
         }
-        return to_route('403');
     }
 }

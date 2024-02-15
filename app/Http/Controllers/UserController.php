@@ -9,18 +9,23 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 
 class UserController extends Controller
 {
     public function __invoke()
     {
-        return view('components.table', ['items' => User::all(), 'get_route' => 'user.get', 'id_column' => 'uuid']);
+        return view('components.table',
+            ['items' => User::all(),
+             'columns' => Schema::getColumnListing('users'),
+             'get_route' => 'user.get',
+             'id_column' => 'uuid']);
     }
 
     public function signup(RegisterRequest $request): RedirectResponse
     {
         Auth::login(User::create($request->validated())->make());
-        return redirect('login');
+        return redirect('signin');
     }
 
     public function signin(LoginRequest $request): RedirectResponse
@@ -31,13 +36,13 @@ class UserController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => __('The provided credentials do not match our records.'),
         ])->onlyInput('email');
     }
 
     public function get(string $uuid)
     {
-        return view('panel.page.user', ['item' => User::find($uuid)]);
+        return view('admin.page.user', ['item' => User::find($uuid)]);
     }
 
     public function logout(Request $request)

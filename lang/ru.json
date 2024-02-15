@@ -3,6 +3,15 @@
   "Info": "Информация",
   "Addresses": "Адреса",
   "Soon": "Скоро",
+
+  "Sign In": "Логин",
+  "Sign Up": "Регистрация",
+
+  "Last Name": "Фамилия",
+  "First Name": "Имя",
+  "Second Name": "Отчество",
+  "Is active": "Активный",
+
   "Statements": "Заказы",
   "Vehicles": "Авто",
   "Used Consumables": "Расходные материалы",
@@ -13,5 +22,28 @@
   "Stuff": "Сотрудники",
   "Workshops": "Мастерские",
   "Services": "Список услуг",
-  "Consumables": "Список расходных материалов"
+  "Consumables": "Список расходных материалов",
+
+  "is_active": "Активно",
+
+  "first_name": "Имя",
+  "last_name": "Фамилия",
+  "second_name": "Отчество",
+
+  "uuid": "UUID",
+  "registration_plate": "Гос. Номер",
+  "datetime": "Время",
+  "comment": "Комментарий",
+
+  "created_at": "Время создания",
+  "updated_at": "Время обновления",
+
+  "model_id": "ID модели",
+
+  "user_uuid": "UUID Клиента",
+  "vehicle_uuid": "UUID Транспорта",
+  "workshop_uuid": "UUID Мастерской",
+
+  "Save": "Сохранить",
+  "Update": "Изменить"
 }

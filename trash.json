@@ -1,0 +1,97 @@
+{
+  "event": {
+    "httpMethod": "GET",
+    "headers": {
+      "Accept": "text\/html,application\/xhtml+xml,application\/xml;q=0.9,image\/avif,image\/webp,*\/*;q=0.8",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Accept-Language": "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
+      "Dnt": "1",
+      "Host": "functions.yandexcloud.net",
+      "Sec-Fetch-Dest": "document",
+      "Sec-Fetch-Mode": "navigate",
+      "Sec-Fetch-Site": "none",
+      "Sec-Fetch-User": "?1",
+      "Sec-Gpc": "1",
+      "Uber-Trace-Id": "8ceef4aaa5c12069:5d7b0c71d78ee3ac:8ceef4aaa5c12069:1",
+      "Upgrade-Insecure-Requests": "1",
+      "User-Agent": "Mozilla\/5.0 (X11; Linux x86_64; rv:123.0) Gecko\/20100101 Firefox\/123.0",
+      "X-Forwarded-For": "94.25.231.134",
+      "X-Real-Remote-Address": "[94.25.231.134]:41467",
+      "X-Request-Id": "a18e4af8-421a-47b6-98c3-59449478006a",
+      "X-Trace-Id": "5ce232d1-ae64-4327-985e-4fdd1932d46f"
+    },
+    "url": "",
+    "params": [],
+    "multiValueParams": [],
+    "pathParams": [],
+    "multiValueHeaders": {
+      "Accept": [
+        "text\/html,application\/xhtml+xml,application\/xml;q=0.9,image\/avif,image\/webp,*\/*;q=0.8"
+      ],
+      "Accept-Encoding": [
+        "gzip, deflate, br"
+      ],
+      "Accept-Language": [
+        "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3"
+      ],
+      "Dnt": [
+        "1"
+      ],
+      "Host": [
+        "functions.yandexcloud.net"
+      ],
+      "Sec-Fetch-Dest": [
+        "document"
+      ],
+      "Sec-Fetch-Mode": [
+        "navigate"
+      ],
+      "Sec-Fetch-Site": [
+        "none"
+      ],
+      "Sec-Fetch-User": [
+        "?1"
+      ],
+      "Sec-Gpc": [
+        "1"
+      ],
+      "Uber-Trace-Id": [
+        "8ceef4aaa5c12069:5d7b0c71d78ee3ac:8ceef4aaa5c12069:1"
+      ],
+      "Upgrade-Insecure-Requests": [
+        "1"
+      ],
+      "User-Agent": [
+        "Mozilla\/5.0 (X11; Linux x86_64; rv:123.0) Gecko\/20100101 Firefox\/123.0"
+      ],
+      "X-Forwarded-For": [
+        "94.25.231.134"
+      ],
+      "X-Real-Remote-Address": [
+        "[94.25.231.134]:41467"
+      ],
+      "X-Request-Id": [
+        "a18e4af8-421a-47b6-98c3-59449478006a"
+      ],
+      "X-Trace-Id": [
+        "5ce232d1-ae64-4327-985e-4fdd1932d46f"
+      ]
+    },
+    "queryStringParameters": [],
+    "multiValueQueryStringParameters": [],
+    "requestContext": {
+      "identity": {
+        "sourceIp": "94.25.231.134",
+        "userAgent": "Mozilla\/5.0 (X11; Linux x86_64; rv:123.0) Gecko\/20100101 Firefox\/123.0"
+      },
+      "httpMethod": "GET",
+      "requestId": "a18e4af8-421a-47b6-98c3-59449478006a",
+      "requestTime": "10\/Feb\/2024:20:02:24 +0000",
+      "requestTimeEpoch": 1707595344
+    },
+    "body": "",
+    "isBase64Encoded": true
+  },
+  "context": {}
+}
+

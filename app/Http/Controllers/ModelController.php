@@ -14,7 +14,7 @@ class ModelController extends Controller
 
     public function get(Request $request, string $id)
     {
-        return view('panel.page.model', ['item' => Model::find($id)]);
+        return view('admin.page.model', ['item' => Model::find($id)]);
     }
 
 }

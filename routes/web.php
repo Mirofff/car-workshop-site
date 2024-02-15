@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ConsumablesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MarkController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\RequestController;
@@ -21,15 +22,17 @@ Route::view('/about', 'about')->name('about');
 Route::middleware('guest')->group(function () {
     Route::redirect('/', '/about');
 
-    Route::view('/login', 'login')->name('login');
-    Route::post('/login', [UserController::class, 'signin'])->name('login');
+    Route::view('/login', 'signin')->name('signin');
+    Route::post('/login', [UserController::class, 'signin'])->name('signin');
 
     Route::view('/signup', 'register')->name('signup');
     Route::post('/signup', [UserController::class, 'signup'])->name('signup');
+
+    Route::view('/reset', 'register')->name('reset');
 });
 
 Route::middleware('role:client')->group(function () {
-    Route::view('/dashboard', 'dashboard')->name('dashboard');
+    Route::view('/dashboard', 'profile')->name('dashboard');
 
     Route::get('/profile', [UserController::class, 'get'])->name('profile');
     Route::put('/profile', [UserController::class, 'put'])->name('profile.put');
@@ -38,52 +41,55 @@ Route::middleware('role:client')->group(function () {
 });
 
 
-Route::prefix('panel')->middleware('role:admin,operator')->group(function () {
-    Route::get('/', RequestController::class)->name('panel.panel');
+Route::prefix('admin')->middleware('role:admin,operator')->group(function () {
+    Route::get('/', RequestController::class)->name('admin.admin');
 
-    Route::get('/statements', StatementController::class)->name('panel.statements');
+    Route::get('/dashboard', DashBoardController::class)->name('admin.dashboard');
+
+    Route::get('/statements', StatementController::class)->name('admin.statements');
     Route::get('/statements/{id}', [StatementController::class, 'get'])->name('statement.get');
+    Route::post('/statements/{request_uuid}', [StatementController::class, 'post'])->name('statement.post');
     Route::put('/statements/{uuid}', [StatementController::class, 'put'])->name('statement.put');
 
-    Route::get('/vehicles', VehicleController::class)->name('panel.vehicles');
+    Route::get('/vehicles', VehicleController::class)->name('admin.vehicles');
     Route::get('/vehicles/{id}', [VehicleController::class, 'get'])->name('vehicle.get');
     Route::put('/vehicles/{uuid}', [VehicleController::class, 'put'])->name('vehicle.put');
 
-    Route::get('/used_consumables', UConsumableController::class)->name('panel.uconsumables');
+    Route::get('/used_consumables', UConsumableController::class)->name('admin.uconsumables');
     Route::get('/used_consumables/{id}', [UConsumableController::class, 'get'])->name('uconsumable.get');
     Route::put('/used_consumables/{uuid}', [UConsumableController::class, 'put'])->name('uconsumable.put');
 
-    Route::get('/used_services', UServiceController::class)->name('panel.uservices');
+    Route::get('/used_services', UServiceController::class)->name('admin.uservices');
     Route::get('/used_services/{id}', [UServiceController::class, 'get'])->name('uservice.get');
     Route::put('/used_services/{uuid}', [UServiceController::class, 'put'])->name('uservice.put');
 });
 
-Route::prefix('panel')->middleware('role:admin')->group(function () {
-    Route::get('/models', [ModelController::class])->name('panel.models');
+Route::prefix('admin')->middleware('role:admin')->group(function () {
+    Route::get('/models', [ModelController::class])->name('admin.models');
     Route::get('/models/{id}', [ModelController::class, 'get'])->name('model.get');
     Route::put('/models/{uuid}', [ModelController::class, 'put'])->name('model.put');
 
-    Route::get('/marks', [MarkController::class])->name('panel.marks');
+    Route::get('/marks', [MarkController::class])->name('admin.marks');
     Route::get('/marks/{id}', [MarkController::class, 'get'])->name('mark.get');
     Route::put('/marks/{uuid}', [MarkController::class, 'put'])->name('mark.put');
 
-    Route::get('/stuff', [StuffController::class])->name('panel.stuff');
+    Route::get('/stuff', [StuffController::class])->name('admin.stuff');
     Route::get('/stuff/{id}', [StuffController::class, 'get'])->name('stuff.get');
     Route::put('/stuff/{uuid}', [StuffController::class, 'put'])->name('stuff.put');
 
-    Route::get('/workshops', [WorkshopsController::class])->name('panel.workshops');
+    Route::get('/workshops', [WorkshopsController::class])->name('admin.workshops');
     Route::get('/workshops/{id}', [WorkshopsController::class, 'get'])->name('workshop.get');
     Route::put('/workshops/{uuid}', [WorkshopsController::class, 'put'])->name('workshop.put');
 
-    Route::get('/services', ServicesController::class)->name('panel.services');
+    Route::get('/services', ServicesController::class)->name('admin.services');
     Route::get('/services/{id}', [ServicesController::class, 'get'])->name('service.get');
     Route::put('/services/{uuid}', [ServicesController::class, 'put'])->name('service.put');
 
-    Route::get('/consumables', ConsumablesController::class)->name('panel.consumables');
-    Route::get('/consumables/{id}', [ConsumablesController::class, 'get'])->name('service.get');
-    Route::put('/consumables/{uuid}', [ConsumablesController::class, 'put'])->name('service.put');
+    Route::get('/consumables', ConsumablesController::class)->name('admin.consumables');
+    Route::get('/consumables/{id}', [ConsumablesController::class, 'get'])->name('consumable.get');
+    Route::put('/consumables/{uuid}', [ConsumablesController::class, 'put'])->name('consumable.put');
 
-    Route::get('/users', UserController::class)->name('panel.users');
+    Route::get('/users', UserController::class)->name('admin.users');
     Route::get('/users/{uuid}', [UserController::class, 'get'])->name('user.get');
     Route::put('/users/{uuid}', [UserController::class, 'put'])->name('user.put');
 });
