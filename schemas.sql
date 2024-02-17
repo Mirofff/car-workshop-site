@@ -125,8 +125,8 @@ create table if not exists used_consumables
     created_at      DATETIME         NOT NULL,
     updated_at      DATETIME         NOT NULL,
 
-    claim_uuid      UUID             NOT NULL,
-    FOREIGN KEY (claim_uuid) REFERENCES statements (uuid),
+    statement_uuid      UUID             NOT NULL,
+    FOREIGN KEY (statement_uuid) REFERENCES statements (uuid),
     consumable_uuid UUID             NOT NULL,
     FOREIGN KEY (consumable_uuid) REFERENCES consumables (uuid)
 );
@@ -146,8 +146,8 @@ create table if not exists used_services
     created_at   DATETIME         NOT NULL,
     updated_at   DATETIME         NOT NULL,
 
-    claim_uuid   UUID             NOT NULL,
-    FOREIGN KEY (claim_uuid) REFERENCES statements (uuid),
+    statement_uuid   UUID             NOT NULL,
+    FOREIGN KEY (statement_uuid) REFERENCES statements (uuid),
     service_uuid UUID             NOT NULL,
     FOREIGN KEY (service_uuid) REFERENCES services (uuid)
 );

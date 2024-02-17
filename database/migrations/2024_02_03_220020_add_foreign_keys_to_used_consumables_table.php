@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::table('used_consumables',
             function (Blueprint $table) {
-                $table->foreign(['claim_uuid'], 'used_consumables_ibfk_1')->references(['uuid'])->on('statements');
+                $table->foreign(['statement_uuid'], 'used_consumables_ibfk_1')->references(['uuid'])->on('statements');
                 $table->foreign(['consumable_uuid'], 'used_consumables_ibfk_2')
                     ->references(['uuid'])
                     ->on('consumables');

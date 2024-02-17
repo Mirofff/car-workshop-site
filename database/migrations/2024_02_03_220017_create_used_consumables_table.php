@@ -17,7 +17,7 @@ return new class extends Migration {
                 $table->uuid()->default('uuid()')->primary();
                 $table->dateTime('created_at');
                 $table->dateTime('updated_at');
-                $table->uuid('claim_uuid')->index('claim_uuid');
+                $table->uuid('statement_uuid')->index('statement_uuid');
                 $table->uuid('consumable_uuid')->index('consumable_uuid');
             });
     }

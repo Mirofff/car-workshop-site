@@ -7,29 +7,23 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('used_services',
             function (Blueprint $table) {
-                $table->foreign(['statement_uuid'], 'used_services_ibfk_1')->references(['uuid'])->on('statements');
-                $table->foreign(['service_uuid'], 'used_services_ibfk_2')->references(['uuid'])->on('services');
+                $table->integer('quantity');
             });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('used_services',
             function (Blueprint $table) {
-                $table->dropForeign('used_services_ibfk_1');
-                $table->dropForeign('used_services_ibfk_2');
+                $table->dropColumn('quantity');
             });
     }
 };

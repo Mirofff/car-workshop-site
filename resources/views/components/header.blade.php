@@ -7,12 +7,12 @@
 
     @auth
         @if(Auth::user()->getRole() != null)
-            <a href="{{route('dashboard')}}">{{__('Dashboard')}}</a>
+            <a href="{{route('dashboard')}}" class="m-2">{{__('Dashboard')}}</a>
         @endif
-        <a href="{{route('profile')}}">Profile</a>
+        <a href="{{route('profile')}}" class="m-2">Profile</a>
     @endauth
     @guest
-        <a href="{{route('signin')}}">{{__('Sign In')}}</a>
-        <a href="{{route('signup')}}">{{__('Sign Up')}}>
+        <a href="{{route('signin')}}" class="m-2">{{__('Sign In')}}</a>
+        <a href="{{route('signup')}}" class="m-2">{{__('Sign Up')}}>
     @endguest
 </nav>

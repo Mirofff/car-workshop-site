@@ -1,4 +1,4 @@
-<form action="{{ route('update-profile') }}" method="post">
+<form action="{{ route('user.put') }}" method="post">
     @csrf
 
     <input name="last_name" id="last_name" type="text" value="{{Auth::user()->last_name}}">
