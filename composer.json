@@ -9,11 +9,14 @@
   "license": "MIT",
   "require": {
     "php": "^8.1",
+    "ext-mysqli": "*",
+    "components/jquery": "^3.7",
     "guzzlehttp/guzzle": "^7.2",
     "laravel/framework": "^10.10",
     "laravel/sanctum": "^3.3",
     "laravel/tinker": "^2.8",
     "league/flysystem-aws-s3-v3": "^3.0",
+    "phpoffice/phpword": "^1.2",
     "riverline/multipart-parser": "^2.1",
     "spatie/laravel-data": "^4.0"
   },
@@ -44,7 +47,9 @@
   "scripts": {
     "bootstrap-to-public": [
       "rm -rf public/bootstrap",
-      "cp -R vendor/twbs/bootstrap/dist public/bootstrap"
+      "cp -R vendor/twbs/bootstrap/dist public/bootstrap",
+      "rm -rf public/jquery",
+      "cp -R vendor/components/jquery public/jquery"
     ],
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

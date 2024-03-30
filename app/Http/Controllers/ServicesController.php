@@ -2,17 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PutServiceRequest;
 use App\Models\Service;
-use Illuminate\Support\Facades\Schema;
 
 class ServicesController extends Controller
 {
-    public function __invoke()
+    public function __invoke(string $uuid = null)
     {
-        return view('components.table',
-            ['items' => Service::all(),
-             'columns' => Schema::getColumnListing('services'),
-             'get_route' => 'service.get',
-             'id_column' => 'id']);
+        if ($uuid) {
+            $current_service = Service::whereUuid($uuid)->firstOrFail();
+        } else {
+            $current_service = null;
+        }
+
+        return view('admin.page.service',
+            ['services' => Service::all(),
+             'current_service' => $current_service]);
+    }
+
+    public function put(PutServiceRequest $request)
+    {
+
+        Service::updateOrCreate(['uuid' => $request->service_uuid], $request->validated());
+        return to_route('admin.services');
     }
 }

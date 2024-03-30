@@ -15,8 +15,6 @@ return new class extends Migration {
         Schema::create('services',
             function (Blueprint $table) {
                 $table->uuid()->default('uuid()')->primary();
-                $table->dateTime('created_at');
-                $table->dateTime('updated_at');
             });
     }
 

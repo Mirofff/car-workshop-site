@@ -22,6 +22,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|UsedConsumable whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UsedConsumable whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UsedConsumable whereUuid($value)
+ * @property int $quantity
+ * @property-read \App\Models\Consumable $consumable
+ * @method static \Illuminate\Database\Eloquent\Builder|UsedConsumable whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UsedConsumable whereStatementUuid($value)
  * @mixin \Eloquent
  */
 class UsedConsumable extends Model

@@ -15,11 +15,11 @@ return new class extends Migration {
         Schema::create('requests',
             function (Blueprint $table) {
                 $table->uuid()->default('uuid()')->primary();
-                $table->dateTime('datetime');
+                $table->date('datetime');
                 $table->text('comment');
                 $table->dateTime('created_at');
                 $table->dateTime('updated_at');
-                $table->uuid('user_uuid')->index('user_uuid');
+                $table->uuid('client_uuid')->index('client_uuid');
                 $table->uuid('vehicle_uuid')->index('vehicle_uuid');
             });
     }

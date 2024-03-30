@@ -17,12 +17,13 @@ class Stuff
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        $user = Auth::user();
+        $stuff = Auth::user();
+        $roles = empty($roles) ? ['admin'] : $roles;
         $roles = array_map(fn ($role) => UserRole::from($role), $roles);
-        if ($user !== null and in_array($user->getRole(), $roles)) {
+        if ($stuff !== null and in_array($stuff->getRole(), $roles)) {
             return $next($request);
         } else {
-            return to_route('403');
+            return to_route('admin.login');
         }
     }
 }

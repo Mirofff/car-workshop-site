@@ -19,7 +19,7 @@ return new class extends Migration {
                 $table->dateTime('updated_at');
                 $table->enum('status', ['complete', 'not_complete']);
                 $table->uuid('request_uuid')->index('request_uuid');
-                $table->uuid('user_uuid')->index('user_uuid');
+                $table->uuid('client_uuid')->index('client_uuid');
                 $table->uuid('vehicle_uuid')->index('vehicle_uuid');
                 $table->boolean('is_active')->default(true);
             });

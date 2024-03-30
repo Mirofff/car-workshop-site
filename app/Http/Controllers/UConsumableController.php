@@ -22,15 +22,20 @@ class UConsumableController extends Controller
         $existed = UsedConsumable::where(['statement_uuid' => $statement_uuid, 'consumable_uuid' => $uuid])->first();
         if ($existed) {
             $existed->increment('quantity');
-           }
-        else{
+        } else {
             UsedConsumable::create(['statement_uuid' => $statement_uuid, 'consumable_uuid' => $uuid]);
         }
         return back();
     }
 
-    public function delete(string $uuid) {
-        UsedConsumable::whereUuid($uuid)->delete();
+    public function delete(string $uuid)
+    {
+        $existed = UsedConsumable::whereUuid($uuid)->firstOrFail();
+        if ($existed->quantity > 1) {
+            $existed->decrement('quantity');
+        } else {
+            $existed->delete();
+        }
         return back();
     }
 }

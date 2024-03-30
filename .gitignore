@@ -21,3 +21,5 @@ yarn-error.log
 /storage/
 /mariadb/
 /public/bootstrap/
+/public/jquery/
+/public/fonts/

@@ -2,17 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PutConsumableRequest;
 use App\Models\Consumable;
-use Illuminate\Support\Facades\Schema;
 
 class ConsumablesController extends Controller
 {
-    public function __invoke()
+    public function __invoke(string $uuid = null)
     {
-        return view('components.table',
-            ['items' => Consumable::all(),
-             'columns' => Schema::getColumnListing('consumables'),
-             'get_route' => 'consumable.get',
-             'id_column' => 'id']);
+        if ($uuid) {
+            $current_consumable = Consumable::whereUuid($uuid)->firstOrFail();
+        } else {
+            $current_consumable = null;
+        }
+
+        return view('admin.page.consumable',
+            ['consumables' => Consumable::all(),
+             'current_consumable' => $current_consumable]);
+    }
+
+    public function put(PutConsumableRequest $request)
+    {
+
+        Consumable::updateOrCreate(['uuid' => $request->consumable_uuid], $request->validated());
+        return to_route('admin.consumables');
     }
 }
+
