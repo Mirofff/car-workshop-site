@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('stuff',
             function (Blueprint $table) {
-                $table->uuid('user_uuid')->primary();
+                $table->uuid('client_uuid')->primary();
                 $table->uuid('workshop_uuid')->index('workshop_uuid');
             });
     }

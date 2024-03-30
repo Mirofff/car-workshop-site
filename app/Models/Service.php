@@ -17,11 +17,17 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereUuid($value)
+ * @property string $name
+ * @property float $price
+ * @method static \Illuminate\Database\Eloquent\Builder|Service whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Service wherePrice($value)
  * @mixin \Eloquent
  */
 class Service extends Model
 {
     use HasUuids;
+
+    public $timestamps = false;
 
     protected $primaryKey = 'uuid';
 

@@ -6,6 +6,7 @@ use App\Enums\StatementStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon $updated_at
  * @property string $status
  * @property string $request_uuid
- * @property string $user_uuid
+ * @property string $client_uuid
  * @property string $vehicle_uuid
  * @property int $is_active
  * @method static \Database\Factories\StatementFactory factory($count = null, $state = [])
@@ -31,6 +32,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Statement whereUserUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Statement whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Statement whereVehicleUuid($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UsedConsumable> $uconsumables
+ * @property-read int|null $uconsumables_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UsedService> $uservices
+ * @property-read int|null $uservices_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Statement whereClientUuid($value)
+ * @property-read \App\Models\Client $client
+ * @property-read \App\Models\Request $request
+ * @property-read \App\Models\Vehicle $vehicle
  * @mixin \Eloquent
  */
 class Statement extends Model
@@ -39,15 +48,33 @@ class Statement extends Model
 
     protected $primaryKey = 'uuid';
 
-    protected $fillable = ['status', 'request_uuid', 'user_uuid', 'vehicle_uuid', 'is_active'];
+    protected $fillable = ['status', 'request_uuid', 'client_uuid', 'vehicle_uuid', 'is_active'];
 
     protected $attributes = ['status' => StatementStatus::NotComplete, 'is_active' => true];
 
-    public function uconsumables(): HasMany {
+    public function uconsumables(): HasMany
+    {
         return $this->hasMany(UsedConsumable::class, 'statement_uuid', 'uuid');
     }
 
-    public function uservices(): HasMany {
+    public function uservices(): HasMany
+    {
         return $this->hasMany(UsedService::class, 'statement_uuid', 'uuid');
+    }
+
+    public function request(): BelongsTo
+    {
+        return $this->belongsTo(Request::class, 'request_uuid', 'uuid');
+    }
+
+
+    public function client(): BelongsTo
+    {
+        return $this->belongsTo(Client::class, 'client_uuid', 'uuid');
+    }
+
+    public function vehicle(): BelongsTo
+    {
+        return $this->belongsTo(Vehicle::class, 'vehicle_uuid', 'uuid');
     }
 }

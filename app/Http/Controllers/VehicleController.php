@@ -2,14 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostVehicleRequest;
 use App\Models\Vehicle;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class VehicleController extends Controller
 {
     public function __invoke()
     {
-        return view('components.table',
-            ['items' => Vehicle::all(), 'columns' => Schema::getColumnListing('vehicles'), 'get_route' => 'vehicle.get', 'id_column' => 'uuid']);
+        return view('pages.vehicles.index',
+            [
+                'vehicles' => Vehicle::whereClientUuid(Auth::guard('client')->id())->get(),
+            ]
+        );
+    }
+
+    public function post(PostVehicleRequest $request): RedirectResponse
+    {
+        Vehicle::create($request->validated());
+        return back();
     }
 }

@@ -21,7 +21,7 @@ return new class extends Migration {
                 $table->rememberToken();
                 $table->timestamps();
                 $table->dropForeign('stuff_ibfk_2');
-                $table->dropColumn('user_uuid');
+                $table->dropColumn('client_uuid');
             });
     }
 
@@ -41,8 +41,8 @@ return new class extends Migration {
                 $table->dropColumn('remember_token');
                 $table->dropColumn('created_at');
                 $table->dropColumn('updated_at');
-                $table->uuid('user_uuid');
-                $table->foreign(['user_uuid'], 'stuff_ibfk_2')->references(['uuid'])->on('users');
+                $table->uuid('client_uuid');
+                $table->foreign(['client_uuid'], 'stuff_ibfk_2')->references(['uuid'])->on('clients');
             });
     }
 };

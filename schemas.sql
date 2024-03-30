@@ -29,12 +29,12 @@ create table if not exists users
 
 create table if not exists stuff
 (
-    user_uuid     UUID PRIMARY KEY NOT NULL,
+    client_uuid     UUID PRIMARY KEY NOT NULL,
 
     workshop_uuid UUID             NOT NULL,
 
     FOREIGN KEY (workshop_uuid) REFERENCES workshops (uuid),
-    FOREIGN KEY (user_uuid) REFERENCES users (uuid)
+    FOREIGN KEY (client_uuid) REFERENCES users (uuid)
 );
 
 create table if not exists marks
@@ -67,13 +67,13 @@ create table if not exists vehicles
 
     model_id           MEDIUMINT        NOT NULL,
     workshop_uuid      UUID             NOT NULL,
-    user_uuid          UUID             NOT NULL,
+    client_uuid          UUID             NOT NULL,
 
     is_active          boolean          not null default true,
 
     FOREIGN KEY (model_id) REFERENCES models (id),
     FOREIGN KEY (workshop_uuid) REFERENCES workshops (uuid),
-    FOREIGN KEY (user_uuid) REFERENCES users (uuid)
+    FOREIGN KEY (client_uuid) REFERENCES users (uuid)
 );
 
 create table if not exists requests
@@ -86,8 +86,8 @@ create table if not exists requests
     created_at   DATETIME         NOT NULL,
     updated_at   DATETIME         NOT NULL,
 
-    user_uuid    UUID             NOT NULL,
-    FOREIGN KEY (user_uuid) REFERENCES users (uuid),
+    client_uuid    UUID             NOT NULL,
+    FOREIGN KEY (client_uuid) REFERENCES users (uuid),
     vehicle_uuid UUID             NOT NULL,
     FOREIGN KEY (vehicle_uuid) REFERENCES vehicles (uuid)
 );
@@ -101,11 +101,11 @@ create table if not exists statements
     status       ENUM ('complete', 'not_complete') NOT NULL,
 
     request_uuid UUID                              NOT NULL,
-    user_uuid    UUID                              NOT NULL,
+    client_uuid    UUID                              NOT NULL,
     vehicle_uuid UUID                              NOT NULL,
     is_active    boolean                           not null default true,
 
-    FOREIGN KEY (user_uuid) REFERENCES users (uuid),
+    FOREIGN KEY (client_uuid) REFERENCES users (uuid),
     FOREIGN KEY (vehicle_uuid) REFERENCES vehicles (uuid),
     FOREIGN KEY (request_uuid) REFERENCES requests (uuid)
 );
@@ -160,8 +160,8 @@ CREATE OR REPLACE TRIGGER statement_deactivate_trigger
     FOR EACH ROW
 BEGIN
     IF OLD.is_active != NEW.is_active THEN
-        update statements set statements.is_active = false where user_uuid = old.uuid;
-        update vehicles set vehicles.is_active = false where user_uuid = old.uuid;
+        update statements set statements.is_active = false where client_uuid = old.uuid;
+        update vehicles set vehicles.is_active = false where client_uuid = old.uuid;
     END IF;
 END;
 //

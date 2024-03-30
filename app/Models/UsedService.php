@@ -22,6 +22,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|UsedService whereServiceUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UsedService whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UsedService whereUuid($value)
+ * @property int $quantity
+ * @property-read \App\Models\Service $service
+ * @method static \Illuminate\Database\Eloquent\Builder|UsedService whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UsedService whereStatementUuid($value)
  * @mixin \Eloquent
  */
 class UsedService extends Model

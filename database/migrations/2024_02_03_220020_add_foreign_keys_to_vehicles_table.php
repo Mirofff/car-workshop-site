@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::table('vehicles',
             function (Blueprint $table) {
                 $table->foreign(['model_id'], 'vehicles_ibfk_1')->references(['id'])->on('models');
-                $table->foreign(['user_uuid'], 'vehicles_ibfk_3')->references(['uuid'])->on('users');
+                $table->foreign(['client_uuid'], 'vehicles_ibfk_3')->references(['uuid'])->on('clients');
                 $table->foreign(['workshop_uuid'], 'vehicles_ibfk_2')->references(['uuid'])->on('workshops');
             });
     }

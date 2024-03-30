@@ -77,7 +77,7 @@ namespace App\Models{
  * @property string $comment
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
- * @property string $user_uuid
+ * @property string $client_uuid
  * @property string $vehicle_uuid
  * @method static \Illuminate\Database\Eloquent\Builder|Request newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Request newQuery()
@@ -121,7 +121,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon $updated_at
  * @property string $status
  * @property string $request_uuid
- * @property string $user_uuid
+ * @property string $client_uuid
  * @property string $vehicle_uuid
  * @property int $is_active
  * @method static \Database\Factories\StatementFactory factory($count = null, $state = [])
@@ -145,10 +145,10 @@ namespace App\Models{
 /**
  * App\Models\Stuff
  *
- * @property string $user_uuid
+ * @property string $client_uuid
  * @property string $workshop_uuid
  * @property string $role
- * @property-read \App\Models\User $user
+ * @property-read \App\Models\Client $user
  * @method static \Illuminate\Database\Eloquent\Builder|Stuff newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Stuff newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Stuff query()
@@ -206,7 +206,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * App\Models\User
+ * App\Models\Client
  *
  * @property string $uuid
  * @property string $first_name
@@ -224,19 +224,19 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User query()
- * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereFirstName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereIsActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereLastName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereSecondName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereUuid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Client newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Client query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereSecondName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereUuid($value)
  * @mixin \Eloquent
  */
 	class User extends \Eloquent {}
@@ -252,7 +252,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon $updated_at
  * @property int $model_id
  * @property string $workshop_uuid
- * @property string $user_uuid
+ * @property string $client_uuid
  * @property int $is_active
  * @method static \Illuminate\Database\Eloquent\Builder|Vehicle newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Vehicle newQuery()

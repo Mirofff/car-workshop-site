@@ -20,7 +20,7 @@ return new class extends Migration {
                 $table->dateTime('updated_at');
                 $table->mediumInteger('model_id')->index('model_id');
                 $table->uuid('workshop_uuid')->index('workshop_uuid');
-                $table->uuid('user_uuid')->index('user_uuid');
+                $table->uuid('client_uuid')->index('client_uuid');
                 $table->boolean('is_active')->default(true);
             });
     }

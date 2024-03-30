@@ -11,8 +11,11 @@
     <link href="{{ asset('bootstrap/css/bootstrap-reboot.min.css') }}" rel="stylesheet" crossorigin="anonymous">
     <link href="{{ asset('bootstrap/css/bootstrap-utilities.min.css') }}" rel="stylesheet" crossorigin="anonymous">
 
+
     <script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
     <title>{{ Route::currentRouteName() }}</title>
 </head>

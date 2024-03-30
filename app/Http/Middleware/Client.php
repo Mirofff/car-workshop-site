@@ -16,8 +16,8 @@ class Client
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::user();
-        if ($user and $user->getRole() == null) {
+        $client = Auth::guard('client')->user();
+        if ($client !== null) {
             return $next($request);
         }
         return to_route('404');

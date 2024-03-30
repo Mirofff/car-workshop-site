@@ -14,8 +14,9 @@ class PostStatement extends FormRequest
     public function rules(): array
     {
         return [
+            "request_uuid" => "required|uuid",
             "vehicle_uuid" => "required|uuid",
-            "user_uuid" => "required|uuid",
+            "client_uuid" => "required|uuid",
         ];
     }
 }
