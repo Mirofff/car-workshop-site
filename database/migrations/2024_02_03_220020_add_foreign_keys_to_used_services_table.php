@@ -14,8 +14,8 @@ return new class extends Migration {
     {
         Schema::table('used_services',
             function (Blueprint $table) {
-                $table->foreign(['statement_uuid'], 'used_services_ibfk_1')->references(['uuid'])->on('statements');
-                $table->foreign(['service_uuid'], 'used_services_ibfk_2')->references(['uuid'])->on('services');
+                $table->foreign(['statement_uuid'], 'used_services_ibfk_1')->references(['uuid'])->on('statements')->cascadeOnDelete();
+                $table->foreign(['service_uuid'], 'used_services_ibfk_2')->references(['uuid'])->on('services')->cascadeOnDelete();
             });
     }
 
