@@ -44,12 +44,34 @@
                     </x-form-group>
 
                     <x-form-group>
-                        <select required class="form-control" name="model_id" id="model">
-                            @foreach(App\Models\Model::all() as $model)
-                                <option value="{{$model->id}}">{{$model->mark->name}} {{$model->name}}</option>
+                        <select required class="form-control" name="mark_id" id="mark">
+                            @foreach(App\Models\Mark::all() as $mark)
+                                <option value="{{$mark->id}}">{{$mark->name}}</option>
                             @endforeach
                         </select>
+                        <label for="model">{{__('Mark')}}</label>
+                    </x-form-group>
+
+                    <x-form-group>
+                        <select required class="form-control" name="model_id" id="model" disabled></select>
                         <label for="model">{{__('Model')}}</label>
+
+                        <script>
+                            let jsonModels = <?php echo json_encode(App\Models\Model::all()) ?>;
+
+                            $(document).ready(() => {
+                                $('#mark').change(() => {
+                                    let selectedValue = $('#mark').val();
+                                    $('#model').prop('disabled', false);
+
+                                    jsonModels.forEach((model) => {
+                                        if (model['mark_id'] == selectedValue) {
+                                            $('#model').append(`<option value=${model['id']}>${model['name']}</option>`)
+                                        }
+                                    })
+                                })
+                            })
+                        </script>
                     </x-form-group>
 
                     <button class="btn btn-primary m-2" value="{{Auth::guard('client')->id()}}" name="client_uuid"

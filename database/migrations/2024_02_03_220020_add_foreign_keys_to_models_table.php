@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::table('models',
             function (Blueprint $table) {
-                $table->foreign(['mark_id'], 'models_ibfk_1')->references(['id'])->on('marks');
+                $table->foreign(['mark_id'], 'models_ibfk_1')->references(['id'])->on('marks')->cascadeOnDelete();
             });
     }
 

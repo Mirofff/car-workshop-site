@@ -42,7 +42,7 @@ return new class extends Migration {
                 $table->dropColumn('created_at');
                 $table->dropColumn('updated_at');
                 $table->uuid('client_uuid');
-                $table->foreign(['client_uuid'], 'stuff_ibfk_2')->references(['uuid'])->on('clients');
+                $table->foreign(['client_uuid'], 'stuff_ibfk_2')->references(['uuid'])->on('clients')->cascadeOnDelete();
             });
     }
 };

@@ -3,6 +3,7 @@
 <head>
     <title>@yield('page.title', config("app.name"))</title>
     @include('includes.head')
+    @include('includes.js')
 </head>
 <body>
 <div class="d-flex flex-column min-vh-100">
