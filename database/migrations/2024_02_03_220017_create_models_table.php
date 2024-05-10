@@ -17,7 +17,7 @@ return new class extends Migration {
                 $table->mediumInteger('id', true);
                 $table->string('name', 45);
                 $table->enum('type', ['bike', 'car'])->nullable();
-                $table->year('year')->nullable();
+                $table->date('year')->nullable();
                 $table->integer('mark_id')->index('mark_id');
             });
     }
