@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\StatementStatus;
 use App\Http\Requests\GetStatementRequest;
 use App\Http\Requests\PostStatement;
+use App\Http\Requests\SaveStatementRequest;
 use App\Models\Statement;
 use App\Models\UsedConsumable;
 use App\Models\UsedService;
@@ -27,10 +28,11 @@ class StatementController extends Controller
             ]);
     }
 
-    public function save(string $uuid)
+    public function save(string $uuid, SaveStatementRequest $req)
     {
         $statement = Statement::whereUuid($uuid)->firstOrFail();
         $statement->status = StatementStatus::Complete;
+        $statement->update($req->validated());
         $statement->save();
 
         return to_route('pages.admin.requests.index');
@@ -55,10 +57,10 @@ class StatementController extends Controller
         for ($i = 0; $i < count($statement->uservices); ++$i) {
             $full_uservice_sum += $statement->uservices[$i]->quantity * $statement->uservices[$i]->service->price;
             $uservices[] = ['uservice_index' => $i + 1,
-                            'service_uuid' => $statement->uservices[$i]->service->uuid,
-                            'name' => $statement->uservices[$i]->service->name,
-                            'quantity' => $statement->uservices[$i]->quantity,
-                            'price' => $statement->uservices[$i]->service->price,
+                'service_uuid' => $statement->uservices[$i]->service->uuid,
+                'name' => $statement->uservices[$i]->service->name,
+                'quantity' => $statement->uservices[$i]->quantity,
+                'price' => $statement->uservices[$i]->service->price,
             ];
         }
 
@@ -67,10 +69,10 @@ class StatementController extends Controller
         for ($i = 0; $i < count($statement->uconsumables); ++$i) {
             $full_uconsumables_sum += $statement->uconsumables[$i]->quantity * $statement->uconsumables[$i]->consumable->price;
             $uconsumables[] = ['uconsumable_index' => $i + 1,
-                               'consumable_uuid' => $statement->uconsumables[$i]->consumable->uuid,
-                               'name' => $statement->uconsumables[$i]->consumable->name,
-                               'quantity' => $statement->uconsumables[$i]->quantity,
-                               'price' => $statement->uconsumables[$i]->consumable->price,
+                'consumable_uuid' => $statement->uconsumables[$i]->consumable->uuid,
+                'name' => $statement->uconsumables[$i]->consumable->name,
+                'quantity' => $statement->uconsumables[$i]->quantity,
+                'price' => $statement->uconsumables[$i]->consumable->price,
             ];
         }
 
@@ -81,7 +83,7 @@ class StatementController extends Controller
             "datetime" => $statement->created_at,
             "mark" => $statement->vehicle->model->mark->name,
             "model" => $statement->vehicle->model->name,
-            "comment" => $statement->request->comment,
+            "comment" => $statement->comment,
             "full_uservices_sum" => $full_uservice_sum,
             "full_uconsumables_sum" => $full_uconsumables_sum,
             "full_sum" => $full_uconsumables_sum + $full_uservice_sum,
@@ -99,12 +101,11 @@ class StatementController extends Controller
         $templateProcessor->cloneRowAndSetValues('uservice_index', $uservices);
         $templateProcessor->cloneRowAndSetValues('uconsumable_index', $uconsumables);
 
-
         $templateProcessor->saveAs("wtf.docx");
         return response()->download('wtf.docx',
             "statement_" . $statement->uuid,
             ['Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-             'Content-Disposition: attachment; filename="' . "statement_" . $statement->uuid . '.docx"']);
+                'Content-Disposition: attachment; filename="' . "statement_" . $statement->uuid . '.docx"']);
     }
 
 

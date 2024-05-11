@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('stuff', function (Blueprint $table) {
-            $table->uuid()->primary();
+        Schema::create('marks', function (Blueprint $table) {
+            $table->integer('id', true);
+            $table->string('name', 45);
         });
     }
 
@@ -21,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('stuff', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('marks');
     }
 };

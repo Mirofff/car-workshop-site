@@ -40,6 +40,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \App\Models\Client $client
  * @property-read \App\Models\Request $request
  * @property-read \App\Models\Vehicle $vehicle
+ * @property string|null $registration_date
+ * @property string|null $execution_date
+ * @method static \Illuminate\Database\Eloquent\Builder|Statement whereExecutionDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Statement whereRegistrationDate($value)
+ * @property string $comment
+ * @property string $pickup_time
+ * @method static \Illuminate\Database\Eloquent\Builder|Statement whereComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Statement wherePickupTime($value)
  * @mixin \Eloquent
  */
 class Statement extends Model
@@ -48,7 +56,7 @@ class Statement extends Model
 
     protected $primaryKey = 'uuid';
 
-    protected $fillable = ['status', 'request_uuid', 'client_uuid', 'vehicle_uuid', 'is_active'];
+    protected $fillable = ['status', 'comment', 'pickup_time', 'request_uuid', 'client_uuid', 'vehicle_uuid', 'is_active', 'registration_date', 'execution_date'];
 
     protected $attributes = ['status' => StatementStatus::NotComplete, 'is_active' => true];
 
@@ -61,12 +69,6 @@ class Statement extends Model
     {
         return $this->hasMany(UsedService::class, 'statement_uuid', 'uuid');
     }
-
-    public function request(): BelongsTo
-    {
-        return $this->belongsTo(Request::class, 'request_uuid', 'uuid');
-    }
-
 
     public function client(): BelongsTo
     {

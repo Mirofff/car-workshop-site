@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('consumables', function (Blueprint $table) {
+        Schema::create('consumables', function (Blueprint $table) {
+            $table->char('uuid', 36)->default('uuid()')->primary();
             $table->string('name');
-            $table->double('price');
+            $table->double('price', null, 0);
         });
     }
 
@@ -22,9 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('consumables', function (Blueprint $table) {
-            $table->dropColumn('name');
-            $table->dropColumn('price');
-        });
+        Schema::dropIfExists('consumables');
     }
 };
