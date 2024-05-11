@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('used_consumables', function (Blueprint $table) {
-            $table->integer('quantity');
+        Schema::table('stuff', function (Blueprint $table) {
+            $table->foreign(['workshop_uuid'], 'stuff_ibfk_1')->references(['uuid'])->on('workshops')->onUpdate('restrict')->onDelete('cascade');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('used_consumables', function (Blueprint $table) {
-            $table->dropColumn('quantity');
+        Schema::table('stuff', function (Blueprint $table) {
+            $table->dropForeign('stuff_ibfk_1');
         });
     }
 };

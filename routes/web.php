@@ -15,10 +15,7 @@ use App\Http\Controllers\UServiceController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\WorkshopsController;
 use App\Models\Stuff;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use PhpOffice\PhpWord\Settings;
-use PhpOffice\PhpWord\TemplateProcessor;
 
 // ---=== Pages ===---
 Route::redirect("/", "about");
@@ -60,7 +57,7 @@ Route::prefix('admin')->middleware('stuff')->group(function () {
 
     Route::get('/statements', [StatementController::class, 'get'])->name('statement.get');
     Route::post('/statements', [StatementController::class, 'post'])->name('statement.post');
-    Route::put('/statements/{uuid}', [StatementController::class, 'save'])->name('statement.save');
+    Route::post('/statements/{uuid}', [StatementController::class, 'save'])->name('statement.save');
     Route::get('/statements/{uuid}', [StatementController::class, 'print'])->name('statement.print');
 
     Route::get('/requests', AdminRequestController::class)->name('pages.admin.requests.index');

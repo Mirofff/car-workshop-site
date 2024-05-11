@@ -15,7 +15,8 @@
                     <x-form-group>
                         <select class="form-control" name="vehicle_uuid" id="vehicle">
                             @foreach($vehicles as $vehicle)
-                                <option value="{{$vehicle->uuid}}">{{$vehicle->model->mark->name}} {{$vehicle->model->name}} {{$vehicle->registration_plate}}</option>
+                                <option
+                                    value="{{$vehicle->uuid}}">{{$vehicle->model->mark->name}} {{$vehicle->model->name}} {{$vehicle->registration_plate}}</option>
                             @endforeach
                         </select>
                         <label for="vehicle">{{__('Vehicle')}}</label>
@@ -27,7 +28,7 @@
                     <x-form-group>
                         <input required class="form-control" type="date" value="{{$today_datetime}}"
                                min="{{$today_datetime}}"
-                               name="datetime" id="datetime">
+                               name="pickup_time" id="datetime">
                         <label for="datetime">{{__('Datetime')}}</label>
                     </x-form-group>
 
