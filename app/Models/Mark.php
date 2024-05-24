@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -9,12 +11,12 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $name
- * @method static \Illuminate\Database\Eloquent\Builder|Mark newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Mark newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Mark query()
- * @method static \Illuminate\Database\Eloquent\Builder|Mark whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mark whereName($value)
- * @mixin \Eloquent
+ * @method static Builder|Mark newModelQuery()
+ * @method static Builder|Mark newQuery()
+ * @method static Builder|Mark query()
+ * @method static Builder|Mark whereId($value)
+ * @method static Builder|Mark whereName($value)
+ * @mixin Eloquent
  */
 class Mark extends Model
 {

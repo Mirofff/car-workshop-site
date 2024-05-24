@@ -10,10 +10,12 @@ class AdminRequestController extends Controller
 {
     public function __invoke()
     {
-        return view('pages.admin.requests.index',
+        return view(
+            'pages.admin.requests.index',
             [
                 'statements' => Statement::orderBy('created_at', 'desc')->get(),
-            ]);
+            ]
+        );
     }
 
     public function post(PostRequestRequest $request)

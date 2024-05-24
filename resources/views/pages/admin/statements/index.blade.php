@@ -1,3 +1,6 @@
+@php use App\Enums\StatementStatus;use App\Models\Consumable;use App\Models\Service; @endphp
+@php @endphp
+@php @endphp
 @extends('layouts.admin')
 
 @section('page.title')
@@ -28,9 +31,9 @@
                            id="statementClientInfo" disabled>
                 </div>
 
-                @if($statement->status != \App\Enums\StatementStatus::Complete->value)
+                @if($statement->status != StatementStatus::Complete->value)
                     <form class="d-flex flex-column flex-grow-1 col"
-                          action="{{route('statement.save', ['uuid' => $statement->uuid])}}"
+                          action="{{route('statement.save', ['id' => $statement->id])}}"
                           method="post">
                         @csrf
 
@@ -47,56 +50,63 @@
                                type="date"
                                class="form-control"
                                id="statementExecutionDate" {{is_null($statement->execution_date) ? '' : 'disabled'}}>
-                        <button type="submit" value="{{Auth::guard('client')->id()}}" name="client_uuid"
+                        <button type="submit" value="{{Auth::guard('client')->id()}}" name="client_id"
                                 class="btn flex-grow-1 btn-outline-success m-1">{{__('Save')}}</button>
                     </form>
                 @endif
-                <form class="d-flex col" action="{{route('statement.print', ['uuid' => $statement->uuid])}}"
+                <form class="d-flex col" action="{{route('statement.print', ['id' => $statement->id])}}"
                       method="get">
                     @csrf
-                    <button type="submit" value="{{Auth::guard('client')->id()}}" name="client_uuid"
+                    <button type="submit" value="{{Auth::guard('client')->id()}}" name="client_id"
                             class="btn flex-grow-1 btn-outline-primary m-1">{{__('Print')}}</button>
                 </form>
             </div>
-            <x-gray-background class="d-flex flex-column">
+            <div class="border border-1 m-1 p-2">
                 <label class="form-label" for="usedConsumable">{{__('Used Consumables')}}</label>
-                <ul class="flex-grow-1 list-group overflow-scroll" id="usedConsumable">
+                <ul class="container-fluid flex-grow-1 list-group" id="usedConsumable">
                     @foreach($uconsumables as $uconsumable)
-                        <form action="{{ route('uconsumable.delete', $uconsumable->uuid) }}" method="POST">
-                            <x-gray-background
-                                class="container container-fluid list-group-item d-flex justify-content-between align-items-center">
-                                {{ $uconsumable->consumable->name }}: {{ $uconsumable->quantity }}
-                                @csrf
-                                @method('DELETE')
-                                @if($statement->status != \App\Enums\StatementStatus::Complete->value)
-                                    <button class="btn btn-outline-danger btn-sm"
-                                            type="submit">{{__('Del')}}</button>
-                                @endif
-                            </x-gray-background>
-                        </form>
+                        <li class="row list-group">
+                            <form class="border border-1 m-1 p-2" action="{{ route('uconsumable.delete', $uconsumable->id) }}"
+                                  method="POST">
+                                <div
+                                    class="flex-grow-1 d-flex justify-content-between align-items-center">
+                                    {{ $uconsumable->consumable->name }}: {{ $uconsumable->quantity }}
+                                    @csrf
+                                    @method('DELETE')
+                                    @if($statement->status != StatementStatus::Complete->value)
+                                        <button class="btn btn-outline-danger btn-sm"
+                                                type="submit">{{__('Del')}}</button>
+                                    @endif
+                                </div>
+                            </form>
+                        </li>
                     @endforeach
                 </ul>
-            </x-gray-background>
+            </div>
 
-            <x-gray-background class="d-flex flex-column">
-                <label class="form-label" for="usedServices">{{__('Used Services')}}</label>
-                <ul class="flex-grow-1 list-group overflow-scroll" id="usedServices">
+            <div class="border border-1 m-1 p-2">
+                <label class="form-label" for="usedConsumable">{{__('Used Consumables')}}</label>
+                <ul class="container-fluid flex-grow-1 list-group" id="usedConsumable">
                     @foreach($uservices as $uservice)
-                        <form action="{{ route('uservice.delete', $uservice->uuid) }}" method="POST">
-                            <x-gray-background
-                                class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ $uservice->service->name }}: {{ $uservice->quantity }}
-                                @csrf
-                                @method('DELETE')
-                                @if($statement->status != \App\Enums\StatementStatus::Complete->value)
-                                    <button class="btn btn-outline-danger btn-sm"
-                                            type="submit">{{__('Del')}}</button>
-                                @endif
-                            </x-gray-background>
-                        </form>
+                        <li class="row list-group">
+                            <form class="border border-1 m-1 p-2" action="{{ route('uservice.delete', $uservice->id) }}"
+                                  method="POST">
+                                <div
+                                    class="flex-grow-1 d-flex justify-content-between align-items-center">
+                                    {{ $uservice->service->name }}: {{ $uservice->quantity }}
+                                    @csrf
+                                    @method('DELETE')
+                                    @if($statement->status != StatementStatus::Complete->value)
+                                        <button class="btn btn-outline-danger btn-sm"
+                                                type="submit">{{__('Del')}}</button>
+                                    @endif
+                                </div>
+                            </form>
+                        </li>
                     @endforeach
                 </ul>
-            </x-gray-background>
+            </div>
+
         </x-gray-background>
 
         <x-gray-background class="col">
@@ -123,10 +133,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach(\App\Models\Consumable::all() as $consumable)
+                @foreach(Consumable::all() as $consumable)
                     <tr class="searchTr">
                         <td>
-                            <a href="{{route('uconsumable.put', ['uuid' => $consumable->uuid, 'statement_uuid' => $statement->uuid])}}">+</a>
+                            <a href="{{route('uconsumable.put', ['id' => $consumable->id, 'statement_id' => $statement->id])}}">+</a>
                         </td>
                         <td>{{$consumable->name}}</td>
                         <td>{{$consumable->price}}</td>
@@ -160,10 +170,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach(\App\Models\Service::all() as $service)
+                @foreach(Service::all() as $service)
                     <tr class="searchTr">
                         <td>
-                            <a href="{{route('uservice.put', ['uuid' => $service->uuid, 'statement_uuid' => $statement->uuid])}}">+</a>
+                            <a href="{{route('uservice.put', ['id' => $service->id, 'statement_id' => $statement->id])}}">+</a>
                         </td>
                         <td>{{$service->name}}</td>
                         <td>{{$service->price}}</td>

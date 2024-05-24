@@ -5,7 +5,8 @@
             height: 100%;
         }
 
-        .form-login {            max-width: 330px;
+        .form-login {
+            max-width: 330px;
             padding: 1rem;
         }
 

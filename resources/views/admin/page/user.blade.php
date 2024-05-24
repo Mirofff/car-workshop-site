@@ -1,7 +1,8 @@
+@php use App\Enums\UserRole; @endphp
 {{--TODO: change forms to blade components--}}
 @include('components.head')
 <main class="row h-100 justify-content-center align-items-center">
-    <form class="w-25" action="{{route('user.put', ['uuid' => $item->uuid])}}"
+    <form class="w-25" action="{{route('user.put', ['id' => $item->id])}}"
           method="post">
         @method('PUT')
         @csrf
@@ -34,7 +35,7 @@
         <div class="form-group">
             <label for="role">{{__('Client')}}</label>
             <select class="form-select" name="role" id="role">
-                @foreach(\App\Enums\UserRole::cases() as $role)
+                @foreach(UserRole::cases() as $role)
                     <option value="{{$role}}" @selected(old('role') == $role)>{{$role}}</option>
                 @endforeach
             </select>

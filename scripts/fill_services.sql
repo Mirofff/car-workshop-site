@@ -1,13 +1,10 @@
 set FOREIGN_KEY_CHECKS = 0;
 
-DELETE
-FROM services;
-
 ALTER table services
     AUTO_INCREMENT = 1;
 
 -- Вставляем данные в таблицу services
-INSERT INTO services (uuid, name, price)
+INSERT INTO services (id, name, price)
 VALUES ('1', 'Замена масла и фильтра', 5000.00),
        ('2', 'Замена тормозных колодок (задних)', 8000.00),
        ('3', 'Замена тормозных колодок (передних)', 10000.00),

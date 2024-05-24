@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user',
+Route::middleware('auth:sanctum')->get(
+    '/user',
     function (Request $request) {
         return $request->user();
-    });
+    }
+);
+
+Route::get(
+    "/api/models",
+    function (Request $req) {
+        $all = Model::whereMarkId($req->markId)->orderBy("name")->get();
+        return $all;
+    }
+)->name('api.models');

@@ -7,23 +7,27 @@ use App\Models\Service;
 
 class ServicesController extends Controller
 {
-    public function __invoke(string $uuid = null)
+    public function __invoke(string $id = null)
     {
-        if ($uuid) {
-            $current_service = Service::whereUuid($uuid)->firstOrFail();
+        if ($id) {
+            $current_service = Service::whereId($id)->firstOrFail();
         } else {
             $current_service = null;
         }
 
-        return view('admin.page.service',
-            ['services' => Service::all(),
-             'current_service' => $current_service]);
+        return view(
+            'admin.page.service',
+            [
+                'services' => Service::all(),
+                'current_service' => $current_service
+            ]
+        );
     }
 
     public function put(PutServiceRequest $request)
     {
 
-        Service::updateOrCreate(['uuid' => $request->service_uuid], $request->validated());
+        Service::updateOrCreate(['id' => $request->service_id], $request->validated());
         return to_route('admin.services');
     }
 }
