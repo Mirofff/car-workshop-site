@@ -1,7 +1,5 @@
 set FOREIGN_KEY_CHECKS = 0;
 
-DELETE FROM marks;
-
 ALTER table marks AUTO_INCREMENT = 1;
 
 INSERT INTO marks (name)

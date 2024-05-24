@@ -15,8 +15,7 @@ class Error extends Component
     public function __construct(
         public ViewErrorBag $errors,
         public string       $alertType = 'info',
-    )
-    {
+    ) {
     }
 
     public function shouldRender(): bool

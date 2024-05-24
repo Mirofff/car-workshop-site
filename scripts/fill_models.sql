@@ -1,8 +1,5 @@
 set FOREIGN_KEY_CHECKS = 0;
 
-DELETE
-FROM models;
-
 ALTER table models
     AUTO_INCREMENT = 1;
 
@@ -135,6 +132,36 @@ VALUES ('1 Series (E87)', 'car', '2020-01-01', 35),
        ('Z4 (E85)', 'car', '2020-01-01', 35),
        ('Z4 (E89)', 'car', '2020-01-01', 35),
        ('Z4 (G29)', 'car', '2020-01-01', 35),
-       ('Z8', 'car', '2020-01-01', 35);
+       ('Z8', 'car', '2020-01-01', 35),
+       ('A4', 'car', '2020-01-01', 25),         -- Audi
+       ('A6', 'car', '2020-01-01', 25),         -- Audi
+       ('Q7', 'car', '2020-01-01', 25),         -- Audi
+       ('A8', 'car', '2020-01-01', 25),         -- Audi
+       ('TT', 'car', '2020-01-01', 25),         -- Audi
+       ('Q5', 'car', '2020-01-01', 25),         -- Audi
+       ('A3', 'car', '2020-01-01', 25),         -- Audi
+       ('A5', 'car', '2020-01-01', 25),         -- Audi
+       ('Q3', 'car', '2020-01-01', 25),         -- Audi
+       ('RS5', 'car', '2020-01-01', 25),        -- Audi
+       ('Aveo', 'car', '2020-01-01', 54),       -- Chevrolet
+       ('Camaro', 'car', '2020-01-01', 54),     -- Chevrolet
+       ('Corvette', 'car', '2020-01-01', 54),   -- Chevrolet
+       ('Malibu', 'car', '2020-01-01', 54),     -- Chevrolet
+       ('Equinox', 'car', '2020-01-01', 54),    -- Chevrolet
+       ('Traverse', 'car', '2020-01-01', 54),   -- Chevrolet
+       ('Impala', 'car', '2020-01-01', 54),     -- Chevrolet
+       ('Suburban', 'car', '2020-01-01', 54),   -- Chevrolet
+       ('Spark', 'car', '2020-01-01', 54),      -- Chevrolet
+       ('Cruze', 'car', '2020-01-01', 54),      -- Chevrolet
+       ('A-Class', 'car', '2020-01-01', 196),   -- Mercedes-Benz
+       ('C-Class', 'car', '2020-01-01', 196),   -- Mercedes-Benz
+       ('E-Class', 'car', '2020-01-01', 196),   -- Mercedes-Benz
+       ('S-Class', 'car', '2020-01-01', 196),   -- Mercedes-Benz
+       ('GLA-Class', 'car', '2020-01-01', 196), -- Mercedes-Benz
+       ('GLC-Class', 'car', '2020-01-01', 196), -- Mercedes-Benz
+       ('GLE-Class', 'car', '2020-01-01', 196), -- Mercedes-Benz
+       ('GLS-Class', 'car', '2020-01-01', 196), -- Mercedes-Benz
+       ('G-Class', 'car', '2020-01-01', 196),   -- Mercedes-Benz
+       ('SL-Class', 'car', '2020-01-01', 196); -- Mercedes-Benz;
 
 set FOREIGN_KEY_CHECKS = 1;

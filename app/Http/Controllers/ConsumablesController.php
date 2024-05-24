@@ -7,23 +7,27 @@ use App\Models\Consumable;
 
 class ConsumablesController extends Controller
 {
-    public function __invoke(string $uuid = null)
+    public function __invoke(string $id = null)
     {
-        if ($uuid) {
-            $current_consumable = Consumable::whereUuid($uuid)->firstOrFail();
+        if ($id) {
+            $current_consumable = Consumable::whereId($id)->firstOrFail();
         } else {
             $current_consumable = null;
         }
 
-        return view('admin.page.consumable',
-            ['consumables' => Consumable::all(),
-             'current_consumable' => $current_consumable]);
+        return view(
+            'admin.page.consumable',
+            [
+                'consumables' => Consumable::all(),
+                'current_consumable' => $current_consumable
+            ]
+        );
     }
 
     public function put(PutConsumableRequest $request)
     {
 
-        Consumable::updateOrCreate(['uuid' => $request->consumable_uuid], $request->validated());
+        Consumable::updateOrCreate(['id' => $request->consumable_id], $request->validated());
         return to_route('admin.consumables');
     }
 }

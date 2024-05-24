@@ -11,9 +11,10 @@ class VehicleController extends Controller
 {
     public function __invoke()
     {
-        return view('pages.vehicles.index',
+        return view(
+            'pages.vehicles.index',
             [
-                'vehicles' => Vehicle::whereClientUuid(Auth::guard('client')->id())->get(),
+                'vehicles' => Vehicle::whereClientId(Auth::guard('client')->id())->get(),
             ]
         );
     }

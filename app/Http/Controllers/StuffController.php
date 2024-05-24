@@ -23,8 +23,10 @@ class StuffController extends Controller
             return to_route('admin');
         }
 
-        return back()->withErrors([
-            'email' => __('The provided credentials do not match our records.'),
-        ])->onlyInput('email');
+        return back()->withErrors(
+            [
+                'email' => __('The provided credentials do not match our records.'),
+            ]
+        )->onlyInput('email');
     }
 }

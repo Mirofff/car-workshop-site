@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostVehicleRequest extends FormRequest
@@ -9,17 +10,16 @@ class PostVehicleRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
             "registration_plate" => "required|string",
             "model_id" => "required|integer",
-            "client_uuid" => "required|uuid",
+            "client_id" => "required|int",
             "vin" => "required|string",
-            "engine" => "required|string",
-            "tech_passport" => "required|string",
+            "tech_passport" => "string|nullable",
             "mileage" => "required|integer",
             "color" => "required|string",
         ];

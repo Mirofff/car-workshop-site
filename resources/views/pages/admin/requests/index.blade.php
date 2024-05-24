@@ -39,14 +39,14 @@
             @foreach($statements as $statement)
                 @php
                     if ($statement->status === StatementStatus::NotComplete->value) {
-                        $option = route('statement.get', ['uuid'=>$statement?->uuid]);
+                        $option = route('admin.statement.post', ['id'=>$statement?->id]);
                         $method = "GET";
-                        $value = $statement->uuid;
+                        $value = $statement->id;
                         $a_title = __('Show');
                     } else {
-                        $option = route('statement.print', ['uuid'=>$statement?->uuid]);
+                        $option = route('statement.print', ['id'=>$statement?->id]);
                         $method = "GET";
-                        $value = $statement->uuid;
+                        $value = $statement->id;
                         $a_title = __('Print');
                     }
                 @endphp
@@ -58,9 +58,9 @@
                             <button
                                 class="btn {{$statement?->status === StatementStatus::Complete ? 'btn-primary': 'btn-secondary'}}"
                                 type="submit">{{$a_title}}</button>
-                            <input type="hidden" name="statement_uuid" value="{{$statement->uuid}}">
-                            <input type="hidden" value="{{$statement->vehicle_uuid}}" name="vehicle_uuid">
-                            <input type="hidden" value="{{$statement->client_uuid}}" name="client_uuid">
+                            <input type="hidden" name="statement_id" value="{{$statement->id}}">
+                            <input type="hidden" value="{{$statement->vehicle_id}}" name="vehicle_id">
+                            <input type="hidden" value="{{$statement->client_id}}" name="client_id">
                         </form>
                     </td>
                     <td>{{$statement->datetime}}</td>
