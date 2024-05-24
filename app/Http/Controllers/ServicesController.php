@@ -2,32 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PutServiceRequest;
 use App\Models\Service;
+use Illuminate\Http\Request;
 
 class ServicesController extends Controller
 {
     public function __invoke(string $id = null)
     {
-        if ($id) {
-            $current_service = Service::whereId($id)->firstOrFail();
-        } else {
-            $current_service = null;
-        }
-
         return view(
-            'admin.page.service',
+            'pages.admin.handbooks.services.index',
             [
                 'services' => Service::all(),
-                'current_service' => $current_service
             ]
         );
     }
 
-    public function put(PutServiceRequest $request)
+    public function post(Request $request)
+    {
+        Service::updateOrCreate(['id' => $request['id']], ["name" => $request['name'], "price" => $request['price']]);
+        return to_route('admin.services');
+    }
+
+    public function put(Request $request)
     {
 
-        Service::updateOrCreate(['id' => $request->service_id], $request->validated());
+        Service::updateOrCreate(['id' => $request['id']], ["name" => $request['name'], "price" => $request['price']]);
+        return to_route('admin.services');
+    }
+
+    public function delete(Request $request)
+    {
+
+        Service::whereId($request['id'])->delete();
         return to_route('admin.services');
     }
 }

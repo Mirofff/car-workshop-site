@@ -68,7 +68,7 @@
                                     </form>
                                 @endif
                             </td>
-                            <td>{{var_dump($request}}</td>
+                            <td>{{$request->pickup_time}}</td>
                             <td>{{$request->vehicle->model->mark->name}} {{$request->vehicle->model->name}} {{$request->vehicle->registration_plate}}</td>
                             <td>{{$request->comment}}</td>
                         </tr>
