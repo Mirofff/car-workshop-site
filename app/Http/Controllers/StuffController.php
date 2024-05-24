@@ -2,31 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StuffLoginRequest;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\DeleteStuffRequest;
+use App\Http\Requests\PostStuffRequest;
+use App\Http\Requests\PutStuffRequest;
+use App\Models\Stuff;
+use Illuminate\Support\Facades\Hash;
 
 class StuffController extends Controller
 {
     public function __invoke()
     {
-        return view('pages.admin.login.index');
+        return view(
+            'pages.admin.handbooks.stuff.index',
+            [
+                "stuff" => Stuff::all(),
+            ]
+        );
     }
 
-    public function login(StuffLoginRequest $request)
+    public function post(PostStuffRequest $req)
     {
-        Auth::logout();
-        Auth::guard('client')->logout();
+        Stuff::create($req->validated());
+        return back();
+    }
 
+    public function put(PutStuffRequest $req)
+    {
+        $validated = array_filter($req->validated());
+        $validated['password'] = Hash::make($validated['password']);
+        Stuff::whereId($validated['id'])->update($validated);
+        return back();
+    }
 
-        if (Auth::attempt($request->validated(), true)) {
-            $request->session()->regenerate();
-            return to_route('admin');
-        }
-
-        return back()->withErrors(
-            [
-                'email' => __('The provided credentials do not match our records.'),
-            ]
-        )->onlyInput('email');
+    public function delete(DeleteStuffRequest $req)
+    {
+        $validated = $req->validated();
+        Stuff::whereId($validated['id'])->delete();
+        return back();
     }
 }

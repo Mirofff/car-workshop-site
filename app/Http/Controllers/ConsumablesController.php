@@ -2,33 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PutConsumableRequest;
 use App\Models\Consumable;
+use Illuminate\Http\Request;
 
 class ConsumablesController extends Controller
 {
-    public function __invoke(string $id = null)
+    public function __invoke()
     {
-        if ($id) {
-            $current_consumable = Consumable::whereId($id)->firstOrFail();
-        } else {
-            $current_consumable = null;
-        }
-
         return view(
-            'admin.page.consumable',
+            'pages.admin.handbooks.consumables.index',
             [
                 'consumables' => Consumable::all(),
-                'current_consumable' => $current_consumable
             ]
         );
     }
 
-    public function put(PutConsumableRequest $request)
+    public function post(Request $request)
+    {
+        Consumable::updateOrCreate(
+            ['id' => $request['id']],
+            ["name" => $request['name'], "price" => $request['price']]
+        );
+        return to_route('admin.services');
+    }
+
+    public function put(Request $request)
     {
 
-        Consumable::updateOrCreate(['id' => $request->consumable_id], $request->validated());
-        return to_route('admin.consumables');
+        Consumable::updateOrCreate(
+            ['id' => $request['id']],
+            ["name" => $request['name'], "price" => $request['price']]
+        );
+        return to_route('admin.services');
+    }
+
+    public function delete(Request $request)
+    {
+
+        Consumable::whereId($request['id'])->delete();
+        return to_route('admin.services');
     }
 }
 

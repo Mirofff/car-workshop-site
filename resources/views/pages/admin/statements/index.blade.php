@@ -17,8 +17,8 @@
                     <label for="statementInfo" class="form-label">{{__('Statement Info')}}</label>
                     <input value="{{$statement->comment}}" type="text" class="form-control" id="statementInfo"
                            disabled>
-                    <label for="statementDatetime" class="form-label">{{__('Statement Info')}}</label>
-                    <input value="{{__('from')}} {{$statement->datetime}}" type="text" class="form-control"
+                    <label for="statementDatetime" class="form-label">{{__('Время записи')}}</label>
+                    <input value="{{$statement->pickup_time}}" type="text" class="form-control"
                            id="statementDatetime" disabled>
                     <label for="statementVehicleInfo" class="form-label">{{__('Vehicle Info')}}</label>
                     <input
@@ -66,7 +66,8 @@
                 <ul class="container-fluid flex-grow-1 list-group" id="usedConsumable">
                     @foreach($uconsumables as $uconsumable)
                         <li class="row list-group">
-                            <form class="border border-1 m-1 p-2" action="{{ route('uconsumable.delete', $uconsumable->id) }}"
+                            <form class="border border-1 m-1 p-2"
+                                  action="{{ route('uconsumable.delete', $uconsumable->id) }}"
                                   method="POST">
                                 <div
                                     class="flex-grow-1 d-flex justify-content-between align-items-center">
@@ -129,7 +130,7 @@
                 <tr>
                     <th scope="col">{{__('Add')}}</th>
                     <th scope="col">{{__('Title')}}</th>
-                    <th scope="col">{{__('Price')}}</th>
+                    <th scope="col">{{__('Price')}} {{__('(В рублях)')}}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -166,7 +167,7 @@
                 <tr>
                     <th scope="col">{{__('Add')}}</th>
                     <th scope="col">{{__('Title')}}</th>
-                    <th scope="col">{{__('Price')}}</th>
+                    <th scope="col">{{__('Price')}} {{__('(В рублях)')}}</th>
                 </tr>
                 </thead>
                 <tbody>

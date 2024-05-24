@@ -3,7 +3,7 @@
         <div class="col-md-3">
             <div class="p-4">
                 <h4>{{__('Add Consumable')}}</h4>
-                <form action="{{route('consumable.put')}}" method="POST">
+                <form action="{{route('admin.consumable.put')}}" method="POST">
                     @method('PUT')
                     @csrf
 
