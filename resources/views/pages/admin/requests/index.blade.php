@@ -29,7 +29,7 @@
             <tr>
                 <th>#</th>
                 <th>{{__('Option')}}</th>
-                <th>{{__('Datetime')}}</th>
+                <th>{{__('Время записи/исполнения')}}</th>
                 <th>{{__('Client')}}</th>
                 <th>{{__('Comment')}}</th>
                 <th>{{__('Vehicle')}}</th>
@@ -56,14 +56,14 @@
                         <form target="_blank" action="{{$option}}" method="{{$method}}">
                             @csrf
                             <button
-                                class="btn {{$statement?->status === StatementStatus::Complete ? 'btn-primary': 'btn-secondary'}}"
+                                class="btn {{$statement?->status == StatementStatus::Complete->value ? 'btn-primary': 'btn-secondary'}}"
                                 type="submit">{{$a_title}}</button>
                             <input type="hidden" name="statement_id" value="{{$statement->id}}">
                             <input type="hidden" value="{{$statement->vehicle_id}}" name="vehicle_id">
                             <input type="hidden" value="{{$statement->client_id}}" name="client_id">
                         </form>
                     </td>
-                    <td>{{$statement->pickup_time}}</td>
+                    <td>{{$statement->status == StatementStatus::Complete->value ? $statement->execution_date : $statement->pickup_time}}</td>
                     <td>{{$statement->client->last_name}} {{$statement->client->first_name}} {{$statement->client->second_name}}</td>
                     <td>{{$statement->comment}}</td>
                     <td>{{$statement->vehicle->registration_plate}} {{$statement->vehicle->model->mark->name}} {{$statement->vehicle->model->name}}</td>
