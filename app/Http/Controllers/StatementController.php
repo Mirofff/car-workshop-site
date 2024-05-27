@@ -44,7 +44,11 @@ class StatementController extends Controller
     {
         $statement = Statement::whereId($id)->firstOrFail();
 
-        Settings::setZipClass(Settings::PCLZIP);
+
+        Settings::loadConfig();
+        Settings::setOutputEscapingEnabled(true);
+        Settings::setCompatibility(false);
+
         try {
             $templateProcessor = new TemplateProcessor(public_path('templates/statement.docx'));
         } catch (CopyFileException $e) {
