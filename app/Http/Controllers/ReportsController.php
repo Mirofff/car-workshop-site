@@ -48,7 +48,9 @@ class ReportsController extends Controller
                                        ->orderBy('ma.id')
                                        ->get();
 
-        Settings::setZipClass(Settings::PCLZIP);
+        Settings::loadConfig();
+        Settings::setOutputEscapingEnabled(true);
+        Settings::setCompatibility(false);
 
         $templateProcessor = new TemplateProcessor(public_path('templates/statistic.docx'));
 
@@ -141,10 +143,11 @@ class ReportsController extends Controller
             $i++;
         }
 
+
         $templateProcessor->saveAs('statistic_report.docx');
 
         return response()->download(
-            'statistic_report.docx',
+            "statistic_report.docx",
             "statistic_report.docx",
             [
                 'Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -200,7 +203,10 @@ class ReportsController extends Controller
                               ->get();
 
 
-        Settings::setZipClass(Settings::PCLZIP);
+        Settings::loadConfig();
+        Settings::setOutputEscapingEnabled(true);
+        Settings::setCompatibility(false);
+
         $templateProcessor = new TemplateProcessor(public_path('templates/dynamic.docx'));
 
         $statements = array_unique(array_map(fn($state) => $state->statementId, $usedConsumablesData->toArray()));
