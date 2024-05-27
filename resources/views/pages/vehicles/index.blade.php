@@ -118,7 +118,7 @@
             $("#registrationPlate").inputmask({regex: '^(([АВЕКМНОРСТУХ] [0-9]{3} [АВЕКМНОРСТУХ]{2} [0-9]{1,3})'});
             // $("#vin").inputmask({regex: '^(?=.*[0-9])(?=.*[A-z])[0-9A-z-]{17}$'});
             // $("#vin").inputmask({regex: '^[A-HJ-NPR-Za-hj-npr-z\d]{8}[\dX][A-HJ-NPR-Za-hj-npr-z\d]{2}\d{6}$'});
-            $("#vin").inputmask({regex: '\b[(A-H|J-N|P|R-Z|0-9)]{17}\b'});
+            $("#vin").inputmask({regex: '[(A-H|J-N|P|R-Z|0-9)]{17}'});
         });
     </script>
 

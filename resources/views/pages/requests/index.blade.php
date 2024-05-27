@@ -26,12 +26,28 @@
                     </x-form-group>
 
                     @php
-                        $today_datetime = Carbon::now()->format('Y-m-d');
+                        $today_datetime = \Carbon\Carbon::now()->toISOString();
                     @endphp
+                    <script>
+                        function toLocalISOString(date) {
+                            const localDate = new Date(date - date.getTimezoneOffset() * 60000); //offset in milliseconds. Credit https://stackoverflow.com/questions/10830357/javascript-toisostring-ignores-timezone-offset
+
+                            // Optionally remove second/millisecond if needed
+                            localDate.setSeconds(null);
+                            localDate.setMilliseconds(null);
+                            return localDate.toISOString().slice(0, -1);
+                        }
+
+                        window.addEventListener("load", () => {
+                            const element = document.getElementById("datetime");
+                            // element.value = toLocalISOString(new Date());
+                            element.min = toLocalISOString(new Date());
+                        });
+                    </script>
                     <x-form-group>
-                        <input required class="form-control" type="datetime-local" value="{{$today_datetime}}"
-                               min="{{$today_datetime}}"
-                               name="pickup_time" id="datetime">
+                        <input required class="form-control" type="datetime-local" step="3600"
+                               name="pickup_time"
+                               id="datetime">
                         <label for="datetime">{{__('Datetime')}}</label>
                     </x-form-group>
 

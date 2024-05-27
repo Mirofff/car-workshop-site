@@ -250,8 +250,8 @@ class ReportsController extends Controller
                 'consumableFullPrice' => '${consumableFullPrice_' . $i . '}',
                 'consumableFinalPrice' => '${consumableFinalPrice_' . $i . '}',
                 'usedConsumablesStatementId' => $statement,
-                'usedConsumablesStatementInfo' => $usedConsumablesData[0]->usedConsumablesStatementInfo,
-                'usedConsumablesStatementExecutionDate' => $usedConsumablesData[0]->usedConsumablesStatementExecutionDate,
+                'usedConsumablesStatementInfo' => '${usedConsumablesStatementInfo_' . $i . '}',
+                'usedConsumablesStatementExecutionDate' => '${usedConsumablesStatementExecutionDate_' . $i . '}',
             );
 
             $servicesReplacements[] = array(
@@ -261,8 +261,8 @@ class ReportsController extends Controller
                 'serviceFullPrice' => '${serviceFullPrice_' . $i . '}',
                 'serviceFinalPrice' => '${serviceFinalPrice_' . $i . '}',
                 'usedServicesStatementId' => $statement,
-                'usedServicesStatementInfo' => $usedServicesData[0]->usedServicesStatementInfo,
-                'usedServicesStatementExecutionDate' => $usedServicesData[0]->usedServicesStatementExecutionDate,
+                'usedServicesStatementInfo' => '${usedServicesStatementInfo_' . $i . '}',
+                'usedServicesStatementExecutionDate' => '${usedServicesStatementExecutionDate_' . $i . '}',
             );
 
             $i++;
@@ -296,6 +296,18 @@ class ReportsController extends Controller
                     );
                     try {
                         $templateProcessor->setValues(["serviceFinalPrice_{$i}" => $row->serviceFinalPrice]);
+                        $templateProcessor->setValues(
+                            [
+                                "usedServicesStatementInfo_{$i}" =>
+                                    $row->usedServicesStatementInfo
+                            ]
+                        );
+                        $templateProcessor->setValues(
+                            [
+                                "usedServicesStatementExecutionDate_{$i}" =>
+                                    $row->usedServicesStatementExecutionDate
+                            ]
+                        );
                     } catch (Exception) {
 
                     }
@@ -314,6 +326,18 @@ class ReportsController extends Controller
                     );
                     try {
                         $templateProcessor->setValues(["consumableFinalPrice_{$i}" => $row->consumableFinalPrice]);;
+                        $templateProcessor->setValues(
+                            [
+                                "usedConsumablesStatementInfo_{$i}" =>
+                                    $row->usedConsumablesStatementInfo
+                            ]
+                        );
+                        $templateProcessor->setValues(
+                            [
+                                "usedConsumablesStatementExecutionDate_{$i}" =>
+                                    $row->usedConsumablesStatementExecutionDate
+                            ]
+                        );
                     } catch (Exception) {
 
                     }
