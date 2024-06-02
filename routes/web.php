@@ -16,8 +16,7 @@ use App\Models\Stuff;
 use Illuminate\Support\Facades\Route;
 
 // ---=== Pages ===---
-Route::redirect("/", "about");
-Route::view('/about', 'pages.about.index')->name('about');
+Route::view('/', 'pages.about.index')->name('about');
 
 Route::view('/login', 'pages.login.index')->name('login');
 Route::post('/login', [ClientController::class, 'login'])->name('login-action');
@@ -47,6 +46,7 @@ Route::middleware('client')->group(
 
         Route::get('/vehicles', VehicleController::class)->name('vehicles');
         Route::post('/vehicles', [VehicleController::class, 'post'])->name('vehicle.post');
+        Route::delete('/vehicles', [VehicleController::class, 'delete'])->name('vehicles.delete');
 
         Route::view('/profile', 'profile')->name('profile');
         Route::put('/profile', [ClientController::class, 'put'])->name('profile.put');

@@ -5,7 +5,7 @@
     @include('includes.head')
 </head>
 <body class="d-flex flex-column align-items-center justify-content-center py-4 bg-body-tertiary vh-100"
-      style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{asset('img/login-page/img.png')}}'); background-repeat:  no-repeat;  background-size: cover">
+      style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{asset('img/login-page/maslo.png')}}'); background-repeat:  no-repeat;  background-size: cover">
 <div style="background-color: rgba(235, 235, 235, 0.8)" class="d-flex flex-column p-5 m-5 rounded rounded-2">
     <form class="d-flex flex-column" action="{{route("register-action")}}" method="post">
         @csrf

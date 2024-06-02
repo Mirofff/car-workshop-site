@@ -9,6 +9,7 @@ use App\Models\UsedService;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class ClientRequestController extends Controller
 {

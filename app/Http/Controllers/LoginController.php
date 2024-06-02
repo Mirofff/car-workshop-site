@@ -18,7 +18,6 @@ class LoginController extends Controller
         Auth::logout();
         Auth::guard('client')->logout();
 
-
         if (Auth::attempt($request->validated(), true)) {
             $request->session()->regenerate();
             return to_route('admin');

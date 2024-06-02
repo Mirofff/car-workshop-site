@@ -80,7 +80,6 @@
                             });
                         </script>
                     </x-form-group>
-
                     <button class="btn btn-primary m-2" value="{{Auth::guard('client')->id()}}" name="client_id"
                             type="submit">{{__('Save')}}</button>
                 </form>
@@ -96,6 +95,7 @@
                     <th>{{__('Mark')}}</th>
                     <th>{{__('Model')}}</th>
                     <th>{{__('Mileage')}}</th>
+                    <th>{{__('Действие')}}</th>
                     </thead>
                     <tbody>
                     @foreach($vehicles as $vehicle)
@@ -105,6 +105,29 @@
                             <td>{{$vehicle->model->mark->name}} {{$vehicle->model->name}}</td>
                             <td>{{$vehicle->model->name}} {{$vehicle->model->year}}</td>
                             <td>{{$vehicle->mileage}}</td>
+                            <td>
+                                @if($vehicle->statement)
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                @else
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item"
+                                                   href="{{route('vehicles.delete', ['id' => $vehicle->id])}}">{{__('Удалить')}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

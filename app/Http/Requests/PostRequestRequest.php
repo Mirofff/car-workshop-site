@@ -18,7 +18,8 @@ class PostRequestRequest extends FormRequest
             "client_id" => "required|int",
             "vehicle_id" => "required|int",
             "comment" => "string",
-            "pickup_time" => "required|date",
+            "pickup_time" => "required|date_format:H:i:s",
+            "pickup_date" => "required|date",
         ];
     }
 }
