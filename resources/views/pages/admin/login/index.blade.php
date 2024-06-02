@@ -10,7 +10,6 @@
         @csrf
 
         <h1 class="h3 mb-3 fw-normal">{{__("Please sign in")}}</h1>
-        <p>{{__("Have no account?")}} <a href="{{route('register')}}">{{__('Register')}}</a></p>
 
         <div class="form-floating">
             <input type="email" class="form-control" id="email" name="email">

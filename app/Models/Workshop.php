@@ -2,25 +2,28 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Workshop
  *
- * @property string $uuid
+ * @property int $id
  * @property string $address
  * @property string $comment
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Workshop newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Workshop newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Workshop query()
- * @method static \Illuminate\Database\Eloquent\Builder|Workshop whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Workshop whereComment($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Workshop whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Workshop whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Workshop whereUuid($value)
- * @mixin \Eloquent
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @method static Builder|Workshop newModelQuery()
+ * @method static Builder|Workshop newQuery()
+ * @method static Builder|Workshop query()
+ * @method static Builder|Workshop whereAddress($value)
+ * @method static Builder|Workshop whereComment($value)
+ * @method static Builder|Workshop whereCreatedAt($value)
+ * @method static Builder|Workshop whereId($value)
+ * @method static Builder|Workshop whereUpdatedAt($value)
+ * @mixin Eloquent
  */
 class Workshop extends Model
 {

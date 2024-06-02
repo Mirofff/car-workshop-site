@@ -15,11 +15,15 @@ class ClientController extends Controller
 {
     public function __invoke()
     {
-        return view('components.table',
-            ['items' => Client::all(),
-             'columns' => Schema::getColumnListing('users'),
-             'get_route' => 'user.get',
-             'id_column' => 'uuid']);
+        return view(
+            'components.table',
+            [
+                'items' => Client::all(),
+                'columns' => Schema::getColumnListing('users'),
+                'get_route' => 'user.get',
+                'id_column' => 'id'
+            ]
+        );
     }
 
     public function register(ClientRegisterRequest $request): RedirectResponse
@@ -38,14 +42,11 @@ class ClientController extends Controller
             return to_route('requests');
         }
 
-        return back()->withErrors([
-            'email' => __('The provided credentials do not match our records.'),
-        ])->onlyInput('email');
-    }
-
-    public function get(string $uuid)
-    {
-        return view('admin.page.user', ['item' => Client::find($uuid)]);
+        return back()->withErrors(
+            [
+                'email' => __('The provided credentials do not match our records.'),
+            ]
+        )->onlyInput('email');
     }
 
     public function logout(Request $request)
@@ -60,9 +61,14 @@ class ClientController extends Controller
         return redirect('about');
     }
 
-    public function put(PutUserStuff $request, string $uuid)
+    public function get(string $id)
     {
-        Client::find($uuid)->update($request->validated());
+        return view('admin.page.user', ['item' => Client::find($id)]);
+    }
+
+    public function put(PutUserStuff $request, string $id)
+    {
+        Client::find($id)->update($request->validated());
         return back();
     }
 }

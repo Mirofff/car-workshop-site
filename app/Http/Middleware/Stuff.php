@@ -13,13 +13,13 @@ class Stuff
     /**
      * Handle an incoming request.
      *
-     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
+     * @param Closure(Request): (Response) $next
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
         $stuff = Auth::user();
         $roles = empty($roles) ? ['admin'] : $roles;
-        $roles = array_map(fn ($role) => UserRole::from($role), $roles);
+        $roles = array_map(fn($role) => UserRole::from($role), $roles);
         if ($stuff !== null and in_array($stuff->getRole(), $roles)) {
             return $next($request);
         } else {

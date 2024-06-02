@@ -1,12 +1,9 @@
 set FOREIGN_KEY_CHECKS = 0;
 
-DELETE
-FROM consumables;
-
 ALTER table consumables
     AUTO_INCREMENT = 1;
 
-INSERT INTO consumables (uuid, name, price)
+INSERT INTO consumables (id, name, price)
 VALUES ('1', 'Моторное масло', 3000.50),
        ('2', 'Фильтр масляный', 800.75),
        ('3', 'Фильтр воздушный', 500.25),

@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequestRequest;
 use App\Models\Request;
+use App\Models\Statement;
 
 class AdminRequestController extends Controller
 {
     public function __invoke()
     {
-        return view('pages.admin.requests.index',
+        return view(
+            'pages.admin.requests.index',
             [
-                'requests' => Request::orderBy('created_at', 'desc')->get(),
-            ]);
+                'statements' => Statement::orderBy('created_at', 'desc')->get(),
+            ]
+        );
     }
 
     public function post(PostRequestRequest $request)

@@ -3,7 +3,7 @@
         <div class="col-md-3">
             <div class="p-4">
                 <h4>{{__('Add Consumable')}}</h4>
-                <form action="{{route('consumable.put')}}" method="POST">
+                <form action="{{route('admin.consumable.put')}}" method="POST">
                     @method('PUT')
                     @csrf
 
@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button class="btn btn-primary" value="{{$current_consumable?->uuid}}" name="consumable_uuid"
+                        <button class="btn btn-primary" value="{{$current_consumable?->id}}" name="consumable_id"
                                 type="submit">{{__('Save')}}</button>
                     </div>
                 </form>
@@ -33,7 +33,7 @@
                 <table class="table-striped table">
                     <thea>
                         <th>{{__('Update')}}</th>
-                        <th>{{__('UUID')}}</th>
+                        <th>{{__('ID')}}</th>
                         <th>{{__('Name')}}</th>
                         <th>{{__('Price')}}</th>
                     </thea>
@@ -41,9 +41,9 @@
                     @foreach($consumables as $consumable)
                         <tr>
                             <td>
-                                <a href="{{route('admin.consumables', ['uuid' => $consumable->uuid])}}">{{__('Update')}}</a>
+                                <a href="{{route('admin.consumables', ['id' => $consumable->id])}}">{{__('Update')}}</a>
                             </td>
-                            <td>{{$consumable->uuid}}</td>
+                            <td>{{$consumable->id}}</td>
                             <td>{{$consumable->name}}</td>
                             <td>{{$consumable->price}}</td>
                         </tr>

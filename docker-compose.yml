@@ -1,41 +1,40 @@
-version: "3.8"
 services:
-  nginx:
-    image: nginx
-    container_name: nginx-car-workshop
-    ports:
-      - "8080:80"
-    volumes:
-      - ./:/var/www/html
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - db
+    #    nginx:
+    #        image: nginx
+    #        container_name: nginx-car-workshop
+    #        ports:
+    #            - "8080:80"
+    #        volumes:
+    #            - ./:/var/www/html
+    #            - ./nginx.conf:/etc/nginx/nginx.conf
+    #        depends_on:
+    #            - db
 
-  # php:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile-php
-  #   container_name: php8.3
-  #   environment:
-  #     XDEBUG_MODE: debug
-  #     DBGP_IDEKEY: docker
-  #     XDEBUG_CONFIG: client_host=host.docker.internal client_port=9005
-  #   user: "1000"
-  #   extra_hosts:
-  #     - "host.docker.internal:host-gateway"
-  #   volumes:
-  #     - ./:/var/www/html
-  #   depends_on:
-  #     - db
+#    php:
+#        build:
+#            context: .
+#            dockerfile: Dockerfile-php
+#        container_name: php8.3
+#        environment:
+#            XDEBUG_MODE: debug
+#            DBGP_IDEKEY: docker
+#            XDEBUG_CONFIG: client_host=host.docker.internal client_port=9005
+#        user: "1000"
+#        extra_hosts:
+#            - "host.docker.internal:host-gateway"
+#        volumes:
+#            - ./:/var/www/html
+#        depends_on:
+#            - db
 
-  db:
-    image: mariadb:11
-    container_name: car-workshop-local-mysql
-    cap_add:
-      - SYS_NICE
-    env_file:
-      - .docker-env
-    volumes:
-      - ./mariadb:/var/lib/mysql
-    ports:
-      - "3306:3306"
+    db:
+        image: mariadb:11
+        container_name: car-workshop-local-mysql
+        cap_add:
+            - SYS_NICE
+        env_file:
+            - .docker-env
+        volumes:
+            - ./mariadb:/var/lib/mysql
+        ports:
+            - "3306:3306"
