@@ -9,27 +9,31 @@ class UServiceController extends Controller
 {
     public function __invoke()
     {
-        return view('components.table',
-            ['items' => UsedService::all(),
-             'columns' => Schema::getColumnListing('used_services'),
-             'get_route' => 'uservice.get',
-             'id_column' => 'uuid']);
+        return view(
+            'components.table',
+            [
+                'items' => UsedService::all(),
+                'columns' => Schema::getColumnListing('used_services'),
+                'get_route' => 'uservice.get',
+                'id_column' => 'id'
+            ]
+        );
     }
 
-    public function put(string $uuid, string $statement_uuid)
+    public function put(string $id, string $statement_id)
     {
-        $existed = UsedService::where(['statement_uuid' => $statement_uuid, 'service_uuid' => $uuid])->first();
+        $existed = UsedService::where(['statement_id' => $statement_id, 'service_id' => $id])->first();
         if ($existed) {
             $existed->increment('quantity');
-        }
-        else{
-            UsedService::create(['statement_uuid' => $statement_uuid, 'service_uuid' => $uuid]);
+        } else {
+            UsedService::create(['statement_id' => $statement_id, 'service_id' => $id]);
         }
         return back();
     }
 
-    public function delete(string $uuid) {
-        $used_service = UsedService::whereUuid($uuid)->firstOrFail();
+    public function delete(string $id)
+    {
+        $used_service = UsedService::whereId($id)->firstOrFail();
 
         if ($used_service->quantity > 1) {
             $used_service->decrement('quantity');

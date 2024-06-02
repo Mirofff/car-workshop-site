@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button class="btn btn-primary" value="{{$current_service?->uuid}}" name="service_uuid"
+                        <button class="btn btn-primary" value="{{$current_service?->id}}" name="service_id"
                                 type="submit">{{__('Save')}}</button>
                     </div>
                 </form>
@@ -41,9 +41,9 @@
                     @foreach($services as $service)
                         <tr>
                             <td>
-                                <a href="{{route('admin.services', ['uuid' => $service->uuid])}}">{{__('Update')}}</a>
+                                <a href="{{route('admin.services', ['id' => $service->id])}}">{{__('Update')}}</a>
                             </td>
-                            <td>{{$service->uuid}}</td>
+                            <td>{{$service->id}}</td>
                             <td>{{$service->name}}</td>
                             <td>{{$service->price}}</td>
                         </tr>

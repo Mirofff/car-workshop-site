@@ -1,3 +1,3 @@
 <li class="nav-item">
-{{ $slot }}
+    {{ $slot }}
 </li>

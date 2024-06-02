@@ -24,3 +24,5 @@ yarn-error.log
 /public/jquery/
 /public/fonts/
 **/_trash
+/normalize-all-vehicles-models.csv
+/course_work_backup.sql

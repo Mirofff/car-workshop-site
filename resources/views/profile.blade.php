@@ -5,7 +5,7 @@
         $user = Auth::guard('client')->user();
     @endphp
 
-    <form action="{{ route('client.put', ['uuid'=> $user->uuid]) }}" method="post">
+    <form action="{{ route('client.put', ['id'=> $user->id]) }}" method="post">
         @csrf
 
         <div>
