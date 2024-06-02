@@ -27,6 +27,7 @@ use Illuminate\Support\Carbon;
  * @property string $pickup_time
  * @property int $client_id
  * @property int $vehicle_id
+ * @property string|null $pickup_date
  * @property-read \App\Models\Client $client
  * @property-read Collection<int, \App\Models\UsedConsumable> $uconsumables
  * @property-read int|null $uconsumables_count
@@ -43,6 +44,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Statement whereExecutionDate($value)
  * @method static Builder|Statement whereId($value)
  * @method static Builder|Statement whereIsActive($value)
+ * @method static Builder|Statement wherePickupDate($value)
  * @method static Builder|Statement wherePickupTime($value)
  * @method static Builder|Statement whereRegistrationDate($value)
  * @method static Builder|Statement whereStatus($value)
@@ -58,6 +60,7 @@ class Statement extends Model
         'status',
         'comment',
         'pickup_time',
+        'pickup_date',
         'request_id',
         'client_id',
         'vehicle_id',

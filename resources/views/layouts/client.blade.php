@@ -12,7 +12,8 @@
             <div class="d-flex container align-items-center">
                 <x-nav>
                     <a href="/" class="pe-5 text-light text-decoration-none navbar-brand">
-                        <img class="d-inline-block text-li align-top" src="{{asset('header-logo.png')}}" height="60" alt=""
+                        <img class="d-inline-block text-li align-top" src="{{asset('header-logo.png')}}" height="60"
+                             alt=""
                              style="filter: invert(1)">
                     </a>
 
@@ -33,6 +34,5 @@
         @yield('content')
     </main>
 </div>
-
 </body>
 </html>

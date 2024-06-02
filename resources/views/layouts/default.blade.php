@@ -9,7 +9,6 @@
 <main class="flex-grow-1 d-flex flex-column fluid-container">
     @yield('content')
 </main>
-@include('includes.footer')
 @include('includes.js')
 </body>
 </html>

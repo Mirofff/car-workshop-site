@@ -6,6 +6,7 @@ use App\Models\Model as VehicleModel;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
 /**
@@ -62,5 +63,10 @@ class Vehicle extends Model
     public function model(): BelongsTo
     {
         return $this->belongsTo(VehicleModel::class);
+    }
+
+    public function statement(): HasOne
+    {
+        return $this->hasOne(Statement::class);
     }
 }

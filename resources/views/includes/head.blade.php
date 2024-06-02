@@ -9,7 +9,6 @@
 <link href="{{ asset('bootstrap/css/bootstrap-grid.min.css') }}" rel="stylesheet" crossorigin="anonymous">
 <link href="{{ asset('bootstrap/css/bootstrap-reboot.min.css') }}" rel="stylesheet" crossorigin="anonymous">
 <link href="{{ asset('bootstrap/css/bootstrap-utilities.min.css') }}" rel="stylesheet" crossorigin="anonymous">
-{{--<link href="{{ asset('bootstrap/icons/font/bootstrap-icons.min.css') }}" rel="stylesheet" crossorigin="anonymous">--}}
-
+<link href="{{ asset('bootstrap/icons/font/bootstrap-icons.min.css') }}" rel="stylesheet" crossorigin="anonymous">
 
 <title>{{ Route::currentRouteName() }}</title>

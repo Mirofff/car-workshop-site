@@ -1,6 +1,5 @@
 @php
-    use Carbon\Carbon;
-@endphp
+    @endphp
 @extends('layouts.client')
 
 @section('page.title')
@@ -24,32 +23,64 @@
                         </select>
                         <label for="vehicle">{{__('Vehicle')}}</label>
                     </x-form-group>
-
-                    @php
-                        $today_datetime = \Carbon\Carbon::now()->toISOString();
-                    @endphp
-                    <script>
-                        function toLocalISOString(date) {
-                            const localDate = new Date(date - date.getTimezoneOffset() * 60000); //offset in milliseconds. Credit https://stackoverflow.com/questions/10830357/javascript-toisostring-ignores-timezone-offset
-
-                            // Optionally remove second/millisecond if needed
-                            localDate.setSeconds(null);
-                            localDate.setMilliseconds(null);
-                            return localDate.toISOString().slice(0, -1);
-                        }
-
-                        window.addEventListener("load", () => {
-                            const element = document.getElementById("datetime");
-                            // element.value = toLocalISOString(new Date());
-                            element.min = toLocalISOString(new Date());
-                        });
-                    </script>
                     <x-form-group>
-                        <input required class="form-control" type="datetime-local" step="3600"
-                               name="pickup_time"
-                               id="datetime">
-                        <label for="datetime">{{__('Datetime')}}</label>
+                        <input required class="form-control" type="date" name="pickup_date" id="pickup_date">
+                        <label for="pickup_date">{{__('Дата')}}</label>
+                        <select class="form-select form-select-lg mb-3" name="pickup_time" id="pickup_time"
+                                aria-label=".form-select-lg example"></select>
                     </x-form-group>
+
+                    <script>
+                        $(document).ready(function () {
+                            const $pickupTime = $('#pickup_time');
+                            const $pickupDate = $('#pickup_date');
+
+                            $pickupDate.attr({
+                                value: luxon.DateTime.now().toISODate(),
+                                min: luxon.DateTime.now().toISODate(),
+                                max: luxon.DateTime.now().plus({day: 14}).toISODate()
+                            });
+
+                            $pickupDate.change(function () {
+                                    $pickupTime.empty();
+                                    $.ajax({
+                                        url: "{{route('api.requests.pickup')}}",
+                                        data: {
+                                            currentDatetime: new Date().toDateString(),
+                                        },
+                                        success: resp => {
+                                            for (let i = 11; i <= 19; i++) {
+                                                const date = luxon.DateTime.now().set({
+                                                    hour: i,
+                                                    minute: 0,
+                                                    second: 0,
+                                                    millisecond: 0
+                                                });
+                                                $pickupTime.append($('<option>', {
+                                                    value: `${date.hour}:00:00`,
+                                                    text: `${date.hour}:00`,
+                                                }));
+                                            }
+
+                                            $("#pickup_time option").each(function (index) {
+                                                resp.forEach(elem => {
+                                                    if ($(this).val() === elem.pickup_time && $pickupDate.val() === elem.pickup_date) {
+                                                        $(this).remove();
+                                                    }
+                                                });
+                                            })
+
+                                        },
+                                        error: resp => {
+                                            console.log(resp);
+                                        }
+                                    })
+                                }
+                            )
+
+                            $pickupDate.trigger("change");
+                        })
+                    </script>
 
                     <label class="form-label" for="comment">{{__("Comment")}}</label>
                     <textarea rows="10" name="comment" class="form-control" id="comment"></textarea>
@@ -93,7 +124,6 @@
                 </table>
             </div>
         </x-gray-background>
-    </div>
     </div>
 
     <x-error :errors="$errors"/>
