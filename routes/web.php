@@ -37,7 +37,6 @@ Route::middleware('client')->group(
 
 Route::middleware('client')->group(
     function () {
-        Route::redirect('/', '/requests');
         Route::view('/dashboard', 'profile')->name('dashboard');
 
         Route::delete('/requests', [ClientRequestController::class, 'discard'])->name('statement.discard');
