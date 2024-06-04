@@ -29,11 +29,9 @@ Route::view('/reset', 'pages.login.register')->name('reset');
 Route::get('/admin/login', LoginController::class)->name('admin.login.index');
 Route::post('/admin/login', [LoginController::class, 'login'])->name('admin.login');
 
-
 Route::middleware('client')->group(
     function () { Route::put('/client/{id}', [ClientController::class, 'put'])->name('client.put'); }
 );
-
 
 Route::middleware('client')->group(
     function () {
@@ -52,8 +50,7 @@ Route::middleware('client')->group(
     }
 );
 
-
-Route::prefix('admin')->middleware('stuff')->group(
+Route::prefix('admin')->middleware('stuff:admin,operator')->group(
     function () {
         Route::get('/', AdminRequestController::class)->name('admin');
 

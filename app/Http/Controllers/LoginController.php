@@ -10,6 +10,8 @@ class LoginController extends Controller
 {
     public function __invoke()
     {
+        Auth::logout();
+        Auth::guard('client')->logout();
         return view('pages.admin.login.index');
     }
 

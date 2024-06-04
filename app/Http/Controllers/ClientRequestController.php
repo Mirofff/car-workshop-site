@@ -19,7 +19,7 @@ class ClientRequestController extends Controller
             'pages.requests.index',
             [
                 'vehicles' => Vehicle::whereClientId(Auth::guard('client')->id())->get(),
-                'requests' => Statement::whereClientId(Auth::guard('client')->id())->get(),
+                'requests' => Statement::whereClientId(Auth::guard('client')->id())->orderBy('pickup_date')->orderBy('pickup_time')->get(),
             ]
         );
     }
