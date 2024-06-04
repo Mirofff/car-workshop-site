@@ -9,9 +9,9 @@
         <table id="requestsTable" class="table table-striped">
             <thead>
             <tr>
-                <th>#</th>
-                <th>{{__('Изменить')}}</th>
-                <th>{{__('Удалить')}}</th>
+                <th style="width: 3%">#</th>
+                <th style="width: 5%">{{__('Изменить')}}</th>
+                <th style="width: 5%">{{__('Удалить')}}</th>
                 <th>{{__('Логин')}}</th>
                 <th>{{__('Пароль')}}</th>
                 <th>{{__('Активно')}}</th>

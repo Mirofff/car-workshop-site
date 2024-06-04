@@ -31,40 +31,30 @@
                     </ul>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <div class="dropdown-toggle text-light nav-link px-2" data-bs-toggle="dropdown"
-                         aria-expanded="false">{{__('Справочники')}}</div>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item">
-                            <a class="btn" href="{{route('admin.clients')}}" role="button"
-                               aria-expanded="false">{{__('Клиенты')}}
-                            </a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a class="btn" href="{{route('admin.services')}}" role="button"
-                               aria-expanded="false">{{__('Услуги')}}
-                            </a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a class="btn" href="{{route('admin.consumables')}}" role="button"
-                               aria-expanded="false">{{__('Расходные материалы')}}
-                            </a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a class="btn" href="{{route('admin.vehicles')}}" role="button"
-                               aria-expanded="false">{{__('Добавленные авто')}}
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="nav-item">
-                    <a target="_blank" href="{{route('admin.stuff')}}"
-                       class="navbar-brand text-light px-2 {{ Route::is('admin.stuff') ? 'active' : '' }}">
-                        {{__('Сотрудники')}}
-                    </a>
-                </li>
-
+                @if(Auth::user()->role === \App\Enums\UserRole::Admin->value)
+                    <li class="nav-item dropdown">
+                        <div class="dropdown-toggle text-light nav-link px-2" data-bs-toggle="dropdown"
+                             aria-expanded="false">{{__('Справочники')}}</div>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item">
+                                <a class="btn" href="{{route('admin.services')}}" role="button"
+                                   aria-expanded="false">{{__('Услуги')}}
+                                </a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="btn" href="{{route('admin.consumables')}}" role="button"
+                                   aria-expanded="false">{{__('Расходные материалы')}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a target="_blank" href="{{route('admin.stuff')}}"
+                           class="navbar-brand text-light px-2 {{ Route::is('admin.stuff') ? 'active' : '' }}">
+                            {{__('Сотрудники')}}
+                        </a>
+                    </li>
+                @endif
             </x-nav>
         </div>
     </div>
