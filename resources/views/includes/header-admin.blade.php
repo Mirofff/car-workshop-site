@@ -57,6 +57,13 @@
                 @endif
             </x-nav>
         </div>
+        @php
+            $user = Auth::user();
+            $userName = sprintf('%s %s. %s.', $user->last_name, mb_substr($user->first_name, 0, 1), mb_substr($user->second_name, 0, 1));
+        @endphp
+        <div class="d-flex text-light align-items-center">
+            <p style="font-size: 18px" class="m-auto mx-5">{{$userName}}</p>
+        </div>
     </div>
     <div class="modal fade" id="statistic-report-modal" tabindex="-1" aria-hidden="true"
          aria-labelledby="statistic-report-modal-label">

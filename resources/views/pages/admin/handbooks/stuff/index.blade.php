@@ -29,7 +29,7 @@
                     @csrf
                     <td></td>
                     <td>
-                        <button class="btn btn-success" type="submit">{{__('A')}}</button>
+                        <button class="btn btn-outline-success w-100" type="submit">{{__('A')}}</button>
                     </td>
                     <td>
                     </td>
@@ -67,14 +67,14 @@
                           action="{{route('admin.stuff.put', ['id' => $employee->id])}}"
                           method="post">
                         @csrf
-                        <td><input class="form-control" name="id" type="hidden"
-                                   value="{{$employee->id}}">{{$employee->id}}</td>
+                        <td class="text-center"><input class="form-control" name="id" type="hidden"
+                                                       value="{{$employee->id}}">{{$employee->id}}</td>
                         <td>
-                            <button class="btn btn-warning" name="_method" value="PUT"
+                            <button class="btn btn-outline-warning w-100" name="_method" value="PUT"
                                     type="submit">{{__('O')}}</button>
                         </td>
                         <td>
-                            <button class="btn btn-danger" name="_method" value="DELETE"
+                            <button class="btn btn-outline-danger w-100" name="_method" value="DELETE"
                                     type="submit">{{__('X')}}</button>
                         </td>
                         <td>

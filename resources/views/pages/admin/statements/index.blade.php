@@ -17,8 +17,8 @@
 
                 <div class="mb-3">
                     <label for="statementInfo" class="form-label">{{__('Statement Info')}}</label>
-                    <input value="{{$statement->comment}}" type="text" class="form-control" id="statementInfo"
-                           disabled>
+                    <textarea class="form-control" name="" id="statementInfo"
+                              disabled>{{$statement->comment}}</textarea>
                     <label for="statementDatetime" class="form-label">{{__('Время записи')}}</label>
                     <input value="{{$statement->pickup_time}}" type="text" class="form-control"
                            id="statementDatetime" disabled>
@@ -129,16 +129,16 @@
             </div>
             <table id="consumablesTable" class="table table-striped">
                 <thead>
-                <tr>
+                <tr class="text-center">
                     <th scope="col">{{__('Add')}}</th>
-                    <th scope="col">{{__('Title')}}</th>
+                    <th scope="col">{{__('Tittle')}}</th>
                     <th scope="col">{{__('Price')}} {{__('(В рублях)')}}</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach(Consumable::all() as $consumable)
                     <tr class="searchTr">
-                        <td>
+                        <td class="text-center">
                             <a href="{{route('uconsumable.put', ['id' => $consumable->id, 'statement_id' => $statement->id])}}">+</a>
                         </td>
                         <td>{{$consumable->name}}</td>
@@ -166,16 +166,16 @@
             </div>
             <table id="servicesTable" class="table table-striped">
                 <thead>
-                <tr>
+                <tr class="text-center">
                     <th scope="col">{{__('Add')}}</th>
-                    <th scope="col">{{__('Title')}}</th>
+                    <th scope="col">{{__('Tittle')}}</th>
                     <th scope="col">{{__('Price')}} {{__('(В рублях)')}}</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach(Service::all() as $service)
                     <tr class="searchTr">
-                        <td>
+                        <td class="text-center">
                             <a href="{{route('uservice.put', ['id' => $service->id, 'statement_id' => $statement->id])}}">+</a>
                         </td>
                         <td>{{$service->name}}</td>

@@ -22,7 +22,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($request->validated(), true)) {
             $request->session()->regenerate();
-            return to_route('admin');
+            return to_route('pages.admin.requests.index');
         }
 
         return back()->withErrors(
