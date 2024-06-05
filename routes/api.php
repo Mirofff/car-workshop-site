@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\StatementStatus;
 use App\Models\Model;
 use App\Models\Statement;
 use Illuminate\Http\Request;
@@ -34,9 +35,12 @@ Route::get(
 Route::get(
     "/requests/datetime",
     function (Request $req) {
-        $resp = Statement::where('pickup_time', '>=', $req->currentDatetime)
-                         ->get(['pickup_date', 'pickup_time'])
-                         ->toArray();
-        return $resp;
+        $query = Statement::whereStatus(StatementStatus::NotComplete->value)
+                          ->where('pickup_date', '=', $req->pickupDate)
+                          ->groupBy('pickup_date')->havingRaw(
+                "count(pickup_date) > (select count(*) from stuff where role = 'operator')"
+            );
+
+        return $query->get(['pickup_time'])->toArray();
     }
 )->name('api.requests.pickup');

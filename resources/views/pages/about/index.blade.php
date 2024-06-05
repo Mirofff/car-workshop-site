@@ -1,10 +1,10 @@
-@extends('layouts.default')
-
-@section('page.title')
-    {{__('About')}}
-@append
-
-@section('page.style')
+<!doctype html>
+<html lang="en">
+<head>
+    <title>
+        {{__('About')}}
+    </title>
+    @include('includes.head')
     <style>
         .transparent-header {
             position: absolute;
@@ -19,9 +19,9 @@
             object-fit: cover;
         }
     </style>
-@stop
-
-@section('content')
+</head>
+<body class="d-flex flex-column min-mh-100">
+<main class="flex-grow-1 d-flex flex-column fluid-container">
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="bootstrap" viewBox="0 0 118 94">
             <title>Bootstrap</title>
@@ -103,12 +103,16 @@
                     </a>
                 </div>
                 <div class="nav-item">
-                    <a href="#about_us"
-                       class="nav-item nav-link text-light px-2 text-white {{ Route::is('requests') ? 'active' : '' }}">{{__('Requests')}}</a>
+                    <a href="#trust"
+                       class="nav-item nav-link text-light px-2 text-white ">{{__('О нас')}}</a>
                 </div>
                 <div class="nav-item">
-                    <a href=""
-                       class="nav-item dropdown nav-link text-light px-2 text-white {{ Route::is('vehicles') ? 'active' : '' }}">{{__('Vehicles')}}</a>
+                    <a href="#service"
+                       class="nav-item dropdown nav-link text-light px-2 text-white">{{__('Услуги')}}</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#pick"
+                       class="nav-item dropdown nav-link text-light px-2 text-white">{{__('Записаться')}}</a>
                 </div>
             </nav>
         </div>
@@ -168,7 +172,7 @@
 
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
-            <h2 class="my-5" id="about_us">{{__("Why you can trust us?")}}</h2>
+            <h2 id="trust" class="my-5" id="about_us">{{__("Why you can trust us?")}}</h2>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <div class="col">
                     <div class="card shadow-sm">
@@ -206,7 +210,7 @@
 
     <div>
         <div class="container px-4 py-5" id="hanging-icons">
-            <h2 class="pb-2 border-bottom">{{__('Спектр услуг')}}</h2>
+            <h2 id="service" class="pb-2 border-bottom">{{__('Спектр услуг')}}</h2>
             <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
                 <div class="col d-flex align-items-start">
                     <div
@@ -306,7 +310,7 @@
     <div class="py-5 text-center"
          style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{asset('img/about-background.png')}}'); background-repeat:  no-repeat;  background-size: cover">
         <div class="col-md-6 p-lg-5 mx-auto my-5">
-            <h1 class="display-3 text-light fw-bold">{{__('Как записаться на прием?')}}</h1>
+            <h1 id="pick" class="display-3 text-light fw-bold">{{__('Как записаться на прием?')}}</h1>
             <h3 class="fw-normal text-light mb-3">{{__('Пройдите реигистрацию, или войдите в существующий аккаунт')}}</h3>
             <div class="d-flex gap-3 justify-content-center lead fw-normal">
                 <a class="h4 icon-link text-light" href="{{route('login')}}">
@@ -331,7 +335,8 @@
                             <strong>{{__('Адрес:')}}</strong> {{__('ул. Пушкина, д. Колотушкина, г. Калининград, Россия')}}
                         </li>
                         <li><strong>{{__('Телефон:')}}</strong> <a href="tel:+88005553535"
-                                                                   class="text-light">{{__('+8 800 555 35 35')}}</a></li>
+                                                                   class="text-light">{{__('+8 800 555 35 35')}}</a>
+                        </li>
                         <li><strong>{{__('Email:')}}</strong> <a href="mailto:info@car-workshop.com"
                                                                  class="text-light">{{__('info@car-workshop.com')}}</a>
                         </li>
@@ -340,9 +345,8 @@
                 <div class="col-md-4">
                     <h5>{{__('Часы работы')}}</h5>
                     <ul class="list-unstyled">
-                        <li>{{__('Понедельник - Пятница:')}} 8:00 - 18:00</li>
-                        <li>{{__('Суббота:')}} 9:00 - 14:00</li>
-                        <li>{{__('Воскресенье:')}} {{__('Выходной')}}</li>
+                        <li>{{__('Понедельник - Пятница:')}} 11:00 - 19:00</li>
+                        <li>{{__('Суббота, Воскресенье:')}} {{__('Выходной')}}</li>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -368,4 +372,7 @@
         </div>
     </footer>
 
-@endsection
+</main>
+@include('includes.js')
+</body>
+</html>

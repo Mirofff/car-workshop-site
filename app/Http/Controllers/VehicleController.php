@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostVehicleRequest;
 use App\Models\Vehicle;
-use Illuminate\Http\Client\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 class VehicleController extends Controller
 {
@@ -27,14 +25,16 @@ class VehicleController extends Controller
         return back();
     }
 
-    public function delete(Request $req): RedirectResponse
+    public function delete(int $id): RedirectResponse
     {
-        $vehicle = Vehicle::whereId($req->id);
+        $vehicle = Vehicle::whereId($id)->get()->first();
 
-        if (!Gate::allows('delete-vehicle', $vehicle)) {
-            abort(404);
+        if (Auth::guard('client')->user()->id !== $vehicle->client_id) {
+            abort(403);
         }
+
         $vehicle->delete();
         return back();
     }
 }
+

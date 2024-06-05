@@ -1,6 +1,8 @@
-@php use App\Enums\StatementStatus;use App\Models\Consumable;use App\Models\Service; @endphp
-@php @endphp
-@php @endphp
+{{-- TODO: Добавить возможность отменить заявку с указанием причины (через модалку) --}}
+@php
+    use App\Enums\StatementStatus;use App\Models\Consumable;use App\Models\Service;
+@endphp
+
 @extends('layouts.admin')
 
 @section('page.title')

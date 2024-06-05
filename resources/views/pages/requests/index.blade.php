@@ -23,11 +23,16 @@
                         </select>
                         <label for="vehicle">{{__('Vehicle')}}</label>
                     </x-form-group>
+
                     <x-form-group>
                         <input required class="form-control" type="date" name="pickup_date" id="pickup_date">
                         <label for="pickup_date">{{__('Дата')}}</label>
-                        <select class="form-select form-select-lg mb-3" name="pickup_time" id="pickup_time"
+                    </x-form-group>
+
+                    <x-form-group>
+                        <select class="form-select" name="pickup_time" id="pickup_time"
                                 aria-label=".form-select-lg example"></select>
+                        <label for="pickup_time">{{__('Дата')}}</label>
                     </x-form-group>
 
                     <script>
@@ -41,31 +46,30 @@
                                 max: luxon.DateTime.now().plus({day: 14}).toISODate()
                             });
 
+                            for (let i = 11; i <= 19; i++) {
+                                const date = luxon.DateTime.now().set({
+                                    hour: i,
+                                    minute: 0,
+                                    second: 0,
+                                    millisecond: 0
+                                });
+                                $pickupTime.append($('<option>', {
+                                    value: `${date.hour}:00:00`,
+                                    text: `${date.hour}:00`,
+                                }));
+                            }
+
                             $pickupDate.change(function () {
-                                    $pickupTime.empty();
                                     $.ajax({
                                         url: "{{route('api.requests.pickup')}}",
                                         data: {
-                                            currentDatetime: new Date().toDateString(),
+                                            pickupDate: this.value,
                                         },
                                         success: resp => {
-                                            for (let i = 11; i <= 19; i++) {
-                                                const date = luxon.DateTime.now().set({
-                                                    hour: i,
-                                                    minute: 0,
-                                                    second: 0,
-                                                    millisecond: 0
-                                                });
-                                                $pickupTime.append($('<option>', {
-                                                    value: `${date.hour}:00:00`,
-                                                    text: `${date.hour}:00`,
-                                                }));
-                                            }
-
                                             $("#pickup_time option").each(function (index) {
                                                 resp.forEach(elem => {
-                                                    if ($(this).val() === elem.pickup_time && $pickupDate.val() === elem.pickup_date) {
-                                                        $(this).remove();
+                                                    if (this.value === elem.pickup_time) {
+                                                        $(this).hide();
                                                     }
                                                 });
                                             })
@@ -115,7 +119,7 @@
                                     </form>
                                 @endif
                             </td>
-                            <td>{{$request->pickup_time}}</td>
+                            <td>{{$request->pickup_date}} {{$request->pickup_time}}</td>
                             <td>{{$request->vehicle->model->mark->name}} {{$request->vehicle->model->name}} {{$request->vehicle->registration_plate}}</td>
                             <td>{{$request->comment}}</td>
                         </tr>

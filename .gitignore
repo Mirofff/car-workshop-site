@@ -26,3 +26,6 @@ yarn-error.log
 **/_trash
 /normalize-all-vehicles-models.csv
 /course_work_backup.sql
+/public/dynamic_report.docx
+/public/statistic_report.docx
+/public/wtf.docx

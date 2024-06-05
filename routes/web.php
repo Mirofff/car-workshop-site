@@ -16,7 +16,8 @@ use App\Models\Stuff;
 use Illuminate\Support\Facades\Route;
 
 // ---=== Pages ===---
-Route::view('/', 'pages.about.index')->name('about');
+Route::view('/about', 'pages.about.index')->name('about');
+Route::redirect('/', '/about');
 
 Route::view('/login', 'pages.login.index')->name('login');
 Route::post('/login', [ClientController::class, 'login'])->name('login-action');
@@ -30,10 +31,6 @@ Route::get('/admin/login', LoginController::class)->name('admin.login.index');
 Route::post('/admin/login', [LoginController::class, 'login'])->name('admin.login');
 
 Route::middleware('client')->group(
-    function () { Route::put('/client/{id}', [ClientController::class, 'put'])->name('client.put'); }
-);
-
-Route::middleware('client')->group(
     function () {
         Route::view('/dashboard', 'profile')->name('dashboard');
 
@@ -43,31 +40,27 @@ Route::middleware('client')->group(
 
         Route::get('/vehicles', VehicleController::class)->name('vehicles');
         Route::post('/vehicles', [VehicleController::class, 'post'])->name('vehicle.post');
-        Route::delete('/vehicles', [VehicleController::class, 'delete'])->name('vehicles.delete');
+        Route::get('/vehicles/{id}', [VehicleController::class, 'delete'])->name('vehicles.delete');
 
         Route::view('/profile', 'profile')->name('profile');
+        Route::put('/client/{id}', [ClientController::class, 'put'])->name('client.put');
         Route::put('/profile', [ClientController::class, 'put'])->name('profile.put');
     }
 );
 
 Route::prefix('admin')->middleware('stuff:admin,operator')->group(
     function () {
-        Route::get('/', AdminRequestController::class)->name('admin');
+        Route::get('/', AdminRequestController::class)->name('pages.admin.requests.index');
 
         Route::get('/statements', [StatementController::class, 'get'])->name('admin.statement.get');
         Route::post('/statements', [StatementController::class, 'post'])->name('admin.statement.post');
         Route::post('/statements/{id}', [StatementController::class, 'save'])->name('statement.save');
         Route::get('/statements/{id}', [StatementController::class, 'print'])->name('statement.print');
 
-        Route::get('/requests', AdminRequestController::class)->name('pages.admin.requests.index');
-
         /*
          * Add/Remove consumable/service in statement
-         *
         */
-        Route::get('/used_consumables/{id}/{statement_id}', [UConsumableController::class, 'put'])->name(
-            'uconsumable.put'
-        );
+        Route::get('/used_consumables/{id}/{statement_id}', [UConsumableController::class, 'put'])->name('uconsumable.put');
         Route::delete('/used_consumables/{id}', [UConsumableController::class, 'delete'])->name('uconsumable.delete');
 
         Route::get('/used_services/{id}/{statement_id}', [UServiceController::class, 'put'])->name('uservice.put');
@@ -103,8 +96,6 @@ Route::prefix('admin')->middleware('stuff:admin,operator')->group(
 
         Route::get('/reports/statistic', [ReportsController::class, 'Static'])->name('admin.report.statistic');
         Route::get('/reports/dynamic', [ReportsController::class, 'Dynamic'])->name('admin.report.dynamic');
-
-
     }
 );
 

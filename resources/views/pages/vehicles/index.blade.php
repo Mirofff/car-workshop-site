@@ -95,7 +95,7 @@
                     <th>{{__('Mark')}}</th>
                     <th>{{__('Model')}}</th>
                     <th>{{__('Mileage')}}</th>
-                    <th>{{__('Действие')}}</th>
+                    <th style="width: 5%">{{__('Действие')}}</th>
                     </thead>
                     <tbody>
                     @foreach($vehicles as $vehicle)
@@ -109,7 +109,8 @@
                                 @if($vehicle->statement)
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                                data-bs-toggle="dropdown" style="width: 100%"
+                                                aria-expanded="false"></button>
                                         <ul class="dropdown-menu">
                                             <li>
                                             </li>
@@ -118,7 +119,8 @@
                                 @else
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                                data-bs-toggle="dropdown" style="width: 100%"
+                                                aria-expanded="false"></button>
                                         <ul class="dropdown-menu">
                                             <li>
                                                 <a class="dropdown-item"

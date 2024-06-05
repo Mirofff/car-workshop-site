@@ -63,7 +63,7 @@
                             <input type="hidden" value="{{$statement->client_id}}" name="client_id">
                         </form>
                     </td>
-                    <td>{{$statement->status == StatementStatus::Complete->value ? $statement->execution_date : $statement->pickup_time}}</td>
+                    <td>{{$statement->status == StatementStatus::Complete->value ? $statement->execution_date : $statement->pickup_date . " " . $statement->pickup_time}}</td>
                     <td>{{$statement->client->last_name}} {{$statement->client->first_name}} {{$statement->client->second_name}}</td>
                     <td>{{$statement->comment}}</td>
                     <td>{{$statement->vehicle->registration_plate}} {{$statement->vehicle->model->mark->name}} {{$statement->vehicle->model->name}}</td>
