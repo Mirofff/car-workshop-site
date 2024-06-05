@@ -44,7 +44,6 @@ Route::middleware('client')->group(
 
         Route::view('/profile', 'profile')->name('profile');
         Route::put('/client/{id}', [ClientController::class, 'put'])->name('client.put');
-        Route::put('/profile', [ClientController::class, 'put'])->name('profile.put');
     }
 );
 

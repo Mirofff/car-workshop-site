@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequestRequest;
+use App\Models\Client;
 use App\Models\Statement;
 use App\Models\UsedConsumable;
 use App\Models\UsedService;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 
 class ClientRequestController extends Controller
 {
@@ -18,8 +18,12 @@ class ClientRequestController extends Controller
         return view(
             'pages.requests.index',
             [
+                'user' => Client::whereId(Auth::guard('client')->id())->first(),
                 'vehicles' => Vehicle::whereClientId(Auth::guard('client')->id())->get(),
-                'requests' => Statement::whereClientId(Auth::guard('client')->id())->orderBy('pickup_date', 'desc')->orderBy('pickup_time', 'desc')->get(),
+                'requests' => Statement::whereClientId(Auth::guard('client')->id())
+                                       ->orderBy('pickup_date', 'desc')
+                                       ->orderBy('pickup_time', 'desc')
+                                       ->get(),
             ]
         );
     }

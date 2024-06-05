@@ -121,7 +121,7 @@
             @endforeach
             </tbody>
         </table>
+        {{ $statements->links() }}
     </x-gray-background>
-
     <x-error :errors="$errors"/>
 @endsection

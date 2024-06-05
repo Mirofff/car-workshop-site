@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientLoginRequest;
+use App\Http\Requests\ClientPutRequest;
 use App\Http\Requests\ClientRegisterRequest;
-use App\Http\Requests\PutUserStuff;
 use App\Models\Client;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -66,9 +66,15 @@ class ClientController extends Controller
         return view('admin.page.user', ['item' => Client::find($id)]);
     }
 
-    public function put(PutUserStuff $request, string $id)
+    public function put(Request $request, ClientPutRequest $putClient): RedirectResponse
     {
-        Client::find($id)->update($request->validated());
+        $client = Client::find($putClient->id);
+        if ($request->user('client')->cannot('update', $client)) {
+            abort(403);
+        }
+
+        $client->update(array_filter($putClient->validated()));
+
         return back();
     }
 }

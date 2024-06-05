@@ -13,7 +13,7 @@ class AdminRequestController extends Controller
         return view(
             'pages.admin.requests.index',
             [
-                'statements' => Statement::orderBy('created_at', 'desc')->get(),
+                'statements' => Statement::orderBy('created_at', 'desc')->paginate(15),
             ]
         );
     }
